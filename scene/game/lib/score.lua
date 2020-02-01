@@ -28,7 +28,7 @@ function M.new( options )
 	score:setFillColor( unpack(color) )
 
 	function score:add( points )
-		score.target = self.target + ( points or 10 )
+		score.target = self.target + ( points or 1 )
 		local function countUp()
 			local diff = math.ceil( ( score.target - score.num ) / 12 )
 			score.num = score.num + diff

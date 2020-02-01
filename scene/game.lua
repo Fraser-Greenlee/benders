@@ -38,6 +38,7 @@ function scene:create( event )
 
 	-- Start physics before loading map
 	physics.start()
+	physics.setDrawMode( "hybrid" )
 	physics.setGravity( 0, 32 )
 
 	-- Load our map
@@ -96,6 +97,7 @@ local function enterFrame( event )
 	local elapsed = event.time
 
 	-- Easy way to scroll a map based on a character
+	[[--
 	if hero and hero.x and hero.y and not hero.isDead then
 		local x, y = hero:localToContent( 0, 0 )
 		x, y = display.contentCenterX - x, display.contentCenterY - y
@@ -105,6 +107,7 @@ local function enterFrame( event )
 			parallax.x, parallax.y = map.x / 6, map.y / 8  -- Affects x more than y
 		end
 	end
+	]]
 end
 
 -- This function is called when scene comes fully on screen
@@ -113,7 +116,7 @@ function scene:show( event )
 	local phase = event.phase
 	if ( phase == "will" ) then
 		fx.fadeIn()	-- Fade up from black
-		Runtime:addEventListener( "enterFrame", enterFrame )
+		-- Runtime:addEventListener( "enterFrame", enterFrame )
 	elseif ( phase == "did" ) then
 		-- Start playing wind sound
 		-- For more details on options to play a pre-loaded sound, see the Audio Usage/Functions guide:
@@ -129,7 +132,7 @@ function scene:hide( event )
 	if ( phase == "will" ) then
 		audio.fadeOut( { time = 1000 } )
 	elseif ( phase == "did" ) then
-		Runtime:removeEventListener( "enterFrame", enterFrame )
+		-- Runtime:removeEventListener( "enterFrame", enterFrame )
 	end
 end
 

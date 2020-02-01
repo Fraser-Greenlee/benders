@@ -35,9 +35,10 @@ function M.new( instance, options )
 	instance:setSequence( "idle" )
 
 	-- Add physics
-	physics.addBody( instance, "dynamic", { radius = 54, density = 3, bounce = 0, friction =  1.0 } )
+	physics.addBody( instance, "dynamic", { density = 3, bounce = 0, friction =  2.0, box = { halfWidth=45, halfHeight=60 }  } ) -- box = { halfWidth=30, halfHeight=40 }
 	instance.isFixedRotation = true
 	instance.anchorY = 0.77
+	instance.jumping = false
 
 	-- Keyboard control
 	local max, acceleration, left, right, flip = 375, 5000, 0, 0, 0
@@ -54,7 +55,7 @@ function M.new( instance, options )
 			if "right" == name or "d" == name then
 				right = acceleration
 				flip = 0.133
-			elseif "space" == name or "buttonA" == name or "button1" == name then
+			elseif "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
 			if not ( left == 0 and right == 0 ) and not instance.jumping then
@@ -73,7 +74,7 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
-			self:applyLinearImpulse( 0, -550 )
+			self:applyLinearImpulse( 0, -700 )
 			self:setSequence( "jump" )
 			self.jumping = true
 		end
@@ -143,9 +144,13 @@ function M.new( instance, options )
 		-- Do this every frame
 		local vx, vy = instance:getLinearVelocity()
 		local dx = left + right
-		if instance.jumping then dx = dx / 4 end
-		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
-			instance:applyForce( dx or 0, 0, instance.x, instance.y )
+		-- if instance.jumping then dx = dx / 2 end
+		local dy = 0
+		if instance.jumping then dy = -5 end
+		if (dx == 0 and instance.jumping) then
+			instance:applyForce( -3*vx, dy, instance.x, instance.y )
+		elseif ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
+			instance:applyForce( dx or 0, dy, instance.x, instance.y )
 		end
 		-- Turn around
 		instance.xScale = math.min( 1, math.max( instance.xScale + flip, -1 ) )
