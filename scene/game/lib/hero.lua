@@ -131,9 +131,14 @@ function M.new( instance, options )
 		local other = event.other
 		local y1, y2 = self.y + 50, other.y - other.height/2
 		if event.contact and ( y1 > y2 ) then
-			-- Don't bump into one way platforms
+			--[[ 
+				TODO use this to allow jumping through a one way platform
+				if other.can_pass_thorugh then
+					event.contact.isEnabled = false
+				end
+			]]
 			if other.floating then
-				event.contact.isEnabled = false
+				event.contact.friction = 0.0
 			else
 				event.contact.friction = 0.1
 			end
