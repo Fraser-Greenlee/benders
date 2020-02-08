@@ -8,25 +8,39 @@ local composer = require( "composer" )
 local M = {}
 
 function M.new( instance )
-	-- Get the current scene
-	local scene = composer.getScene( composer.getSceneName( "current" ) )
-	local sounds = scene.sounds
-
 	-- Store map placement and hide placeholder
 	local parent = instance.parent
-    local x, y = instance.x, instance.y
-    
-    --[[
+	print(instance.x, instance.y)
+	instance.i = 0
 
-    -- define particle system
-    local 
+	function instance:addWater()
 
-	local function enterFrame()
-		-- Do this every frame
-        -- add water particle from fountain
+		local function enterFrame()
+			instance.i = instance.i + 1
+			if instance.i % 4 == 0 then
+				-- need to send a 1st arg that isn't used, should probably be the water instance?
+				instance.water.makeParticle( instance.water, instance.x, instance.y, 0, -1000 )
+			end
+		end
+
+		local tm = timer.performWithDelay( 100, enterFrame, -1 )
+
+		function instance:finalize()
+			-- On remove, cleanup instance, or call directly for non-visual
+			timer.cancel(tm)
+		end
+		
+		-- Add a finalize listener (for display objects only, comment out for non-visual)
+		instance:addEventListener( "finalize" )
+
+	
+		return instance
 	end
 
-    ]]
+	-- Return instance
+	instance.name = "fountain"
+	instance.type = "fountain"
+	return instance
 end
 
 return M

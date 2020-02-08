@@ -1552,7 +1552,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":80,
          "x":0,
          "y":0
@@ -1799,8 +1799,8 @@
                  "type":"",
                  "visible":true,
                  "width":80,
-                 "x":480,
-                 "y":400
+                 "x":640,
+                 "y":800
                 }, 
                 {
                  "gid":17,
@@ -2259,19 +2259,6 @@
                 }
             },
          "tilewidth":384
-        }, 
-        {
-         "columns":0,
-         "firstgid":67,
-         "image":"..\/..\/..\/..\/..\/..\/Desktop\/Celeste_20181214112918.png",
-         "imageheight":1012,
-         "imagewidth":1801,
-         "margin":0,
-         "name":"background tiles",
-         "spacing":0,
-         "tilecount":0,
-         "tileheight":45,
-         "tilewidth":45
         }],
  "tilewidth":80,
  "version":1,

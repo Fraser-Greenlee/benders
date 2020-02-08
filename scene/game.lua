@@ -7,6 +7,7 @@ local physics = require( "physics" )
 local json = require( "json" )
 local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
+local Water = require( "scene.bending.water" )
 
 -- Variables local to scene
 local map, hero, shield, parallax
@@ -88,6 +89,12 @@ function scene:create( event )
 	sceneGroup:insert( score )
 	sceneGroup:insert( gem )
 	sceneGroup:insert( shield )
+
+	-- Give fountain water
+	water = Water.new( physics )
+	fountain = map:findObject( "fountain" )
+	fountain.water = water
+	timer.performWithDelay( 1000, fountain.addWater )
 
 end
 
