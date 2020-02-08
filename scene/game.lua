@@ -8,6 +8,8 @@ local json = require( "json" )
 local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
 local Water = require( "scene.bending.water" )
+local Bending = require( "scene.bending.bend" )
+local config = require('scene.game-config').noDisplay.game
 
 -- Variables local to scene
 local map, hero, shield, parallax
@@ -39,7 +41,9 @@ function scene:create( event )
 
 	-- Start physics before loading map
 	physics.start()
-	-- physics.setDrawMode( "hybrid" )
+	if config.debugPhysics then
+		physics.setDrawMode( "hybrid" )
+	end
 	physics.setGravity( 0, 32 )
 
 	-- Load our map
@@ -95,6 +99,10 @@ function scene:create( event )
 	fountain = map:findObject( "fountain" )
 	fountain.water = water
 	timer.performWithDelay( 1000, fountain.addWater )
+
+	-- Allow bending
+	bending = Bending.new(display, water.particleSystem)
+	bending.drawGrid(bending)
 
 end
 

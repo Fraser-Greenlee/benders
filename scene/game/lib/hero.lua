@@ -1,6 +1,8 @@
 
 -- Module/class for platfomer hero
 
+local config = require('scene.game-config').noDisplay.hero
+
 -- Use this as a template to build an in-game hero 
 local fx = require( "com.ponywolf.ponyfx" )
 local composer = require( "composer" )
@@ -35,7 +37,7 @@ function M.new( instance, options )
 	instance:setSequence( "idle" )
 
 	-- Add physics
-	physics.addBody( instance, "dynamic", { density = 3, bounce = 0, friction =  2.0, box = { halfWidth=45, halfHeight=60 }  } ) -- box = { halfWidth=30, halfHeight=40 }
+	physics.addBody( instance, "dynamic", config.physics )
 	instance.isFixedRotation = true
 	instance.anchorY = 0.77
 	instance.jumping = false
@@ -74,7 +76,7 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
-			self:applyLinearImpulse( 0, -700 )
+			self:applyLinearImpulse( 0, config.jumpForce )
 			self:setSequence( "jump" )
 			self.jumping = true
 		end
@@ -151,7 +153,7 @@ function M.new( instance, options )
 		local dx = left + right
 		-- if instance.jumping then dx = dx / 2 end
 		local dy = 0
-		if instance.jumping then dy = -5 end
+		-- if instance.jumping then dy = -5 end
 		if (dx == 0 and instance.jumping) then
 			instance:applyForce( -3*vx, dy, instance.x, instance.y )
 		elseif ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then

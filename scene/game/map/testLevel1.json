@@ -59,8 +59,8 @@
                  "type":"coin",
                  "visible":true,
                  "width":64,
-                 "x":1504,
-                 "y":768
+                 "x":1360,
+                 "y":160
                 }, 
                 {
                  "gid":66,
@@ -129,6 +129,134 @@
                  "width":2560,
                  "x":0,
                  "y":1280
+                }, 
+                {
+                 "height":68,
+                 "id":491,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"1.0"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":240,
+                 "x":2320,
+                 "y":480
+                }, 
+                {
+                 "height":68,
+                 "id":492,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"1.0"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":240,
+                 "x":480,
+                 "y":-320
+                }, 
+                {
+                 "gid":66,
+                 "height":80,
+                 "id":494,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":480,
+                 "y":-240
+                }, 
+                {
+                 "gid":66,
+                 "height":80,
+                 "id":495,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":560,
+                 "y":-240
+                }, 
+                {
+                 "gid":66,
+                 "height":80,
+                 "id":496,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":640,
+                 "y":-240
+                }, 
+                {
+                 "height":80,
+                 "id":499,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"1.0"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":80,
+                 "y":720
+                }, 
+                {
+                 "height":80,
+                 "id":500,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"1.0"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":720,
+                 "y":720
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -810,7 +938,7 @@
          "name":"bounds",
          "objects":[
                 {
-                 "height":1656,
+                 "height":1980,
                  "id":375,
                  "name":"",
                  "properties":
@@ -826,10 +954,10 @@
                  "visible":true,
                  "width":32,
                  "x":-32,
-                 "y":-268
+                 "y":-592
                 }, 
                 {
-                 "height":1663,
+                 "height":1999,
                  "id":376,
                  "name":"",
                  "properties":
@@ -845,7 +973,7 @@
                  "visible":true,
                  "width":32,
                  "x":2560,
-                 "y":-267
+                 "y":-603
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -854,7 +982,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":491,
+ "nextobjectid":501,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,

@@ -1,6 +1,8 @@
 
 -- Module/class for water
 
+local config = require('scene.game-config').noDisplay.water
+
 -- Define module
 local M = {}
 
@@ -9,11 +11,11 @@ function M.new( physics )
 
     instance.particleSystem = physics.newParticleSystem({
         filename = "scene/bending/img/rounded_square.png",
-        radius=18,
-        imageRadius=20,
-        density=0.7,
-        gravityScale=1,
-        pressureStrength=0.1
+        radius=config.radius,
+        imageRadius=config.imageRadius,
+        density=config.density,
+        gravityScale=config.gravityScale,
+        pressureStrength=config.pressureStrength,
     })
 
     function instance:makeParticle( x, y, velocityX, velocityY )
