@@ -24,26 +24,20 @@ function M.new( instance, options )
 	local x, y = instance.x, instance.y
 
 	-- Load spritesheet
-	local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
-	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
-	local sequenceData = {
-		{ name = "idle", frames = { 1 } },
-		{ name = "walk", frames = { 2, 3, 4, 5 }, time = 333, loopCount = 0 },
-		{ name = "jump", frames = { 6 } },
-		{ name = "ouch", frames = { 7 } },
-	}
-	instance = display.newSprite( parent, sheet, sequenceData )
+	local sheet = graphics.newImageSheet( "scene/game/img/" .. config.sheetFileName, config.sheetData )
+	instance = display.newSprite( parent, sheet, config.sequenceData )
 	instance.x,instance.y = x, y
 	instance:setSequence( "idle" )
 
 	-- Add physics
 	physics.addBody( instance, "dynamic", config.physics )
 	instance.isFixedRotation = true
-	instance.anchorY = 0.77
+	instance.anchorY = config.anchorY
+	instance.anchorX = config.anchorX
 	instance.jumping = false
 
 	-- Keyboard control
-	local max, acceleration, left, right, flip = 375, 5000, 0, 0, 0
+	local left, right, flip = 0, 0, 0
 	local lastEvent = {}
 	local function key( event )
 		local phase = event.phase
@@ -51,11 +45,11 @@ function M.new( instance, options )
 		if ( phase == lastEvent.phase ) and ( name == lastEvent.keyName ) then return false end  -- Filter repeating keys
 		if phase == "down" then
 			if "left" == name or "a" == name then
-				left = -acceleration
+				left = -config.walkAcceleration
 				flip = -0.133
 			end
 			if "right" == name or "d" == name then
-				right = acceleration
+				right = config.walkAcceleration
 				flip = 0.133
 			elseif "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
@@ -69,6 +63,7 @@ function M.new( instance, options )
 			if "right" == name or "d" == name then right = 0 end
 			if left == 0 and right == 0 and not instance.jumping then
 				instance:setSequence("idle")
+				instance:play()
 			end
 		end
 		lastEvent = event
@@ -78,6 +73,7 @@ function M.new( instance, options )
 		if not self.jumping then
 			self:applyLinearImpulse( 0, config.jumpForce )
 			self:setSequence( "jump" )
+			instance:play()
 			self.jumping = true
 		end
 	end
@@ -156,7 +152,7 @@ function M.new( instance, options )
 		-- if instance.jumping then dy = -5 end
 		if (dx == 0 and instance.jumping) then
 			instance:applyForce( -3*vx, dy, instance.x, instance.y )
-		elseif ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
+		elseif ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
 			instance:applyForce( dx or 0, dy, instance.x, instance.y )
 		end
 		-- Turn around

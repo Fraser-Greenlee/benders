@@ -33,12 +33,40 @@ local startConfig = {
     },
     hero = {
         physics = {
-            density = 1.5,
+            density = 1.2,
             bounce = 0,
             friction =  2.0,
-            box = { halfWidth = 45, halfHeight = 60 }
+            box = { halfWidth = 42, halfHeight = 75 }
         },
-        jumpForce = -300
+        anchorY = 0.56,
+        anchorX = 0.45,
+        jumpForce = -500,
+        walkAcceleration = 1000,
+        maxWalkSpeed = 375,
+        sheetFileName = "katara.png",
+        sheetData = {
+            width = 150,
+            height = 170,
+            numFrames = 24,
+            sheetContentWidth = 3600,
+            sheetContentHeight = 170
+        },
+        sequenceData = {
+            { name = "idle", frames = { 1, 2, 3, 4, 5, 6 } },
+            { name = "walk", frames = { 15, 16, 17, 18, 19 }, time = 333, loopCount = 0 },
+            { name = "jump", frames = { 20, 21, 22, 23, 24 } },
+            { name = "ouch", frames = { 7, 8, 9, 10, 11, 12, 13, 14 } },
+        },
+        oldSprite = {
+            sheetFileName = "sprites.png",
+            sheetData = {
+                width = 192,
+                height = 256,
+                numFrames = 79,
+                sheetContentWidth = 1920,
+                sheetContentHeight = 2048
+            }
+        }
     },
     game = {
         debugPhysics = false
