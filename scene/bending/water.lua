@@ -9,9 +9,9 @@ function M.new( physics )
 
     instance.particleSystem = physics.newParticleSystem({
         filename = "scene/bending/img/rounded_square.png",
-        radius=9,
-        imageRadius=12,
-        density=1.3,
+        radius=8,
+        imageRadius=10,
+        density=0.7,
         gravityScale=4,
         pressureStrength=0.1
     })

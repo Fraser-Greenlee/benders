@@ -19,11 +19,11 @@ function M.new( instance )
 			instance.i = instance.i + 1
 			if instance.i % 4 == 0 then
 				-- need to send a 1st arg that isn't used, should probably be the water instance?
-				instance.water.makeParticle( instance.water, instance.x, instance.y, 0, -1000 )
+				instance.water.makeParticle( instance.water, instance.x, instance.y - 40, 0, -1000 )
 			end
 		end
 
-		local tm = timer.performWithDelay( 100, enterFrame, -1 )
+		local tm = timer.performWithDelay( 10, enterFrame, -1 )
 
 		function instance:finalize()
 			-- On remove, cleanup instance, or call directly for non-visual

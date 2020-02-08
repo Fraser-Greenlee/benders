@@ -39,7 +39,7 @@ function scene:create( event )
 
 	-- Start physics before loading map
 	physics.start()
-	physics.setDrawMode( "hybrid" )
+	-- physics.setDrawMode( "hybrid" )
 	physics.setGravity( 0, 32 )
 
 	-- Load our map
