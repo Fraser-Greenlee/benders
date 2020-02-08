@@ -9,15 +9,14 @@ function M.new( physics )
 
     instance.particleSystem = physics.newParticleSystem({
         filename = "scene/bending/img/rounded_square.png",
-        radius=8,
-        imageRadius=10,
+        radius=18,
+        imageRadius=20,
         density=0.7,
-        gravityScale=4,
+        gravityScale=1,
         pressureStrength=0.1
     })
 
     function instance:makeParticle( x, y, velocityX, velocityY )
-        print('makeParticle', x, y, velocityX, velocityY)
         instance.particleSystem:createParticle({
             x = x,
             y = y,
