@@ -19,6 +19,11 @@ local startConfig = {
         maxAge = 1,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
+    
+        charge = {
+            max = 100,
+            lossPerParticle = 0.02
+        },
 
         debugLine = false,
         debugGrid = false,
@@ -47,14 +52,14 @@ local startConfig = {
         sheetData = {
             width = 150,
             height = 170,
-            numFrames = 24,
-            sheetContentWidth = 3600,
+            numFrames = 25,
+            sheetContentWidth = 3750,
             sheetContentHeight = 170
         },
         sequenceData = {
             { name = "idle", frames = { 1, 2, 3, 4, 5, 6 } },
-            { name = "walk", frames = { 15, 16, 17, 18, 19 }, time = 333, loopCount = 0 },
-            { name = "jump", frames = { 20, 21, 22, 23, 24 } },
+            { name = "walk", frames = { 15, 16, 17, 18, 19, 20 }, time = 333, loopCount = 0 },
+            { name = "jump", frames = { 21, 22, 23, 24, 25 } },
             { name = "ouch", frames = { 7, 8, 9, 10, 11, 12, 13, 14 } },
         },
         oldSprite = {

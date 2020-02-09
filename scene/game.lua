@@ -95,7 +95,7 @@ function scene:create( event )
 	sceneGroup:insert( shield )
 
 	-- Give fountain water
-	water = Water.new( physics )
+	water = Water.new( display, physics )
 	fountain = map:findObject( "fountain" )
 	fountain.water = water
 	timer.performWithDelay( 1000, fountain.addWater )

@@ -10,7 +10,6 @@ local M = {}
 function M.new( instance )
 	-- Store map placement and hide placeholder
 	local parent = instance.parent
-	print(instance.x, instance.y)
 	instance.i = 0
 
 	function instance:addWater()

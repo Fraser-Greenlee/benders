@@ -100,6 +100,10 @@ function M.new( display, particleSystem )
     end
 
     function self:render()
+        local particlesTouched = 0
+        if self.bendingCharge <= 0 then
+            return false
+        end
         for coords, pixel in pairs(self.config.boxes) do
             if (pixel ~= nil) then
                 local age = (system.getTimer() - pixel.madeAt) / 1000
@@ -108,16 +112,20 @@ function M.new( display, particleSystem )
                 else
                     local ageRatio = 1 - (age / self.config.maxAge)
 
-                    local region = self.particleSystem:queryRegion(
+                    local hits = self.particleSystem:queryRegion(
                         pixel.x - self.config.pixel.size/2,
                         pixel.y - self.config.pixel.size/2,
                         pixel.x + self.config.pixel.size/2,
                         pixel.y + self.config.pixel.size/2,
                         { deltaVelocityX=pixel.deltaVX * ageRatio, deltaVelocityY=pixel.deltaVY * ageRatio }
                     )
+                    if hits ~= nil then
+                        particlesTouched = particlesTouched + #hits
+                    end
                 end
             end
         end
+        self.bendingCharge = self.bendingCharge - particlesTouched * self.config.charge.lossPerParticle
     end
 
     -- attributes for tracking cursor movement
@@ -128,6 +136,10 @@ function M.new( display, particleSystem )
     self.touchY = 0
     self.velocityX = 0
     self.velocityY = 0
+    self.bendingCharge = self.config.charge.max
+    self.bendingCircle = display.newCircle( 300, 300, self.config.pixel.size * self.config.radius.px )
+    self.bendingCircle:setFillColor( 0.2, 0.7, 0.1 )
+    self.bendingCircle.alpha = 0.0
 
     function self:staticBend()
         if ( self.previousTime + self.config.staticDelay < system.getTimer() ) then
@@ -148,19 +160,17 @@ function M.new( display, particleSystem )
             self.previousY = self.touchY
             self.velocityX = ( positionDeltaX / timeDelta )
             self.velocityY = ( positionDeltaY / timeDelta )
-    
+
+            self.bendingCircle.x = self.touchX
+            self.bendingCircle.y = self.touchY
+            self.bendingCircle.alpha = 0.2 * self.bendingCharge/100
+
             self.run( self, event.time, self.touchX, self.touchY, self.velocityX, self.velocityY )
-    
-            if self.config.debugPrint then
-                if ( "began" == event.phase ) then
-                    print('began')
-                    local staticTimer = timer.performWithDelay( 1, runstaticBend, -1 )
-                elseif ( "moved" == event.phase ) then
-                    print('moved')
-                elseif ( "ended" == event.phase or "cancelled" == event.phase ) then
-                    print('end')
-                    timer.cancel( staticTimer )
-                end
+
+            if ( "began" == event.phase ) then
+                self.bendingCharge = self.config.charge.max
+            elseif ( "ended" == event.phase or "cancelled" == event.phase ) then
+                self.bendingCircle.alpha = 0.0
             end
         end
         return true
