@@ -17,9 +17,13 @@ function M.new( display, particleSystem )
 
     local function bendingPixelXY(x, y)
         x = x
-        y = y - self.config.pixel.start.y + self.config.pixel.size/2
+        y = y - self.config.pixel.start.y
         local pixelX = math.round(x / self.config.pixel.size)
         local pixelY = math.round(y / self.config.pixel.size)
+
+        self.pixelOffsetX = x % self.config.pixel.size
+        self.pixelOffsetY = y % self.config.pixel.size
+
         return pixelX, pixelY
     end
     
@@ -30,7 +34,7 @@ function M.new( display, particleSystem )
             - then gradually decrease till last 10% radius
             - put 0 force there
         ]]
-        local bendingCoeff = ( (XorY / self.config.radius.px) - 0.1 )
+        local bendingCoeff = ( (XorY / self.config.radius.px) )
         return - self.config.power * bendingCoeff
     end
     
@@ -45,7 +49,7 @@ function M.new( display, particleSystem )
                 self.displayGroup,
                 pixel.x, pixel.y, pixel.x + pixel.deltaVX/2, pixel.y + pixel.deltaVY/2
             )
-            line:setStrokeColor( math.random(), math.random(), math.random(), 1 )
+            --line:setStrokeColor( math.random(), math.random(), math.random(), 1 )
             line.strokeWidth = 1
         end
     end
@@ -101,8 +105,9 @@ function M.new( display, particleSystem )
 
     function self:render()
         local particlesTouched = 0
+        local hasCharge = 1
         if self.bendingCharge <= 0 then
-            return false
+            hasCharge = 0
         end
         for coords, pixel in pairs(self.config.boxes) do
             if (pixel ~= nil) then
@@ -117,7 +122,7 @@ function M.new( display, particleSystem )
                         pixel.y - self.config.pixel.size/2,
                         pixel.x + self.config.pixel.size/2,
                         pixel.y + self.config.pixel.size/2,
-                        { deltaVelocityX=pixel.deltaVX * ageRatio, deltaVelocityY=pixel.deltaVY * ageRatio }
+                        { deltaVelocityX=pixel.deltaVX * ageRatio * hasCharge, deltaVelocityY=pixel.deltaVY * ageRatio * hasCharge }
                     )
                     if hits ~= nil then
                         particlesTouched = particlesTouched + #hits
@@ -126,6 +131,13 @@ function M.new( display, particleSystem )
             end
         end
         self.bendingCharge = self.bendingCharge - particlesTouched * self.config.charge.lossPerParticle
+        if self.bendingCharge < 0 then
+            particlesTouched = 0
+        end
+        if particlesTouched == 0 and self.bendingCharge < self.config.charge.max then
+            self.bendingCharge = self.bendingCharge + self.config.charge.rechargePerRender
+        end
+        print(self.bendingCharge)
     end
 
     -- attributes for tracking cursor movement
@@ -136,6 +148,8 @@ function M.new( display, particleSystem )
     self.touchY = 0
     self.velocityX = 0
     self.velocityY = 0
+    self.pixelOffsetX = 0
+    self.pixelOffsetY = 0
     self.bendingCharge = self.config.charge.max
     self.bendingCircle = display.newCircle( 300, 300, self.config.pixel.size * self.config.radius.px )
     self.bendingCircle:setFillColor( 0.2, 0.7, 0.1 )
@@ -163,12 +177,17 @@ function M.new( display, particleSystem )
 
             self.bendingCircle.x = self.touchX
             self.bendingCircle.y = self.touchY
-            self.bendingCircle.alpha = 0.2 * self.bendingCharge/100
+            if self.bendingCharge <= 0 then
+                self.bendingCircle.alpha = 0.0
+            else
+                self.bendingCircle.alpha = 0.05 + 0.3 * self.bendingCharge/self.config.charge.max
+            end
 
             self.run( self, event.time, self.touchX, self.touchY, self.velocityX, self.velocityY )
 
             if ( "began" == event.phase ) then
-                self.bendingCharge = self.config.charge.max
+                -- self.bendingCharge = self.config.charge.max
+                print('start')
             elseif ( "ended" == event.phase or "cancelled" == event.phase ) then
                 self.bendingCircle.alpha = 0.0
             end

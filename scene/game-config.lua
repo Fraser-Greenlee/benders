@@ -21,8 +21,9 @@ local startConfig = {
         playerVmultiplier = 0,
     
         charge = {
-            max = 100,
-            lossPerParticle = 0.02
+            max = 200,
+            lossPerParticle = 0.02,
+            rechargePerRender = 2
         },
 
         debugLine = false,
