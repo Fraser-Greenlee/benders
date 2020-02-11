@@ -137,7 +137,6 @@ function M.new( display, particleSystem )
         if particlesTouched == 0 and self.bendingCharge < self.config.charge.max then
             self.bendingCharge = self.bendingCharge + self.config.charge.rechargePerRender
         end
-        print(self.bendingCharge)
     end
 
     -- attributes for tracking cursor movement
