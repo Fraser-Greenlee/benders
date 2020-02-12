@@ -39,10 +39,10 @@ local startConfig = {
     },
     hero = {
         physics = {
-            density = 1.2,
+            density = 2.0,
             bounce = 0,
             friction =  2.0,
-            box = { halfWidth = 42, halfHeight = 75 }
+            box = { halfWidth = 42, halfHeight = 60 }
         },
         anchorY = 0.56,
         anchorX = 0.45,
@@ -51,16 +51,16 @@ local startConfig = {
         maxWalkSpeed = 375,
         sheetFileName = "katara.png",
         sheetData = {
-            width = 150,
-            height = 170,
+            width = 120,
+            height = 136,
             numFrames = 25,
-            sheetContentWidth = 3750,
-            sheetContentHeight = 170
+            sheetContentWidth = 3000,
+            sheetContentHeight = 136
         },
         sequenceData = {
-            { name = "idle", frames = { 1, 2, 3, 4, 5, 6 } },
+            { name = "idle", frames = { 1, 2, 3, 4, 5, 6 }, time = 333 },
             { name = "walk", frames = { 15, 16, 17, 18, 19, 20 }, time = 333, loopCount = 0 },
-            { name = "jump", frames = { 21, 22, 23, 24, 25 } },
+            { name = "jump", frames = { 21, 22, 23, 24, 25 }, time = 333 },
             { name = "ouch", frames = { 7, 8, 9, 10, 11, 12, 13, 14 } },
         },
         oldSprite = {
