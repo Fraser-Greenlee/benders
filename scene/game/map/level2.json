@@ -7,16 +7,73 @@
          "name":"background",
          "objects":[
                 {
-                 "gid":15,
-                 "height":192,
-                 "id":284,
+                 "height":80,
+                 "id":534,
                  "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":160,
-                 "x":192,
-                 "y":450
+                 "width":400,
+                 "x":1120,
+                 "y":560
+                }, 
+                {
+                 "height":80,
+                 "id":535,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":1120,
+                 "y":480
+                }, 
+                {
+                 "height":80,
+                 "id":536,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":1440,
+                 "y":480
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -37,7 +94,7 @@
                  "name":"",
                  "properties":
                     {
-                     "map":"scene\/game\/map\/sandbox3.json"
+                     "map":"scene\/game\/map\/level2.json"
                     },
                  "propertytypes":
                     {
@@ -48,18 +105,6 @@
                  "visible":true,
                  "width":160,
                  "x":2240,
-                 "y":-320
-                }, 
-                {
-                 "gid":18,
-                 "height":64,
-                 "id":384,
-                 "name":"",
-                 "rotation":0,
-                 "type":"coin",
-                 "visible":true,
-                 "width":64,
-                 "x":1360,
                  "y":160
                 }, 
                 {
@@ -81,7 +126,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":800,
+                 "width":400,
                  "x":0,
                  "y":800
                 }, 
@@ -107,53 +152,7 @@
                  "y":1280
                 }, 
                 {
-                 "height":68,
-                 "id":491,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":240,
-                 "x":2320,
-                 "y":480
-                }, 
-                {
-                 "height":68,
-                 "id":492,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":240,
-                 "x":480,
-                 "y":-320
-                }, 
-                {
-                 "height":80,
+                 "height":400,
                  "id":500,
                  "name":"",
                  "properties":
@@ -172,8 +171,8 @@
                  "type":"",
                  "visible":true,
                  "width":80,
-                 "x":720,
-                 "y":720
+                 "x":320,
+                 "y":880
                 }, 
                 {
                  "gid":6,
@@ -183,9 +182,9 @@
                  "rotation":0,
                  "type":"filterParticlesBlock",
                  "visible":true,
-                 "width":80,
-                 "x":2400,
-                 "y":1200
+                 "width":240,
+                 "x":400,
+                 "y":1120
                 }, 
                 {
                  "height":80,
@@ -206,12 +205,12 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":320,
-                 "x":160,
-                 "y":480
+                 "width":400,
+                 "x":2160,
+                 "y":160
                 }, 
                 {
-                 "height":160,
+                 "height":1040,
                  "id":512,
                  "name":"",
                  "properties":
@@ -230,11 +229,11 @@
                  "type":"",
                  "visible":true,
                  "width":80,
-                 "x":2320,
-                 "y":1120
+                 "x":2160,
+                 "y":240
                 }, 
                 {
-                 "height":160,
+                 "height":240,
                  "id":513,
                  "name":"",
                  "properties":
@@ -253,8 +252,20 @@
                  "type":"",
                  "visible":true,
                  "width":80,
-                 "x":2480,
-                 "y":1120
+                 "x":640,
+                 "y":1040
+                }, 
+                {
+                 "gid":86,
+                 "height":64,
+                 "id":533,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":64,
+                 "x":1360,
+                 "y":-240
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -978,7 +989,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":80,
          "x":0,
          "y":0
@@ -1045,8 +1056,8 @@
                  "type":"hero",
                  "visible":true,
                  "width":128,
-                 "x":240,
-                 "y":480
+                 "x":80,
+                 "y":800
                 }, 
                 {
                  "height":48,
@@ -1076,7 +1087,7 @@
                  "type":"fountain",
                  "visible":true,
                  "width":80,
-                 "x":2400,
+                 "x":480,
                  "y":1280
                 }],
          "opacity":1,
@@ -1148,7 +1159,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":524,
+ "nextobjectid":537,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,
@@ -1434,6 +1445,303 @@
              "67":
                 {
                  "image":"..\/..\/..\/sprite-work\/scafolding-block-water-filter.png"
+                },
+             "7":
+                {
+                 "image":"img\/column1.png"
+                },
+             "8":
+                {
+                 "image":"img\/column2.png"
+                },
+             "9":
+                {
+                 "image":"img\/doorBlueStroked.png"
+                }
+            },
+         "tilewidth":384
+        }, 
+        {
+         "columns":0,
+         "firstgid":69,
+         "margin":0,
+         "name":"objs",
+         "spacing":0,
+         "tilecount":65,
+         "tileheight":332,
+         "tiles":
+            {
+             "0":
+                {
+                 "image":"img\/alter.png"
+                },
+             "1":
+                {
+                 "image":"img\/blobBlue.png"
+                },
+             "10":
+                {
+                 "image":"img\/doorGreenStroke.png"
+                },
+             "11":
+                {
+                 "image":"img\/doorRedStroked.png"
+                },
+             "12":
+                {
+                 "image":"img\/doorStroked.png"
+                },
+             "13":
+                {
+                 "image":"img\/earthWall.png"
+                },
+             "14":
+                {
+                 "image":"img\/exit.png"
+                },
+             "15":
+                {
+                 "image":"img\/flare.png"
+                },
+             "16":
+                {
+                 "image":"img\/gemBlueStroked.png"
+                },
+             "17":
+                {
+                 "image":"img\/gemRedStroked.png"
+                },
+             "18":
+                {
+                 "image":"img\/grassLarge.png"
+                },
+             "19":
+                {
+                 "image":"img\/grassSmall.png"
+                },
+             "2":
+                {
+                 "image":"img\/blobGreen.png"
+                },
+             "20":
+                {
+                 "image":"img\/grey.png"
+                },
+             "21":
+                {
+                 "image":"img\/hero.png"
+                },
+             "22":
+                {
+                 "image":"img\/keyGreenStroked.png"
+                },
+             "23":
+                {
+                 "image":"img\/keyRedStroked.png"
+                },
+             "24":
+                {
+                 "image":"img\/keyYellowStroked.png"
+                },
+             "25":
+                {
+                 "image":"img\/platform1.png"
+                },
+             "26":
+                {
+                 "image":"img\/platform2.png"
+                },
+             "27":
+                {
+                 "image":"img\/platform3.png"
+                },
+             "28":
+                {
+                 "image":"img\/platform4.png",
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "height":0,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":36,
+                             "id":4,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":193.333,
+                             "x":-1.33333,
+                             "y":-0.666667
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "width":0,
+                     "x":0,
+                     "y":0
+                    }
+                },
+             "29":
+                {
+                 "image":"img\/platformBase1.png"
+                },
+             "3":
+                {
+                 "image":"img\/blue.png"
+                },
+             "30":
+                {
+                 "image":"img\/platformBase2.png"
+                },
+             "31":
+                {
+                 "image":"img\/platformBase3.png"
+                },
+             "32":
+                {
+                 "image":"img\/platformBase4.png"
+                },
+             "33":
+                {
+                 "image":"img\/platformBlock1.png"
+                },
+             "34":
+                {
+                 "image":"img\/platformBlock2.png"
+                },
+             "35":
+                {
+                 "image":"img\/platformBlock3.png"
+                },
+             "36":
+                {
+                 "image":"img\/platformBlock4.png"
+                },
+             "37":
+                {
+                 "image":"img\/platformConnector1.png"
+                },
+             "38":
+                {
+                 "image":"img\/platformConnector2.png"
+                },
+             "39":
+                {
+                 "image":"img\/platformConnector3.png"
+                },
+             "4":
+                {
+                 "image":"img\/bombStroked.png"
+                },
+             "40":
+                {
+                 "image":"img\/platformConnector4.png"
+                },
+             "41":
+                {
+                 "image":"img\/pushBlock1.png"
+                },
+             "42":
+                {
+                 "image":"img\/pushBlock2.png"
+                },
+             "43":
+                {
+                 "image":"img\/pushBlock3.png"
+                },
+             "44":
+                {
+                 "image":"img\/shadow.png"
+                },
+             "45":
+                {
+                 "image":"img\/shieldStroked.png"
+                },
+             "46":
+                {
+                 "image":"img\/sign.png"
+                },
+             "48":
+                {
+                 "image":"img\/swordStroked.png"
+                },
+             "49":
+                {
+                 "image":"img\/torch.png"
+                },
+             "5":
+                {
+                 "image":"img\/castleWall.png"
+                },
+             "50":
+                {
+                 "image":"img\/trap.png"
+                },
+             "51":
+                {
+                 "image":"img\/wallDecor1.png"
+                },
+             "52":
+                {
+                 "image":"img\/wallDecor2.png"
+                },
+             "53":
+                {
+                 "image":"img\/wallDecor3.png"
+                },
+             "54":
+                {
+                 "image":"img\/window1.png"
+                },
+             "55":
+                {
+                 "image":"img\/window2.png"
+                },
+             "56":
+                {
+                 "image":"img\/window3.png"
+                },
+             "57":
+                {
+                 "image":"img\/backgroundArch.png"
+                },
+             "58":
+                {
+                 "image":"img\/backgroundMountain.png"
+                },
+             "59":
+                {
+                 "image":"img\/backgroundTower.png"
+                },
+             "6":
+                {
+                 "image":"img\/cloud.png"
+                },
+             "60":
+                {
+                 "image":"img\/backgroundTree.png"
+                },
+             "61":
+                {
+                 "image":"img\/earthWall2.png"
+                },
+             "62":
+                {
+                 "image":"img\/skeleton.png"
+                },
+             "64":
+                {
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/lOH0viX_1x.png"
+                },
+             "65":
+                {
+                 "image":"..\/..\/..\/sprite-work\/scafolding-block.png"
+                },
+             "66":
+                {
+                 "image":"img\/towerfall-background.png"
                 },
              "7":
                 {

@@ -1,7 +1,6 @@
 
 -- Module/class for water fountain
 
--- Use this as a template to build an in-game hero 
 local composer = require( "composer" )
 
 -- Define module

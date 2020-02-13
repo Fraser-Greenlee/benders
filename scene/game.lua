@@ -9,10 +9,11 @@ local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
 local Water = require( "scene.bending.water" )
 local Bending = require( "scene.bending.bend" )
+local FilterParticleSystem = require( "scene.game.lib.filterParticleSystem" )
 local config = require('scene.game-config').noDisplay.game
 
 -- Variables local to scene
-local map, hero, shield, parallax
+local map, hero, shield, parallax, water, filterParticleSystem
 
 -- Create a new Composer scene
 local scene = composer.newScene()
@@ -59,7 +60,7 @@ function scene:create( event )
 	hero.filename = filename
 
 	-- Find our enemies and other items
-	map:extend( "blob", "enemy", "exit", "coin", "spikes", "fountain" )
+	map:extend( "blob", "enemy", "exit", "coin", "spikes", "fountain", "filterParticlesBlock" )
 
 	-- Find the parallax layer
 	parallax = map:findLayer( "parallax" )
@@ -99,6 +100,15 @@ function scene:create( event )
 	fountain = map:findObject( "fountain" )
 	fountain.water = water
 	timer.performWithDelay( 1000, fountain.addWater )
+
+	-- Use seperate particle system to filter water
+	filterParticleSystem = FilterParticleSystem.new( physics )
+	filterBlocks = map:listTypes( "filterParticlesBlock" )
+	for i, block in pairs(filterBlocks) do
+		block.particleSystem = filterParticleSystem.particleSystem
+		block.makeBlock()
+	end
+
 
 	-- Allow bending
 	bending = Bending.new(display, water.particleSystem)
@@ -153,6 +163,16 @@ end
 
 -- This function is called when scene is destroyed
 function scene:destroy( event )
+
+	local fullScreen = {
+		x = 0,
+        y = 0,
+        halfWidth = display.actualContentWidth,
+        halfHeight = display.actualContentHeight*2
+	}
+	filterParticleSystem.particleSystem:destroyParticles( fullScreen )
+	water.particleSystem:destroyParticles( fullScreen )
+
 
 	audio.stop()  -- Stop all audio
 	for s, v in pairs( self.sounds ) do  -- Release all audio handles

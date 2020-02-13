@@ -46,7 +46,7 @@ local startConfig = {
         },
         anchorY = 0.56,
         anchorX = 0.45,
-        jumpForce = -500,
+        jumpForce = -650,
         walkAcceleration = 1000,
         maxWalkSpeed = 375,
         sheetFileName = "katara.png",
@@ -72,6 +72,18 @@ local startConfig = {
                 sheetContentWidth = 1920,
                 sheetContentHeight = 2048
             }
+        }
+    },
+    filter = {
+        particleSystem = {
+            filename = "scene/bending/img/invisible.png",
+            radius = 10,
+            gravityScale = 0.0
+        },
+        group = {
+            flags = {"wall"},
+            groupFlags = "rigid",
+            strength = 0.0
         }
     },
     game = {

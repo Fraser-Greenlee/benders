@@ -30,15 +30,7 @@ function M.new( display, physics )
         })
     end
 
-    -- TODO finish proper water look!
-    local screenWidth = display.actualContentWidth
-    local screenHeight = display.actualContentHeight
-
     local worldGroup = display.newGroup()
-    local letterboxWidth = (display.actualContentWidth-display.contentWidth)/2
-    local letterboxHeight = (display.actualContentHeight-display.contentHeight)/2
-    local midX = display.actualContentWidth/2
-    local midY = letterboxHeight/2 + letterboxHeight/6
     -- Initialize snapshot for full screen
     local snapshot = display.newSnapshot( worldGroup, display.actualContentWidth*2, display.actualContentHeight*2 )
     local snapshotGroup = snapshot.group

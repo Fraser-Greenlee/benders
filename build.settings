@@ -64,7 +64,7 @@ settings = {
 
 	plugins =
 	{
-
+        ["plugin.collisionFilters"] = {publisherId = "com.coronalabs"},
 	},
 
 	--  Files to be excluded are specified per-platform (iOS, Android, or all) using simple pattern
