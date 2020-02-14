@@ -57,8 +57,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":640,
-                 "x":240,
+                 "width":400,
+                 "x":480,
                  "y":240
                 }, 
                 {
@@ -92,7 +92,7 @@
                  "rotation":0,
                  "type":"filterParticlesBlock",
                  "visible":true,
-                 "width":960,
+                 "width":1120,
                  "x":880,
                  "y":320
                 }, 
@@ -115,8 +115,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":400,
-                 "x":1840,
+                 "width":320,
+                 "x":2000,
                  "y":240
                 }, 
                 {
@@ -162,7 +162,7 @@
                  "type":"",
                  "visible":true,
                  "width":80,
-                 "x":1840,
+                 "x":2000,
                  "y":160
                 }, 
                 {
@@ -328,7 +328,7 @@
                  "y":-400
                 }, 
                 {
-                 "height":320,
+                 "height":240,
                  "id":544,
                  "name":"",
                  "properties":
@@ -392,8 +392,54 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":160,
-                 "x":2240,
+                 "width":80,
+                 "x":2320,
+                 "y":160
+                }, 
+                {
+                 "height":80,
+                 "id":547,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":240,
+                 "x":320,
+                 "y":80
+                }, 
+                {
+                 "height":80,
+                 "id":548,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":480,
                  "y":160
                 }],
          "opacity":1,
@@ -1186,7 +1232,7 @@
                  "visible":true,
                  "width":128,
                  "x":2240,
-                 "y":80
+                 "y":1280
                 }, 
                 {
                  "height":48,
@@ -1288,7 +1334,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":547,
+ "nextobjectid":549,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,

@@ -24,10 +24,14 @@ local startConfig = {
             max = 200,
             min = 100,
             lossPerParticle = 0.02,
-            rechargePerRender = 2
+            rechargePerRender = 2,
+            indicator = {
+                width = 200,
+                height = 50
+            }
         },
-        distance = {
-            max = 300
+        distancePower = {
+            max = 1500,
         },
 
         debugLine = false,

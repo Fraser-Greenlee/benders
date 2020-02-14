@@ -266,6 +266,18 @@
                  "width":64,
                  "x":1360,
                  "y":-240
+                }, 
+                {
+                 "gid":204,
+                 "height":80,
+                 "id":537,
+                 "name":"waterBlock",
+                 "rotation":0,
+                 "type":"waterBlock",
+                 "visible":true,
+                 "width":240,
+                 "x":400,
+                 "y":1200
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1159,7 +1171,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":537,
+ "nextobjectid":538,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,
@@ -1757,6 +1769,131 @@
                 }
             },
          "tilewidth":384
+        }, 
+        {
+         "columns":0,
+         "firstgid":136,
+         "margin":0,
+         "name":"objs",
+         "spacing":0,
+         "tilecount":28,
+         "tileheight":256,
+         "tiles":
+            {
+             "1":
+                {
+                 "image":"img\/blobBlue.png"
+                },
+             "13":
+                {
+                 "image":"img\/earthWall.png"
+                },
+             "15":
+                {
+                 "image":"img\/flare.png"
+                },
+             "17":
+                {
+                 "image":"img\/gemRedStroked.png"
+                },
+             "2":
+                {
+                 "image":"img\/blobGreen.png"
+                },
+             "20":
+                {
+                 "image":"img\/grey.png"
+                },
+             "21":
+                {
+                 "image":"img\/hero.png"
+                },
+             "22":
+                {
+                 "image":"img\/keyGreenStroked.png"
+                },
+             "23":
+                {
+                 "image":"img\/keyRedStroked.png"
+                },
+             "24":
+                {
+                 "image":"img\/keyYellowStroked.png"
+                },
+             "3":
+                {
+                 "image":"img\/blue.png"
+                },
+             "33":
+                {
+                 "image":"img\/platformBlock1.png"
+                },
+             "34":
+                {
+                 "image":"img\/platformBlock2.png"
+                },
+             "35":
+                {
+                 "image":"img\/platformBlock3.png"
+                },
+             "36":
+                {
+                 "image":"img\/platformBlock4.png"
+                },
+             "42":
+                {
+                 "image":"img\/pushBlock2.png"
+                },
+             "43":
+                {
+                 "image":"img\/pushBlock3.png"
+                },
+             "44":
+                {
+                 "image":"img\/shadow.png"
+                },
+             "45":
+                {
+                 "image":"img\/shieldStroked.png"
+                },
+             "49":
+                {
+                 "image":"img\/torch.png"
+                },
+             "5":
+                {
+                 "image":"img\/castleWall.png"
+                },
+             "61":
+                {
+                 "image":"img\/earthWall2.png"
+                },
+             "62":
+                {
+                 "image":"img\/skeleton.png"
+                },
+             "64":
+                {
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/lOH0viX_1x.png"
+                },
+             "65":
+                {
+                 "image":"..\/..\/..\/sprite-work\/scafolding-block.png"
+                },
+             "67":
+                {
+                 "image":"..\/..\/..\/sprite-work\/scafolding-block-water-filter.png"
+                },
+             "68":
+                {
+                 "image":"..\/..\/..\/..\/..\/..\/Downloads\/941bca96d43f33fb6263e57fe2e8c00cb9d56cec.png"
+                },
+             "9":
+                {
+                 "image":"img\/doorBlueStroked.png"
+                }
+            },
+         "tilewidth":256
         }],
  "tilewidth":80,
  "version":1,

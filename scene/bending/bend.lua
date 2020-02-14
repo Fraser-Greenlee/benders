@@ -35,7 +35,7 @@ function M.new( display, particleSystem, hero )
             - then gradually decrease till last 10% radius
             - put 0 force there
         ]]
-        local bendingCoeff = ( (XorY / self.config.radius.px) )
+        local bendingCoeff = ( (XorY / self.bendingRadius) )
         return - self.config.power * bendingCoeff
     end
     
@@ -78,14 +78,14 @@ function M.new( display, particleSystem, hero )
 
     function self:run(eventTime, globalX, globalY, playerVX, playerVY)
         centreX, centreY = bendingPixelXY(globalX, globalY)
-        for y = centreY - self.config.radius.px, centreY + self.config.radius.px do
-            for x = centreX - self.config.radius.px, centreX + self.config.radius.px do
+        for y = centreY - self.bendingRadius, centreY + self.bendingRadius do
+            for x = centreX - self.bendingRadius, centreX + self.bendingRadius do
     
                 local relX = x - centreX
                 local relY = y - centreY
                 local distance = math.sqrt(relX*relX + relY*relY)
     
-                if distance <= self.config.radius.px then
+                if distance <= self.bendingRadius then
                     local pixel = self.config.boxes[tostring(x) .. ',' .. tostring(y)]
                     if pixel == nil then
                         pixel = {}
@@ -138,6 +138,7 @@ function M.new( display, particleSystem, hero )
         if particlesTouched == 0 and self.bendingCharge < self.config.charge.max then
             self.bendingCharge = self.bendingCharge + self.config.charge.rechargePerRender
         end
+        self.bendingChargeIndicator.path.width = self.config.charge.indicator.width * self.bendingCharge/self.config.charge.max
     end
 
     -- attributes for tracking cursor movement
@@ -151,7 +152,15 @@ function M.new( display, particleSystem, hero )
     self.pixelOffsetX = 0
     self.pixelOffsetY = 0
     self.bendingCharge = self.config.charge.max
-    self.bendingCircle = display.newCircle( 300, 300, self.config.pixel.size * self.config.radius.px )
+    self.bendingChargeIndicatorFull = display.newRect(
+        self.displayGroup, 400, -520, self.config.charge.indicator.width, self.config.charge.indicator.height
+    )
+    self.bendingChargeIndicator = display.newRect(
+        self.displayGroup, 400, -520, self.config.charge.indicator.width, self.config.charge.indicator.height
+    )
+    self.bendingChargeIndicator:setFillColor( 0.2, 0.7, 0.1 )
+    self.bendingRadius = self.config.radius.px
+    self.bendingCircle = display.newCircle( self.displayGroup, 300, 300, self.config.pixel.size * self.bendingRadius )
     self.bendingCircle.strokeWidth = 30
     self.bendingCircle:setStrokeColor( 0.2, 0.7, 0.1 )
     self.bendingCircle:setFillColor( 1, 1, 1, 0.0 )
@@ -179,7 +188,16 @@ function M.new( display, particleSystem, hero )
 
             self.bendingCircle.x = self.touchX
             self.bendingCircle.y = self.touchY
-            -- TODO measure distance from self.hero.x, self.hero.y
+            
+            local heroDistance = math.sqrt((self.bendingCircle.x - self.hero.x)^2 + (self.bendingCircle.y - self.hero.y)^2)
+            if heroDistance <= self.config.distancePower.max then
+                self.bendingRadius = 2.5
+            else
+                self.bendingRadius = 1
+            end
+
+            self.bendingCircle.path.radius = self.bendingRadius * self.config.pixel.size
+
             if self.bendingCharge <= 0 or self.hasCharge == 0 then
                 self.bendingCircle.alpha = 0.0
             else
