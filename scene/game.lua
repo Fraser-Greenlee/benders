@@ -60,7 +60,7 @@ function scene:create( event )
 	hero.filename = filename
 
 	-- Find our enemies and other items
-	map:extend( "blob", "enemy", "exit", "coin", "spikes", "fountain", "filterParticlesBlock" )
+	map:extend( "blob", "enemy", "exit", "coin", "spikes", "fountain", "waterBlock", "filterParticlesBlock" )
 
 	-- Find the parallax layer
 	parallax = map:findLayer( "parallax" )
@@ -95,11 +95,18 @@ function scene:create( event )
 	sceneGroup:insert( gem )
 	sceneGroup:insert( shield )
 
-	-- Give fountain water
+	-- Give fountains & waterBlocks water
 	water = Water.new( display, physics )
-	fountain = map:findObject( "fountain" )
-	fountain.water = water
-	timer.performWithDelay( 1000, fountain.addWater )
+	allFountains = map:listTypes( "fountain" )
+	for i, fountain in pairs(allFountains) do
+		fountain.water = water
+		timer.performWithDelay( 1000, fountain.addWater )
+	end
+	allWaterBlocks = map:listTypes( "waterBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
 
 	-- Use seperate particle system to filter water
 	filterParticleSystem = FilterParticleSystem.new( physics )
@@ -172,6 +179,7 @@ function scene:destroy( event )
 	}
 	filterParticleSystem.particleSystem:destroyParticles( fullScreen )
 	water.particleSystem:destroyParticles( fullScreen )
+	bending:destroy()
 
 
 	audio.stop()  -- Stop all audio

@@ -9,25 +9,14 @@ local M = {}
 function M.new( display, physics )
     local instance = {}
 
-    instance.particleSystem = physics.newParticleSystem({
-        filename = "scene/bending/img/rounded_square.png",
-        radius=config.radius,
-        imageRadius=config.imageRadius,
-        density=config.density,
-        gravityScale=config.gravityScale,
-        pressureStrength=config.pressureStrength,
-    })
+    instance.particleSystem = physics.newParticleSystem( config.particleSystem )
 
     function instance:makeParticle( x, y, velocityX, velocityY )
-        instance.particleSystem:createParticle({
-            x = x,
-            y = y,
-            velocityX = velocityX,
-            velocityY = velocityY,
-            color = { 0.3, 0.4, 1, 1 },
-            lifetime = 48,
-            flags = { "water" }
-        })
+        config.createParticle.x = x
+        config.createParticle.y = y
+        config.createParticle.velocityX = velocityX
+        config.createParticle.velocityY = velocityY
+        instance.particleSystem:createParticle( config.createParticle )
     end
 
     local worldGroup = display.newGroup()

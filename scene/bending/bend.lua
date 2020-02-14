@@ -103,11 +103,14 @@ function M.new( display, particleSystem )
         end
     end
 
+    self.hasCharge = 1
+
     function self:render()
         local particlesTouched = 0
-        local hasCharge = 1
         if self.bendingCharge <= 0 then
-            hasCharge = 0
+            self.hasCharge = 0
+        elseif self.hasCharge == 0 and self.bendingCharge >= self.config.charge.min then
+            self.hasCharge = 1
         end
         for coords, pixel in pairs(self.config.boxes) do
             if (pixel ~= nil) then
@@ -122,18 +125,15 @@ function M.new( display, particleSystem )
                         pixel.y - self.config.pixel.size/2,
                         pixel.x + self.config.pixel.size/2,
                         pixel.y + self.config.pixel.size/2,
-                        { deltaVelocityX=pixel.deltaVX * ageRatio * hasCharge, deltaVelocityY=pixel.deltaVY * ageRatio * hasCharge }
+                        { deltaVelocityX=pixel.deltaVX * ageRatio * self.hasCharge, deltaVelocityY=pixel.deltaVY * ageRatio * self.hasCharge }
                     )
-                    if hits ~= nil then
+                    if hits ~= nil and self.hasCharge == 1 then
                         particlesTouched = particlesTouched + #hits
                     end
                 end
             end
         end
         self.bendingCharge = self.bendingCharge - particlesTouched * self.config.charge.lossPerParticle
-        if self.bendingCharge < 0 then
-            particlesTouched = 0
-        end
         if particlesTouched == 0 and self.bendingCharge < self.config.charge.max then
             self.bendingCharge = self.bendingCharge + self.config.charge.rechargePerRender
         end
@@ -176,7 +176,7 @@ function M.new( display, particleSystem )
 
             self.bendingCircle.x = self.touchX
             self.bendingCircle.y = self.touchY
-            if self.bendingCharge <= 0 then
+            if self.bendingCharge <= 0 or self.hasCharge == 0 then
                 self.bendingCircle.alpha = 0.0
             else
                 self.bendingCircle.alpha = 0.05 + 0.3 * self.bendingCharge/self.config.charge.max
@@ -197,7 +197,13 @@ function M.new( display, particleSystem )
     -- start run timers
     Runtime:addEventListener( "touch", onTouch )
     local runRender = function() return self.render( self ) end
-    timer.performWithDelay(self.config.renderDelay, runRender, -1)
+    local renderTimer = timer.performWithDelay(self.config.renderDelay, runRender, -1)
+
+    function self:destroy()
+        self.displayGroup:removeSelf()
+        timer.cancel( renderTimer )
+        Runtime:removeEventListener( "touch", onTouch )
+    end
 
     return self
 end

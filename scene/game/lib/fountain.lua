@@ -16,7 +16,6 @@ function M.new( instance )
 		local function enterFrame()
 			instance.i = instance.i + 1
 			if instance.i % 4 == 0 then
-				-- need to send a 1st arg that isn't used, should probably be the water instance?
 				instance.water.makeParticle( instance.water, instance.x, instance.y - 40, math.random(-3, 3), -1000 )
 			end
 		end

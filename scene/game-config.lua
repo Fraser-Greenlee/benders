@@ -22,6 +22,7 @@ local startConfig = {
     
         charge = {
             max = 200,
+            min = 100,
             lossPerParticle = 0.02,
             rechargePerRender = 2
         },
@@ -31,11 +32,24 @@ local startConfig = {
         debugPrint = false
     },
     water = {
-        radius = 18,
-        imageRadius=20,
-        density=2,
-        gravityScale=1,
-        pressureStrength=0.1
+        particleSystem = {
+            filename = "scene/bending/img/rounded_square.png",
+            radius = 18,
+            imageRadius=20,
+            density=2,
+            gravityScale=1,
+            pressureStrength=0.1
+        },
+        createParticle = {
+            color = { 0.3, 0.4, 1, 1 },
+            lifetime = 48,
+            flags = { "water" }
+        },
+        createGroup = {
+            color = { 0.3, 0.4, 1, 1 },
+            lifetime = 48,
+            flags = { "water" }
+        }
     },
     hero = {
         physics = {
@@ -77,7 +91,7 @@ local startConfig = {
     filter = {
         particleSystem = {
             filename = "scene/bending/img/invisible.png",
-            radius = 10,
+            radius = 30,
             gravityScale = 0.0
         },
         group = {
