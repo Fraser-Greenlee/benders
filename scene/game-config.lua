@@ -26,6 +26,9 @@ local startConfig = {
             lossPerParticle = 0.02,
             rechargePerRender = 2
         },
+        distance = {
+            max = 300
+        },
 
         debugLine = false,
         debugGrid = false,

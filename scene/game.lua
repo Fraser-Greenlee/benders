@@ -118,7 +118,7 @@ function scene:create( event )
 
 
 	-- Allow bending
-	bending = Bending.new(display, water.particleSystem)
+	bending = Bending.new( display, water.particleSystem, hero )
 	bending.drawGrid(bending)
 
 end

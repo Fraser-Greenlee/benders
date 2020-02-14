@@ -6,7 +6,7 @@ local configMaker = require('scene.game-config').new
 -- Define module
 local M = {}
 
-function M.new( display, particleSystem )
+function M.new( display, particleSystem, hero )
     local self = {}
 
     self.display = display
@@ -14,6 +14,7 @@ function M.new( display, particleSystem )
 	self.displayGroup = display.newGroup()
     self.config = configMaker(self.display).bending
     self.particleSystem = particleSystem
+    self.hero = hero
 
     local function bendingPixelXY(x, y)
         x = x
@@ -151,7 +152,9 @@ function M.new( display, particleSystem )
     self.pixelOffsetY = 0
     self.bendingCharge = self.config.charge.max
     self.bendingCircle = display.newCircle( 300, 300, self.config.pixel.size * self.config.radius.px )
-    self.bendingCircle:setFillColor( 0.2, 0.7, 0.1 )
+    self.bendingCircle.strokeWidth = 30
+    self.bendingCircle:setStrokeColor( 0.2, 0.7, 0.1 )
+    self.bendingCircle:setFillColor( 1, 1, 1, 0.0 )
     self.bendingCircle.alpha = 0.0
 
     function self:staticBend()
@@ -176,6 +179,7 @@ function M.new( display, particleSystem )
 
             self.bendingCircle.x = self.touchX
             self.bendingCircle.y = self.touchY
+            -- TODO measure distance from self.hero.x, self.hero.y
             if self.bendingCharge <= 0 or self.hasCharge == 0 then
                 self.bendingCircle.alpha = 0.0
             else
