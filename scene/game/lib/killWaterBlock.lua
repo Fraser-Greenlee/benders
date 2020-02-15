@@ -14,7 +14,7 @@ function M.new( instance )
 			instance.particleSystem:destroyParticles(
                 {
                     x = instance.x,
-                    y = instance.x,
+                    y = instance.y,
                     halfWidth = instance.width/2,
                     halfHeight = instance.height/2
                 }

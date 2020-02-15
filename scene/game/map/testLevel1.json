@@ -51,18 +51,6 @@
                  "y":-320
                 }, 
                 {
-                 "gid":18,
-                 "height":64,
-                 "id":384,
-                 "name":"",
-                 "rotation":0,
-                 "type":"coin",
-                 "visible":true,
-                 "width":64,
-                 "x":1360,
-                 "y":160
-                }, 
-                {
                  "height":80,
                  "id":438,
                  "name":"",
