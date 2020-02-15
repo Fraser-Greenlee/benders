@@ -229,7 +229,7 @@
                  "type":"",
                  "visible":true,
                  "width":80,
-                 "x":2160,
+                 "x":2400,
                  "y":240
                 }, 
                 {
@@ -269,7 +269,7 @@
                 }, 
                 {
                  "gid":204,
-                 "height":80,
+                 "height":240,
                  "id":537,
                  "name":"waterBlock",
                  "rotation":0,
@@ -277,7 +277,7 @@
                  "visible":true,
                  "width":240,
                  "x":400,
-                 "y":1200
+                 "y":1280
                 }],
          "opacity":1,
          "type":"objectgroup",
