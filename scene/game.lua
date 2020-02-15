@@ -60,7 +60,7 @@ function scene:create( event )
 	hero.filename = filename
 
 	-- Find our enemies and other items
-	map:extend( "blob", "enemy", "exit", "coin", "spikes", "fountain", "waterBlock", "filterParticlesBlock" )
+	map:extend( "blob", "enemy", "exit", "coin", "spikes", "fountain", "waterBlock", "filterParticlesBlock", "deathBlock", "killWaterBlock" )
 
 	-- Find the parallax layer
 	parallax = map:findLayer( "parallax" )
@@ -100,12 +100,17 @@ function scene:create( event )
 	allFountains = map:listTypes( "fountain" )
 	for i, fountain in pairs(allFountains) do
 		fountain.water = water
-		timer.performWithDelay( 1000, fountain.addWater )
+		fountain.addWater()
 	end
 	allWaterBlocks = map:listTypes( "waterBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
+	end
+	allkillWaterBlocks = map:listTypes( "killWaterBlock" )
+	for i, block in pairs(allkillWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.start()
 	end
 
 	-- Use seperate particle system to filter water

@@ -78,23 +78,29 @@ function M.new( instance, options )
 		end
 	end
 
+	function instance:die()
+		fx.fadeOut(
+			function()
+				composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
+			end,
+			5, 0
+		)
+		instance.isDead = true
+		instance.isSensor = true
+		self:applyLinearImpulse( 0, -500 )
+		-- Death animation
+		instance:setSequence( "ouch" )
+		self.xScale = 1
+		transition.to( self, { xScale = -1, time = 750, transition = easing.continuousLoop, iterations = -1 } )
+		-- Remove all listeners
+		self:finalize()
+	end
+
 	function instance:hurt()
 		fx.flash( self )
 		audio.play( sounds.hurt[math.random(2)] )
 		if self.shield:damage() <= 0 then
-			-- We died
-			fx.fadeOut( function()
-				composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
-			end, 1500, 1000 )
-			instance.isDead = true
-			instance.isSensor = true
-			self:applyLinearImpulse( 0, -500 )
-			-- Death animation
-			instance:setSequence( "ouch" )
-			self.xScale = 1
-			transition.to( self, { xScale = -1, time = 750, transition = easing.continuousLoop, iterations = -1 } )
-			-- Remove all listeners
-			self:finalize()
+			instance:die()
 		end
 	end
 

@@ -82,7 +82,7 @@ local startConfig = {
             { name = "idle", frames = { 1, 2, 3, 4, 5, 6 }, time = 333 },
             { name = "walk", frames = { 15, 16, 17, 18, 19, 20 }, time = 333, loopCount = 0 },
             { name = "jump", frames = { 21, 22, 23, 24, 25 }, time = 333 },
-            { name = "ouch", frames = { 7, 8, 9, 10, 11, 12, 13, 14 } },
+            { name = "ouch", frames = { 7, 8, 9, 10, 11, 12, 13, 14 } }
         },
         oldSprite = {
             sheetFileName = "sprites.png",
