@@ -21,7 +21,7 @@ local startConfig = {
         playerVmultiplier = 0,
     
         charge = {
-            max = 200,
+            max = 300,
             min = 100,
             lossPerParticle = 0.02,
             rechargePerRender = 2,
@@ -50,12 +50,12 @@ local startConfig = {
         createParticle = {
             color = { 0.3, 0.4, 1, 1 },
             lifetime = 48,
-            flags = { "water" }
+            flags = { "water", "fixtureContactListener" }
         },
         createGroup = {
             color = { 0.3, 0.4, 1, 1 },
             lifetime = 48,
-            flags = { "water" }
+            flags = { "water", "fixtureContactListener" }
         }
     },
     hero = {
