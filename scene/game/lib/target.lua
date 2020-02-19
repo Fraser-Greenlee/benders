@@ -9,7 +9,7 @@ local M = {}
 function M.new( instance )
 
     if not instance.bodyType then
-		physics.addBody( instance, "static", { isSensor = true } )
+		physics.addBody( instance, "static" )
     end
 
 	function instance:collision( event )

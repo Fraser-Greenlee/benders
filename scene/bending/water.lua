@@ -19,6 +19,15 @@ function M.new( display, physics )
         instance.particleSystem:createParticle( config.createParticle )
     end
 
+    local function particleSystemCollision( self, event )
+        if ( event.phase == "began" and event.object.type ~= nil ) then
+            print(event.object.type)
+        end
+    end
+      
+    instance.particleSystem.particleCollision = particleSystemCollision
+    instance.particleSystem:addEventListener( "particleCollision" )
+
     local worldGroup = display.newGroup()
     -- Initialize snapshot for full screen
     local snapshot = display.newSnapshot( worldGroup, display.actualContentWidth*2, display.actualContentHeight*2 )
