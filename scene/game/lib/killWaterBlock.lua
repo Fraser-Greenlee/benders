@@ -19,7 +19,6 @@ function M.new( instance )
                     halfHeight = instance.height/2
                 }
             )
-            print('kill water')
 		end
 
 		local tm = timer.performWithDelay( 10000, enterFrame, -1 )

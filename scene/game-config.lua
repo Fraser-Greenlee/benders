@@ -107,6 +107,9 @@ local startConfig = {
             strength = 0.0
         }
     },
+    target = {
+        start_health = 100
+    },
     game = {
         debugPhysics = false
     }

@@ -11,6 +11,17 @@ function M.new( display, physics )
 
     instance.particleSystem = physics.newParticleSystem( config.particleSystem )
 
+    local function particleSystemCollision( self, event )
+        if ( event.phase == "began" and event.object.type ~= nil ) then
+            if event.object.type == "target" then
+                event.object.waterHit()
+            end
+        end
+    end
+
+    instance.particleSystem.particleCollision = particleSystemCollision
+    instance.particleSystem:addEventListener( "particleCollision" )
+
     function instance:makeParticle( x, y, velocityX, velocityY )
         config.createParticle.x = x
         config.createParticle.y = y
@@ -19,14 +30,19 @@ function M.new( display, physics )
         instance.particleSystem:createParticle( config.createParticle )
     end
 
-    local function particleSystemCollision( self, event )
-        if ( event.phase == "began" and event.object.type ~= nil ) then
-            print(event.object.type)
-        end
+    local fullScreen = {
+		x = -500,
+		y = -200,
+		halfWidth = display.actualContentWidth + 500,
+		halfHeight = (display.actualContentHeight + 500)*2
+    }
+
+    function instance:destroy()
+        timer.performWithDelay( 100, function()
+            instance.particleSystem:destroyParticles( fullScreen )
+        end, -1)
+        instance.particleSystem:removeEventListener( "particleCollision" )
     end
-      
-    instance.particleSystem.particleCollision = particleSystemCollision
-    instance.particleSystem:addEventListener( "particleCollision" )
 
     local worldGroup = display.newGroup()
     -- Initialize snapshot for full screen

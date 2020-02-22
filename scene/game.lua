@@ -14,12 +14,15 @@ local config = require('scene.game-config').noDisplay.game
 
 -- Variables local to scene
 local map, hero, shield, parallax, water, filterParticleSystem
+local hasRan = false
 
 -- Create a new Composer scene
 local scene = composer.newScene()
 
 -- This function is called when scene is created
 function scene:create( event )
+
+	print('game scene')
 
 	local sceneGroup = self.view  -- Add scene display objects to this group
 
@@ -124,7 +127,6 @@ function scene:create( event )
 		block.makeBlock()
 	end
 
-
 	-- Allow bending
 	bending = Bending.new( display, water.particleSystem, hero )
 	bending.drawGrid(bending)
@@ -178,17 +180,17 @@ end
 
 -- This function is called when scene is destroyed
 function scene:destroy( event )
-
+	-- TODO nothing in here is causing the error, try adding `error()` to see whats being ran.
 	local fullScreen = {
-		x = 0,
-        y = 0,
-        halfWidth = display.actualContentWidth,
-        halfHeight = display.actualContentHeight*2
+		x = -500,
+		y = -200,
+		halfWidth = display.actualContentWidth + 500,
+		halfHeight = (display.actualContentHeight + 500)*2
 	}
-	filterParticleSystem.particleSystem:destroyParticles( fullScreen )
-	water.particleSystem:destroyParticles( fullScreen )
-	bending:destroy()
 
+	bending:destroy()
+	water:destroy()
+	filterParticleSystem.particleSystem:destroyParticles(fullScreen)
 
 	audio.stop()  -- Stop all audio
 	for s, v in pairs( self.sounds ) do  -- Release all audio handles
