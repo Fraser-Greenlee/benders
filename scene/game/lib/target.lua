@@ -29,7 +29,7 @@ function M.new( instance )
 		if instance.HP <= 0 then
 			instance.kill()
 		else
-			instance.fill.effect.intensity = -(1 - (instance.HP / config.startHealth))
+			instance.fill.effect.intensity = -(0.7 - 0.7*(instance.HP / config.startHealth))
 		end
 	end
 
