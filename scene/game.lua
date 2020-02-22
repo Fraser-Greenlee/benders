@@ -65,7 +65,7 @@ function scene:create( event )
 	-- Find our enemies and other items
 	map:extend(
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
-		"waterBlock", "filterParticlesBlock", "deathBlock", "killWaterBlock"
+		"waterBlock", "filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock"
 	)
 
 	-- Find the parallax layer
@@ -180,7 +180,6 @@ end
 
 -- This function is called when scene is destroyed
 function scene:destroy( event )
-	-- TODO nothing in here is causing the error, try adding `error()` to see whats being ran.
 	local fullScreen = {
 		x = -500,
 		y = -200,

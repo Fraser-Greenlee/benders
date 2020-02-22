@@ -1317,6 +1317,18 @@
                  "width":80,
                  "x":1200,
                  "y":1280
+                }, 
+                {
+                 "gid":210,
+                 "height":80,
+                 "id":667,
+                 "name":"",
+                 "rotation":0,
+                 "type":"filterPlayerBlock",
+                 "visible":true,
+                 "width":400,
+                 "x":1071.3731825525,
+                 "y":556.575121163167
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1387,7 +1399,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":667,
+ "nextobjectid":669,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,

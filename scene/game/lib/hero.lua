@@ -3,6 +3,10 @@
 
 local config = require('scene.game-config').noDisplay.hero
 
+local collisionFilters = require( "plugin.collisionFilters" )
+collisionFilters.setupFilters( { nothing={ "player", "filterBlock" } } )
+local playerFilter = collisionFilters.getFilter( "player" )
+
 -- Use this as a template to build an in-game hero 
 local fx = require( "com.ponywolf.ponyfx" )
 local composer = require( "composer" )
@@ -30,6 +34,7 @@ function M.new( instance, options )
 	instance:setSequence( "idle" )
 
 	-- Add physics
+	config.physics.filter = playerFilter
 	physics.addBody( instance, "dynamic", config.physics )
 	instance.isFixedRotation = true
 	instance.anchorY = config.anchorY
