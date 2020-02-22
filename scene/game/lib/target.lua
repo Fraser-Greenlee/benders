@@ -12,7 +12,8 @@ function M.new( instance )
 		physics.addBody( instance, "static" )
 	end
 
-	instance.HP = config.start_health
+	instance.HP = config.startHealth
+	instance.fill.effect = "filter.brightness"
 	instance.killed = false
 
 	function instance:kill()
@@ -25,14 +26,15 @@ function M.new( instance )
 
 	function instance:damage( amount )
 		instance.HP = instance.HP - amount
-		-- update healthbar
 		if instance.HP <= 0 then
 			instance.kill()
+		else
+			instance.fill.effect.intensity = -(1 - (instance.HP / config.startHealth))
 		end
 	end
 
 	function instance:waterHit()
-		instance.damage(instance, 10)
+		instance.damage(instance, config.waterHitDamage)
 	end
 
 	function instance:collision( event )

@@ -108,7 +108,8 @@ local startConfig = {
         }
     },
     target = {
-        start_health = 100
+        startHealth = 100,
+        waterHitDamage = 1
     },
     game = {
         debugPhysics = false
