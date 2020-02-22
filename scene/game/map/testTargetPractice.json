@@ -1329,6 +1329,18 @@
                  "width":400,
                  "x":1071.3731825525,
                  "y":556.575121163167
+                }, 
+                {
+                 "gid":65,
+                 "height":80,
+                 "id":669,
+                 "name":"",
+                 "rotation":90,
+                 "type":"fountain",
+                 "visible":true,
+                 "width":80,
+                 "x":560,
+                 "y":160
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1399,7 +1411,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":669,
+ "nextobjectid":670,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,

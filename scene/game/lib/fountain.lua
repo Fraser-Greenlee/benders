@@ -16,7 +16,18 @@ function M.new( instance )
 		local function enterFrame()
 			instance.i = instance.i + 1
 			if instance.i % 4 == 0 then
-				instance.water.makeParticle( instance.water, instance.x, instance.y - 40, math.random(-3, 3), -1000 )
+				if instance.rotation == 0 then
+					instance.water.makeParticle( instance.water, instance.x, instance.y - 40, math.random(-3, 3), -1000 )
+				elseif instance.rotation == 90 then
+					instance.water.makeParticle( instance.water, instance.x + 40, instance.y, 1000, math.random(-3, 3) )
+				elseif instance.rotation == 180 then
+					instance.water.makeParticle( instance.water, instance.x, instance.y + 40, math.random(-3, 3), 1000 )
+				elseif instance.rotation == 270 then
+					instance.water.makeParticle( instance.water, instance.x - 40, instance.y, -1000, math.random(-3, 3) )
+				else
+					print('bad fountain rotation')
+					error()
+				end
 			end
 		end
 
