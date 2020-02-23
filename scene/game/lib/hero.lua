@@ -42,7 +42,7 @@ function M.new( instance, options )
 	instance.jumping = false
 
 	-- Keyboard control
-	local left, right, flip = 0, 0, 0
+	local left, right, flip = 0, 0, 1
 	local lastEvent = {}
 	local function key( event )
 		local phase = event.phase
