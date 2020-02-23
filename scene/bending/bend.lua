@@ -165,66 +165,68 @@ function M.new( display, particleSystem, hero )
     self.bendingCircle:setStrokeColor( 0.2, 0.7, 0.1 )
     self.bendingCircle:setFillColor( 1, 1, 1, 0.0 )
     self.bendingCircle.alpha = 0.0
+    self.lastTouchEvent = 0
+    self.bendTimer = 0
 
-    function self:staticBend()
-        if ( self.previousTime + self.config.staticDelay < system.getTimer() ) then
-            bend.run( self, system.getTimer(), touchX, touchY, velocityX, velocityY )
+    function self:timer(event)
+        self.touchX = self.lastTouchEvent.x
+        self.touchY = self.lastTouchEvent.y
+        self.previousTime = ( self.lastTouchEvent.time / 1000 )
+        local positionDeltaX = self.touchX - self.previousX
+        local positionDeltaY = self.touchY - self.previousY
+        self.previousX = self.touchX
+        self.previousY = self.touchY
+        self.velocityX = ( positionDeltaX / self.timeDelta )
+        self.velocityY = ( positionDeltaY / self.timeDelta )
+
+        self.bendingCircle.x = self.touchX
+        self.bendingCircle.y = self.touchY
+        
+        local heroDistance = math.sqrt((self.bendingCircle.x - self.hero.x)^2 + (self.bendingCircle.y - self.hero.y)^2)
+        if heroDistance <= self.config.distancePower.max then
+            self.bendingRadius = 2.5
+        else
+            self.bendingRadius = 1
         end
+
+        self.bendingCircle.path.radius = self.bendingRadius * self.config.pixel.size
+
+        if self.bendingCharge <= 0 or self.hasCharge == 0 then
+            self.bendingCircle.alpha = 0.0
+        else
+            self.bendingCircle.alpha = 0.05 + 0.3 * self.bendingCharge/self.config.charge.max
+        end
+
+        self.run( self, event.time, self.touchX, self.touchY, self.velocityX, self.velocityY )
     end
-    local runstaticBend = function() return self.staticBend( self ) end
 
-    local function onTouch(event)
-        local timeDelta = ( event.time / 1000 ) - self.previousTime
-        if timeDelta > 0 then
-            self.touchX = event.x
-            self.touchY = event.y
-            self.previousTime = ( event.time / 1000 )
-            local positionDeltaX = self.touchX - self.previousX
-            local positionDeltaY = self.touchY - self.previousY
-            self.previousX = self.touchX
-            self.previousY = self.touchY
-            self.velocityX = ( positionDeltaX / timeDelta )
-            self.velocityY = ( positionDeltaY / timeDelta )
-
-            self.bendingCircle.x = self.touchX
-            self.bendingCircle.y = self.touchY
-            
-            local heroDistance = math.sqrt((self.bendingCircle.x - self.hero.x)^2 + (self.bendingCircle.y - self.hero.y)^2)
-            if heroDistance <= self.config.distancePower.max then
-                self.bendingRadius = 2.5
-            else
-                self.bendingRadius = 1
-            end
-
-            self.bendingCircle.path.radius = self.bendingRadius * self.config.pixel.size
-
-            if self.bendingCharge <= 0 or self.hasCharge == 0 then
-                self.bendingCircle.alpha = 0.0
-            else
-                self.bendingCircle.alpha = 0.05 + 0.3 * self.bendingCharge/self.config.charge.max
-            end
-
-            self.run( self, event.time, self.touchX, self.touchY, self.velocityX, self.velocityY )
-
+    function self:touch(event)
+        self.timeDelta = ( event.time / 1000 ) - self.previousTime
+        if self.timeDelta > 0 then
+            self.lastTouchEvent = event
             if ( "began" == event.phase ) then
-                -- self.bendingCharge = self.config.charge.max
-                print('start')
-            elseif ( "ended" == event.phase or "cancelled" == event.phase ) then
-                self.bendingCircle.alpha = 0.0
+                self.bendTimer = timer.performWithDelay( 10, self, -1 )
             end
+            self.previousTime = event.time
+        end
+        if ( "ended" == event.phase or "cancelled" == event.phase ) then
+            print('timer.cancel', self.bendTimer)
+            timer.cancel(self.bendTimer)
+            self.bendingCircle.alpha = 0.0
+            self.previousTime = 0
         end
         return true
     end
 
     -- start run timers
-    Runtime:addEventListener( "touch", onTouch )
+    Runtime:addEventListener( "touch", self )
     local runRender = function() return self.render( self ) end
     local renderTimer = timer.performWithDelay(self.config.renderDelay, runRender, -1)
 
     function self:destroy()
         self.displayGroup:removeSelf()
         timer.cancel( renderTimer )
-        Runtime:removeEventListener( "touch", onTouch )
+        Runtime:removeEventListener( "touch", self )
     end
 
     return self
