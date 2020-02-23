@@ -70,16 +70,26 @@ function M.new( instance, options )
 				instance:setSequence("idle")
 				instance:play()
 			end
+			if "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
+				instance:jumpFloatEnd()
+			end
 		end
 		lastEvent = event
 	end
 
 	function instance:jump()
 		if not self.jumping then
+			self.gravityScale = config.floatGravity
 			self:applyLinearImpulse( 0, config.jumpForce )
 			self:setSequence( "jump" )
 			instance:play()
 			self.jumping = true
+		end
+	end
+
+	function instance:jumpFloatEnd()
+		if self.jumping then
+			self.gravityScale = 1
 		end
 	end
 
@@ -128,6 +138,7 @@ function M.new( instance, options )
 				end
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
+				instance:jumpFloatEnd()
 				self.jumping = false
 				if not ( left == 0 and right == 0 ) and not instance.jumping then
 					instance:setSequence( "walk" )

@@ -65,9 +65,10 @@ local startConfig = {
             friction =  2.0,
             box = { halfWidth = 42, halfHeight = 60 }
         },
+        floatGravity = 0.5,
+        jumpForce = -450,
         anchorY = 0.56,
         anchorX = 0.45,
-        jumpForce = -650,
         walkAcceleration = 1000,
         maxWalkSpeed = 375,
         sheetFileName = "katara.png",
