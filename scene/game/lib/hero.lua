@@ -51,11 +51,11 @@ function M.new( instance, options )
 		if phase == "down" then
 			if "left" == name or "a" == name then
 				left = -config.walkAcceleration
-				flip = -0.133
+				flip = -0.9
 			end
 			if "right" == name or "d" == name then
 				right = config.walkAcceleration
-				flip = 0.133
+				flip = 0.9
 			elseif "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end

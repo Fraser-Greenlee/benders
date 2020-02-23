@@ -184,9 +184,9 @@ function M.new( display, particleSystem, hero )
         
         local heroDistance = math.sqrt((self.bendingCircle.x - self.hero.x)^2 + (self.bendingCircle.y - self.hero.y)^2)
         if heroDistance <= self.config.distancePower.max then
-            self.bendingRadius = 2.5
+            self.bendingRadius = self.config.radius.px
         else
-            self.bendingRadius = 1
+            self.bendingRadius = self.config.farRadius
         end
 
         self.bendingCircle.path.radius = self.bendingRadius * self.config.pixel.size
@@ -210,7 +210,6 @@ function M.new( display, particleSystem, hero )
             self.previousTime = event.time
         end
         if ( "ended" == event.phase or "cancelled" == event.phase ) then
-            print('timer.cancel', self.bendTimer)
             timer.cancel(self.bendTimer)
             self.bendingCircle.alpha = 0.0
             self.previousTime = 0

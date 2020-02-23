@@ -12,6 +12,7 @@ local startConfig = {
         radius = {
             px = 2.5
         },
+        farRadius = 1,
         boxes = {},
         renderDelay = 1,
         staticDelay = 1,
@@ -66,7 +67,7 @@ local startConfig = {
             box = { halfWidth = 42, halfHeight = 60 }
         },
         floatGravity = 0.5,
-        jumpForce = -450,
+        jumpForce = -480,
         anchorY = 0.56,
         anchorX = 0.45,
         walkAcceleration = 1000,
