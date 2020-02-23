@@ -51,11 +51,11 @@ function M.new( instance, options )
 		if phase == "down" then
 			if "left" == name or "a" == name then
 				left = -config.walkAcceleration
-				flip = -1.1
+				flip = -1
 			end
 			if "right" == name or "d" == name then
 				right = config.walkAcceleration
-				flip = 1.1
+				flip = 1
 			elseif "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
@@ -181,7 +181,7 @@ function M.new( instance, options )
 			instance:applyForce( dx or 0, dy, instance.x, instance.y )
 		end
 		-- Turn around
-		instance.xScale = math.min( 1, math.max( instance.xScale + flip, -1 ) )
+		instance.xScale = math.min( 1, flip )
 	end
 
 	function instance:finalize()
