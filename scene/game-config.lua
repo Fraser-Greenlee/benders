@@ -32,7 +32,7 @@ local startConfig = {
             }
         },
         distancePower = {
-            max = 1500,
+            max = 850,
         },
 
         debugLine = false,
