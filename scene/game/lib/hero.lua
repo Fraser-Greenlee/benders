@@ -120,14 +120,6 @@ function M.new( instance, options )
 
 	function instance:die()
 		composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
-		--[[
-		fx.fadeOut(
-			function()
-				composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
-			end,
-			5, 0
-		)
-		]]
 		instance.isDead = true
 		instance.isSensor = true
 		self:applyLinearImpulse( 0, -500 )
