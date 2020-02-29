@@ -170,18 +170,6 @@ function M.new( instance, options )
 
 	local function enterFrame()
 		-- Do this every frame
-		local vx, vy = instance:getLinearVelocity()
-		local dx = left + right
-		-- if instance.jumping then dx = dx / 2 end
-		local dy = 0
-		-- if instance.jumping then dy = -5 end
-		if (dx == 0 and instance.jumping) then
-			instance:applyForce( -3*vx, dy, instance.x, instance.y )
-		elseif ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
-			instance:applyForce( dx or 0, dy, instance.x, instance.y )
-		end
-		-- Turn around
-		instance.xScale = math.min( 1, flip )
 	end
 
 	function instance:finalize()

@@ -16,13 +16,13 @@ local startConfig = {
         boxes = {},
         renderDelay = 1,
         staticDelay = 1,
-        power = 200,
+        power = 180,
         maxAge = 1,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
     
         charge = {
-            max = 300,
+            max = 1000,
             min = 100,
             lossPerParticle = 0.02,
             rechargePerRender = 2,
@@ -61,10 +61,13 @@ local startConfig = {
     },
     hero = {
         physics = {
-            density = 2.0,
-            bounce = 0,
-            friction =  2.0,
-            box = { halfWidth = 42, halfHeight = 60 }
+            density = 1,
+            bounce = 0.5,
+            friction =  0.2,
+            radius = 80
+        },
+        alternativeShapes = {
+            basicBoat = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 199-90,34+10, 201-90,1+10 }
         },
         floatGravity = 0.5,
         jumpForce = -480,
@@ -72,13 +75,14 @@ local startConfig = {
         anchorX = 0.45,
         walkAcceleration = 1000,
         maxWalkSpeed = 375,
-        sheetFileName = "katara.png",
+        sheetFileName = "katara-boat.png",
+        singleFrame = "katara-boat-single_frame.png",
         sheetData = {
-            width = 120,
-            height = 136,
+            width = 230,
+            height = 180,
             numFrames = 25,
-            sheetContentWidth = 3000,
-            sheetContentHeight = 136
+            sheetContentWidth = 5750,
+            sheetContentHeight = 180
         },
         sequenceData = {
             { name = "idle", frames = { 1, 2, 3, 4, 5, 6 }, time = 333 },
@@ -114,7 +118,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = false
+        debugPhysics = true
     }
 }
 
