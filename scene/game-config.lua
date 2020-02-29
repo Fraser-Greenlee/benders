@@ -61,10 +61,10 @@ local startConfig = {
     },
     hero = {
         physics = {
-            density = 1,
+            density = 1.3,
             bounce = 0.5,
             friction =  0.2,
-            radius = 80
+            radius = 55
         },
         alternativeShapes = {
             basicBoat = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 199-90,34+10, 201-90,1+10 }
