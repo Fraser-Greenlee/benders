@@ -22,8 +22,8 @@ function M.new( display, particleSystem, hero )
         local pixelX = math.round(x / self.config.pixel.size)
         local pixelY = math.round(y / self.config.pixel.size)
 
-        self.pixelOffsetX = x % self.config.pixel.size
-        self.pixelOffsetY = y % self.config.pixel.size
+        self.pixelOffsetX = -(x % self.config.pixel.size)
+        self.pixelOffsetY = -(y % self.config.pixel.size)
 
         return pixelX, pixelY
     end
@@ -48,9 +48,9 @@ function M.new( display, particleSystem, hero )
         if self.config.debugLine then
             local line = self.display.newLine(
                 self.displayGroup,
-                pixel.x, pixel.y, pixel.x + pixel.deltaVX/2, pixel.y + pixel.deltaVY/2
+                pixel.x + self.pixelOffsetX, pixel.y + self.pixelOffsetY, pixel.x + self.pixelOffsetX + pixel.deltaVX/2, pixel.y + self.pixelOffsetY + pixel.deltaVY/2
             )
-            --line:setStrokeColor( math.random(), math.random(), math.random(), 1 )
+            -- line:setStrokeColor( math.random(), math.random(), math.random(), 1 )
             line.strokeWidth = 1
         end
     end
@@ -122,12 +122,13 @@ function M.new( display, particleSystem, hero )
                     local ageRatio = 1 - (age / self.config.maxAge)
 
                     local hits = self.particleSystem:queryRegion(
-                        pixel.x - self.config.pixel.size/2,
-                        pixel.y - self.config.pixel.size/2,
-                        pixel.x + self.config.pixel.size/2,
-                        pixel.y + self.config.pixel.size/2,
+                        pixel.x - self.config.pixel.size/2 + self.pixelOffsetX,
+                        pixel.y - self.config.pixel.size/2 + self.pixelOffsetY,
+                        pixel.x + self.config.pixel.size/2 + self.pixelOffsetX,
+                        pixel.y + self.config.pixel.size/2 + self.pixelOffsetY,
                         { deltaVelocityX=pixel.deltaVX * ageRatio * self.hasCharge, deltaVelocityY=pixel.deltaVY * ageRatio * self.hasCharge }
                     )
+
                     if hits ~= nil and self.hasCharge == 1 then
                         particlesTouched = particlesTouched + #hits
                     end

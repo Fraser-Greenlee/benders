@@ -61,7 +61,7 @@ local startConfig = {
     },
     hero = {
         physics = {
-            density = 1.3,
+            density = 1,
             bounce = 0.5,
             friction =  0.2,
             radius = 55
@@ -118,7 +118,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = true
+        debugPhysics = false
     }
 }
 
