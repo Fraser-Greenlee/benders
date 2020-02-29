@@ -35,7 +35,32 @@ function M.new( instance, options )
 
 	-- Add physics
 	config.physics.filter = playerFilter
-	physics.addBody( instance, "dynamic", config.physics )
+	physics.addBody( instance, "dynamic",
+		{
+			density = 1.3,
+			bounce = 0.0,
+			friction = 0.2,
+			shape = { 
+				0-90,0+10, 0-90,37+10, 38-90,62+10, 38-90,-10+10
+			}
+		},
+		{
+			density = 1.3,
+			bounce = 0.0,
+			friction = 0.2,
+			shape = { 
+				160-90,62+10, 201-90,37+10, 201-90,1+10, 160-90,-10+10
+			}
+		},
+		{
+			density = 1.3,
+			bounce = 0.0,
+			friction = 0.2,
+			shape = { 
+				38-90,10+10,  160-90,10+10, 160-90,-10+10, 38-90,-10+10
+			}
+		}
+	)
 	instance.isFixedRotation = true
 	instance.anchorY = config.anchorY
 	instance.anchorX = config.anchorX
@@ -154,12 +179,6 @@ function M.new( instance, options )
 		local other = event.other
 		local y1, y2 = self.y + 50, other.y - other.height/2
 		if event.contact and ( y1 > y2 ) then
-			--[[ 
-				TODO use this to allow jumping through a one way platform
-				if other.can_pass_thorugh then
-					event.contact.isEnabled = false
-				end
-			]]
 			if other.floating then
 				event.contact.friction = 0.0
 			else

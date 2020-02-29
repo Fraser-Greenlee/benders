@@ -41,9 +41,9 @@ local startConfig = {
     },
     water = {
         particleSystem = {
-            filename = "scene/bending/img/rounded_square.png",
+            filename = "scene/bending/img/water_droplet.png",
             radius = 18,
-            imageRadius=20,
+            imageRadius=23,
             density=2,
             gravityScale=1,
             pressureStrength=0.1
@@ -64,10 +64,12 @@ local startConfig = {
             density = 1.3,
             bounce = 0.0,
             friction = 0.2,
-            shape = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 201-90,37+10, 201-90,1+10, 38-90,-10+10, 160-90,-10+10 },
+            shape = { 
+                0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 201-90,37+10, 201-90,1+10, 38-90,-10+10, 160-90,-10+10
+            },
         },
         alternativeShapes = {
-            basicBoat = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 201-90,37+10, 201-90,1+10 },
+            basicBoat = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 201-90,37+10, 201-90,1+10, 38-90,-10+10, 160-90,-10+10 },
             radius = 55
         },
         floatGravity = 0.5,
@@ -76,8 +78,7 @@ local startConfig = {
         anchorX = 0.45,
         walkAcceleration = 1000,
         maxWalkSpeed = 375,
-        sheetFileName = "katara-boat.png",
-        singleFrame = "katara-boat-single_frame.png",
+        sheetFileName = "katara-boat-export.png",
         sheetData = {
             width = 230,
             height = 180,
@@ -119,7 +120,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = true
+        debugPhysics = false
     }
 }
 

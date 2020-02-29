@@ -168,6 +168,7 @@ function M.new( display, particleSystem, hero )
     self.bendingCircle.alpha = 0.0
     self.lastTouchEvent = 0
     self.bendTimer = 0
+    self.ranRestart = false -- if player holds touch while level is restarted the event times will be off, use this to reset it
 
     function self:timer(event)
         self.touchX = self.lastTouchEvent.x
@@ -207,10 +208,13 @@ function M.new( display, particleSystem, hero )
             self.lastTouchEvent = event
             if ( "began" == event.phase ) then
                 self.bendTimer = timer.performWithDelay( 10, self, -1 )
+                self.ranRestart = false
             end
-            self.previousTime = event.time
+            if self.ranRestart == true then
+                self.previousTime = event.time
+            end
         end
-        if ( "ended" == event.phase or "cancelled" == event.phase ) then
+        if ( "ended" == event.phase or "cancelled" == event.phase ) and type(self.bendTimer) ~= 'number' then
             timer.cancel(self.bendTimer)
             self.bendingCircle.alpha = 0.0
             self.previousTime = 0
@@ -224,6 +228,12 @@ function M.new( display, particleSystem, hero )
     local renderTimer = timer.performWithDelay(self.config.renderDelay, runRender, -1)
 
     function self:destroy()
+        if type(self.bendTimer) ~= 'number' then
+            timer.cancel(self.bendTimer)
+            self.bendingCircle.alpha = 0.0
+            self.previousTime = 0
+            self.ranRestart = true
+        end
         self.displayGroup:removeSelf()
         timer.cancel( renderTimer )
         Runtime:removeEventListener( "touch", self )
