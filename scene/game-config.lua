@@ -25,7 +25,7 @@ local startConfig = {
             max = 1000,
             min = 100,
             lossPerParticle = 0.02,
-            rechargePerRender = 2,
+            rechargePerRender = 6,
             indicator = {
                 width = 200,
                 height = 50
@@ -61,13 +61,14 @@ local startConfig = {
     },
     hero = {
         physics = {
-            density = 1,
-            bounce = 0.5,
-            friction =  0.2,
-            radius = 55
+            density = 1.3,
+            bounce = 0.0,
+            friction =  1,
+            shape = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 199-90,34+10, 201-90,1+10 },
         },
         alternativeShapes = {
-            basicBoat = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 199-90,34+10, 201-90,1+10 }
+            basicBoat = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 199-90,34+10, 201-90,1+10 },
+            radius = 55
         },
         floatGravity = 0.5,
         jumpForce = -480,
@@ -118,7 +119,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = false
+        debugPhysics = true
     }
 }
 
