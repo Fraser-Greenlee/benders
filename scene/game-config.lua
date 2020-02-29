@@ -22,10 +22,10 @@ local startConfig = {
         playerVmultiplier = 0,
     
         charge = {
-            max = 1000,
+            max = 300,
             min = 100,
             lossPerParticle = 0.02,
-            rechargePerRender = 6,
+            rechargePerRender = 3,
             indicator = {
                 width = 200,
                 height = 50
