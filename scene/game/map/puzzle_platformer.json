@@ -884,29 +884,6 @@
                  "y":1360
                 }, 
                 {
-                 "height":320,
-                 "id":674,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":320,
-                 "x":800,
-                 "y":1120
-                }, 
-                {
                  "height":80,
                  "id":678,
                  "name":"",
@@ -951,29 +928,6 @@
                  "width":160,
                  "x":2400,
                  "y":1360
-                }, 
-                {
-                 "height":400,
-                 "id":687,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":320,
-                 "x":1680,
-                 "y":1040
                 }, 
                 {
                  "gid":65,
@@ -1224,6 +1178,102 @@
                  "width":286,
                  "x":1120,
                  "y":1360
+                }, 
+                {
+                 "height":0,
+                 "id":785,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":-320
+                        }, 
+                        {
+                         "x":80,
+                         "y":-400
+                        }, 
+                        {
+                         "x":240,
+                         "y":-400
+                        }, 
+                        {
+                         "x":320,
+                         "y":-320
+                        }, 
+                        {
+                         "x":320,
+                         "y":0
+                        }],
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":800,
+                 "y":1440
+                }, 
+                {
+                 "height":0,
+                 "id":786,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":-448
+                        }, 
+                        {
+                         "x":80,
+                         "y":-560
+                        }, 
+                        {
+                         "x":240,
+                         "y":-560
+                        }, 
+                        {
+                         "x":320,
+                         "y":-448
+                        }, 
+                        {
+                         "x":320,
+                         "y":0
+                        }],
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1680,
+                 "y":1440
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1294,7 +1344,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":785,
+ "nextobjectid":787,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,
