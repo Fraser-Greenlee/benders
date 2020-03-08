@@ -6,17 +6,17 @@ local startConfig = {
                 y = -520
             },
             per = {
-                row = 30
+                row = 50
             }
         },
         radius = {
             px = 2.5
         },
-        farRadius = 1,
+        farRadius = 2,
         boxes = {},
         renderDelay = 1,
         staticDelay = 1,
-        power = 180,
+        power = 140,
         maxAge = 1,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
@@ -61,7 +61,7 @@ local startConfig = {
     },
     hero = {
         physics = {
-            density = 1.3,
+            density = 1.8,
             bounce = 0.0,
             friction = 0.2,
             shape = { 
@@ -106,7 +106,7 @@ local startConfig = {
     filter = {
         particleSystem = {
             filename = "scene/bending/img/invisible.png",
-            radius = 30,
+            radius = 35,
             gravityScale = 0.0
         },
         group = {
@@ -120,7 +120,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = true
+        debugPhysics = false
     }
 }
 

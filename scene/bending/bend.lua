@@ -154,10 +154,10 @@ function M.new( display, particleSystem, hero )
     self.pixelOffsetY = 0
     self.bendingCharge = self.config.charge.max
     self.bendingChargeIndicatorFull = display.newRect(
-        self.displayGroup, 400, -520, self.config.charge.indicator.width, self.config.charge.indicator.height
+        self.displayGroup, 400, -250, self.config.charge.indicator.width, self.config.charge.indicator.height
     )
     self.bendingChargeIndicator = display.newRect(
-        self.displayGroup, 400, -520, self.config.charge.indicator.width, self.config.charge.indicator.height
+        self.displayGroup, 400, -250, self.config.charge.indicator.width, self.config.charge.indicator.height
     )
     self.bendingChargeIndicator:setFillColor( 0.2, 0.7, 0.1 )
     self.bendingRadius = self.config.radius.px

@@ -22,8 +22,8 @@ application = {
 
 		-- Set content area width/height settings for 1080p resolution here
 		-- Note that even for landscape-oriented apps, width should be the "short" side for Corona's purposes
-		width = 800,
-		height = 2560,
+		width = 1800,
+		height = 3200,
 
 		-- Sample aspect-driven width/height:
 		--width = aspectRatio > 1.5 and 720 or math.ceil( 1200 / aspectRatio ),
