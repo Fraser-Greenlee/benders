@@ -106,7 +106,7 @@ local startConfig = {
     filter = {
         particleSystem = {
             filename = "scene/bending/img/invisible.png",
-            radius = 35,
+            radius = 30,
             gravityScale = 0.0
         },
         group = {
