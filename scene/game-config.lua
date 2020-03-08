@@ -120,7 +120,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = false
+        debugPhysics = true
     }
 }
 

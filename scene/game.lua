@@ -123,6 +123,7 @@ function scene:create( event )
 	filterParticleSystem = FilterParticleSystem.new( physics )
 	filterBlocks = map:listTypes( "filterParticlesBlock" )
 	for i, block in pairs(filterBlocks) do
+		print("filterParticlesBlock")
 		block.particleSystem = filterParticleSystem.particleSystem
 		block.makeBlock()
 	end

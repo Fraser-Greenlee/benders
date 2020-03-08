@@ -17,6 +17,8 @@ function M.new( instance )
 		instance.particleSystem:createGroup( config )
 	end
 
+	instance.isVisible = false
+
 	-- Return instance
 	instance.name = "filterParticlesBlock"
 	instance.type = "filterParticlesBlock"
