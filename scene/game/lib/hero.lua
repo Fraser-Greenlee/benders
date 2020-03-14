@@ -34,33 +34,47 @@ function M.new( instance, options )
 	instance:setSequence( "idle" )
 
 	-- Add physics
-	config.physics.filter = playerFilter
-	physics.addBody( instance, "dynamic",
-		{
-			density = 1.3,
-			bounce = 0.0,
-			friction = 0.2,
-			shape = { 
-				0-90,0+10, 0-90,37+10, 38-90,62+10, 38-90,-10+10
+	if (config.body == 'hollow') then
+		physics.addBody( instance, "dynamic",
+			{
+				density = 1.3,
+				bounce = 0.0,
+				friction = 0.2,
+				filter = playerFilter,
+				shape = { 
+					0-90,0+10, 0-90,37+10, 38-90,62+10, 38-90,-10+10
+				}
+			},
+			{
+				density = 1.3,
+				bounce = 0.0,
+				friction = 0.2,
+				filter = playerFilter,
+				shape = { 
+					160-90,62+10, 201-90,37+10, 201-90,1+10, 160-90,-10+10
+				}
+			},
+			{
+				density = 1.3,
+				bounce = 0.0,
+				friction = 0.2,
+				filter = playerFilter,
+				shape = { 
+					38-90,10+10,  160-90,10+10, 160-90,-10+10, 38-90,-10+10
+				}
 			}
-		},
-		{
-			density = 1.3,
-			bounce = 0.0,
-			friction = 0.2,
-			shape = { 
-				160-90,62+10, 201-90,37+10, 201-90,1+10, 160-90,-10+10
+		)
+	elseif (config.body == 'circle') then
+		physics.addBody( instance, "dynamic",
+			{
+				density = 1.2,
+				bounce = 0.0,
+				friction = 0.2,
+				filter = playerFilter,
+				radius = 70
 			}
-		},
-		{
-			density = 1.3,
-			bounce = 0.0,
-			friction = 0.2,
-			shape = { 
-				38-90,10+10,  160-90,10+10, 160-90,-10+10, 38-90,-10+10
-			}
-		}
-	)
+		)
+	end
 	instance.isFixedRotation = true
 	instance.anchorY = config.anchorY
 	instance.anchorX = config.anchorX

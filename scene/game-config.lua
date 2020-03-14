@@ -34,6 +34,7 @@ local startConfig = {
         distancePower = {
             max = 850,
         },
+        heroPull = 5,
 
         debugLine = false,
         debugGrid = false,
@@ -60,18 +61,7 @@ local startConfig = {
         }
     },
     hero = {
-        physics = {
-            density = 1.8,
-            bounce = 0.0,
-            friction = 0.2,
-            shape = { 
-                0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 201-90,37+10, 201-90,1+10, 38-90,-10+10, 160-90,-10+10
-            },
-        },
-        alternativeShapes = {
-            basicBoat = { 0-90,0+10, 0-90,37+10, 38-90,62+10, 160-90,63+10, 201-90,37+10, 201-90,1+10, 38-90,-10+10, 160-90,-10+10 },
-            radius = 55
-        },
+        body = 'hollow',
         floatGravity = 0.5,
         jumpForce = -480,
         anchorY = 0.56,
@@ -120,7 +110,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = false
+        debugPhysics = true
     }
 }
 

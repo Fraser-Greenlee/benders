@@ -183,13 +183,23 @@ function M.new( display, particleSystem, hero )
 
         self.bendingCircle.x = self.touchX
         self.bendingCircle.y = self.touchY
-        
-        local heroDistance = math.sqrt((self.bendingCircle.x - self.hero.x)^2 + (self.bendingCircle.y - self.hero.y)^2)
+
+        local heroDistX = self.bendingCircle.x - self.hero.x
+        local heroDistY = self.bendingCircle.y - self.hero.y
+        local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
         if heroDistance <= self.config.distancePower.max then
             self.bendingRadius = self.config.radius.px
         else
             self.bendingRadius = self.config.farRadius
         end
+
+        -- pull hero
+        self.hero:applyLinearImpulse(
+            (heroDistX/heroDistance) * self.config.heroPull,
+            heroDistY/heroDistance * self.config.heroPull,
+            hero.x,
+            hero.y
+        )
 
         self.bendingCircle.path.radius = self.bendingRadius * self.config.pixel.size
 

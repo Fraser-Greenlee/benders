@@ -167,7 +167,7 @@ function scene:show( event )
 		-- Start playing wind sound
 		-- For more details on options to play a pre-loaded sound, see the Audio Usage/Functions guide:
 		-- https://docs.coronalabs.com/guide/media/audioSystem/index.html
-		audio.play( self.sounds.wind, { loops = -1, fadein = 750, channel = 15 } )
+		-- audio.play( self.sounds.wind, { loops = -1, fadein = 750, channel = 15 } )
 	end
 end
 
