@@ -30,6 +30,19 @@ function M.new( display, physics )
         instance.particleSystem:createParticle( config.waterBlock.createParticle )
     end
 
+    function instance:deleteParticles( startX, startY, endX, endY )
+        local distX = endX - startX
+        local distY = endY - startY
+        local distance = math.sqrt(distX*distX + distY*distY)
+        instance.particleSystem:destroyParticles({
+            x = (startX + endX) / 2,
+            y = (startY + endY) / 2,
+            angle = math.atan2( distY, distX ),
+            halfWidth = distance/2,
+            halfHeight = 10
+        })
+    end
+
     local fullScreen = {
 		x = -500,
 		y = -200,

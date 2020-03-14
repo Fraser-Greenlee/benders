@@ -53,26 +53,22 @@ local startConfig = {
         waterBlock = {
             createParticle = {
                 color = { 0.3, 0.43, 1, 1 },
-                lifetime = 200,
                 flags = { "water", "colorMixing", "fixtureContactListener" }
             },
             createGroup = {
                 color = { 0.3, 0.43, 1, 1 },
-                lifetime = 200,
                 flags = { "water", "colorMixing", "fixtureContactListener" }
             }
         },
         iceBlock = {
             createParticle = {
                 color = { 1, 1, 1, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "fixtureContactListener" },
                 groupFlags = { "solid", "rigid", "barrier" }
             },
             createGroup = {
                 color = { 1, 1, 1, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "fixtureContactListener" },
                 groupFlags = { "solid", "rigid", "barrier" }
@@ -81,13 +77,11 @@ local startConfig = {
         sandBlock = {
             createParticle = {
                 color = { 210/255, 180/255, 150/255, 1 },
-                lifetime = 200,
                 strength = 0.0,
                 flags = { "powder", "repulsive", "staticPressure", "reactive", "fixtureContactListener" },
             },
             createGroup = {
                 color = { 210/255, 180/255, 150/255, 1 },
-                lifetime = 200,
                 strength = 0.0,
                 flags = { "powder", "repulsive", "staticPressure", "reactive", "fixtureContactListener" },
             }
@@ -95,13 +89,11 @@ local startConfig = {
         mudBlock = {
             createParticle = {
                 color = { 86/255, 48/255, 51/255, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "viscous", "tensile", "fixtureContactListener" }
             },
             createGroup = {
                 color = { 86/255, 48/255, 51/255, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "viscous", "tensile", "fixtureContactListener" }
             }
@@ -109,13 +101,11 @@ local startConfig = {
         jellyBlock = {
             createParticle = {
                 color = { 200/255, 255/255, 76/255, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "spring", "elastic", "fixtureContactListener" }
             },
             createGroup = {
                 color = { 200/255, 255/255, 76/255, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "spring", "elastic", "fixtureContactListener" }
             }
@@ -123,13 +113,11 @@ local startConfig = {
         poisonBlock = {
             createParticle = {
                 color = { 70/255, 231/255, 40/255, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "water", "colorMixing", "fixtureContactListener" }
             },
             createGroup = {
                 color = { 30/255, 210/255, 40/255, 1 },
-                lifetime = 200,
                 strength = 1.0,
                 flags = { "water", "colorMixing", "fixtureContactListener" }
             }
