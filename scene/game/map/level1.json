@@ -2,6 +2,19 @@
  "height":31,
  "layers":[
         {
+         "height":31,
+         "image":"..\/..\/..\/inspiration\/dark-towerfall-background.png",
+         "name":"backdrop",
+         "offsetx":0,
+         "offsety":-250,
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":80,
+         "x":0,
+         "y":0
+        }, 
+        {
          "draworder":"topdown",
          "height":40,
          "name":"background",
@@ -361,7 +374,7 @@
                 }, 
                 {
                  "gid":279,
-                 "height":160,
+                 "height":80,
                  "id":828,
                  "name":"",
                  "rotation":0,

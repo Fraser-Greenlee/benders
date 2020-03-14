@@ -22,8 +22,6 @@ local scene = composer.newScene()
 -- This function is called when scene is created
 function scene:create( event )
 
-	print('game scene')
-
 	local sceneGroup = self.view  -- Add scene display objects to this group
 
 	-- Sounds
@@ -55,6 +53,11 @@ function scene:create( event )
 	local mapData = json.decodeFile( system.pathForFile( filename, system.ResourceDirectory ) )
 	map = tiled.new( mapData, "scene/game/map" )
 	--map.xScale, map.yScale = 0.85, 0.85
+
+	local background = display.newImage(sceneGroup, "inspiration/dark-towerfall-background.png")
+	background:scale(3.15, 3.15)
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
 
 	-- Find our hero!
 	map.extensions = "scene.game.lib."

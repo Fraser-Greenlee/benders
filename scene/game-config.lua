@@ -49,12 +49,12 @@ local startConfig = {
             pressureStrength=0.1
         },
         createParticle = {
-            color = { 0.3, 0.4, 1, 1 },
+            color = { 0.3, 0.43, 1, 1 },
             lifetime = 48,
             flags = { "water", "fixtureContactListener" }
         },
         createGroup = {
-            color = { 0.3, 0.4, 1, 1 },
+            color = { 0.3, 0.43, 1, 1 },
             lifetime = 48,
             flags = { "water", "fixtureContactListener" }
         }
