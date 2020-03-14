@@ -111,13 +111,13 @@ local startConfig = {
                 color = { 200/255, 255/255, 76/255, 1 },
                 lifetime = 200,
                 strength = 1.0,
-                flags = { "viscous", "tensile", "spring", "elastic", "fixtureContactListener" }
+                flags = { "spring", "elastic", "fixtureContactListener" }
             },
             createGroup = {
                 color = { 200/255, 255/255, 76/255, 1 },
                 lifetime = 200,
                 strength = 1.0,
-                flags = { "viscous", "tensile", "spring", "elastic", "fixtureContactListener" }
+                flags = { "spring", "elastic", "fixtureContactListener" }
             }
         },
         poisonBlock = {
