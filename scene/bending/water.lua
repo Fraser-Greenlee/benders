@@ -51,7 +51,7 @@ function M.new( display, physics )
     snapshot.x = 0
     snapshot.y = 0
     snapshot.canvasMode = "discard"
-    snapshot.alpha = 0.6
+    snapshot.alpha = 0.8
     -- Insert the particle system into the snapshot
     snapshotGroup:insert( instance.particleSystem )
     -- Update (invalidate) the snapshot each frame

@@ -1,8 +1,8 @@
 
--- Module/class for the steamBlock
+-- Module/class for the sandBlock
 
 local composer = require( "composer" )
-local config = require('scene.game-config').noDisplay.water.steamBlock.createGroup
+local config = require('scene.game-config').noDisplay.water.sandBlock.createGroup
 
 -- Define module
 local M = {}
@@ -22,8 +22,8 @@ function M.new( instance )
 	end
 
 	-- Return instance
-	instance.name = "steamBlock"
-	instance.type = "steamBlock"
+	instance.name = "sandBlock"
+	instance.type = "sandBlock"
 	return instance
 end
 

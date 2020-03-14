@@ -35,6 +35,7 @@ local startConfig = {
             max = 850,
         },
         heroPull = 5,
+        heroPullDist = 300,
 
         debugLine = false,
         debugGrid = false,
@@ -77,19 +78,18 @@ local startConfig = {
                 groupFlags = { "solid", "rigid" }
             }
         },
-        steamBlock = {
+        sandBlock = {
             createParticle = {
-                color = { 1, 1, 1, 0.1 },
+                color = { 210/255, 180/255, 150/255, 1 },
                 lifetime = 48,
                 strength = 0.0,
-                flags = { "powder", "repulsive", "fixtureContactListener" }
+                flags = { "powder", "repulsive", "staticPressure", "reactive", "fixtureContactListener" },
             },
             createGroup = {
-                color = { 1, 1, 1, 0.9 },
+                color = { 210/255, 180/255, 150/255, 1 },
                 lifetime = 48,
                 strength = 0.0,
-                flags = { "powder", "repulsive", "staticPressure", "fixtureContactListener" },
-                linearVelocityY = -1000
+                flags = { "powder", "repulsive", "staticPressure", "reactive", "fixtureContactListener" },
             }
         },
         mudBlock = {
@@ -108,13 +108,13 @@ local startConfig = {
         },
         jellyBlock = {
             createParticle = {
-                color = { 106/255, 253/255, 76/255, 1 },
+                color = { 200/255, 255/255, 76/255, 1 },
                 lifetime = 48,
                 strength = 1.0,
                 flags = { "viscous", "tensile", "spring", "elastic", "fixtureContactListener" }
             },
             createGroup = {
-                color = { 106/255, 253/255, 76/255, 1 },
+                color = { 200/255, 255/255, 76/255, 1 },
                 lifetime = 48,
                 strength = 1.0,
                 flags = { "viscous", "tensile", "spring", "elastic", "fixtureContactListener" }
@@ -122,13 +122,13 @@ local startConfig = {
         },
         poisonBlock = {
             createParticle = {
-                color = { 106/255, 253/255, 76/255, 1 },
+                color = { 70/255, 231/255, 40/255, 1 },
                 lifetime = 48,
                 strength = 1.0,
                 flags = { "water", "colorMixing", "fixtureContactListener" }
             },
             createGroup = {
-                color = { 106/255, 253/255, 76/255, 1 },
+                color = { 30/255, 210/255, 40/255, 1 },
                 lifetime = 48,
                 strength = 1.0,
                 flags = { "water", "colorMixing", "fixtureContactListener" }

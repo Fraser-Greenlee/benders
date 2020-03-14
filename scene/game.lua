@@ -68,7 +68,7 @@ function scene:create( event )
 	-- Find our enemies and other items
 	map:extend(
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
-		"waterBlock", "iceBlock", "steamBlock", "mudBlock", "jellyBlock", "poisonBlock",
+		"waterBlock", "iceBlock", "sandBlock", "mudBlock", "jellyBlock", "poisonBlock",
 		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock"
 	)
 
@@ -122,7 +122,7 @@ function scene:create( event )
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allWaterBlocks = map:listTypes( "steamBlock" )
+	allWaterBlocks = map:listTypes( "sandBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()

@@ -337,18 +337,6 @@
                  "y":640
                 }, 
                 {
-                 "gid":285,
-                 "height":80,
-                 "id":828,
-                 "name":"",
-                 "rotation":0,
-                 "type":"filterParticlesBlock",
-                 "visible":true,
-                 "width":560,
-                 "x":2080,
-                 "y":160
-                }, 
-                {
                  "height":480,
                  "id":829,
                  "name":"",
@@ -547,18 +535,6 @@
                  "y":2640
                 }, 
                 {
-                 "gid":65,
-                 "height":80,
-                 "id":749,
-                 "name":"",
-                 "rotation":0,
-                 "type":"fountain",
-                 "visible":true,
-                 "width":80,
-                 "x":1120,
-                 "y":80
-                }, 
-                {
                  "gid":278,
                  "height":180,
                  "id":764,
@@ -602,13 +578,13 @@
                  "rotation":0,
                  "type":"iceBlock",
                  "visible":true,
-                 "width":480,
-                 "x":2080,
-                 "y":1600
+                 "width":720,
+                 "x":560,
+                 "y":880
                 }, 
                 {
                  "gid":282,
-                 "height":240,
+                 "height":320,
                  "id":837,
                  "name":"",
                  "rotation":0,
@@ -617,18 +593,6 @@
                  "width":400,
                  "x":80,
                  "y":2080
-                }, 
-                {
-                 "gid":283,
-                 "height":80,
-                 "id":838,
-                 "name":"",
-                 "rotation":0,
-                 "type":"jellyBlock",
-                 "visible":true,
-                 "width":240,
-                 "x":1040,
-                 "y":880
                 }, 
                 {
                  "height":160,
@@ -745,6 +709,41 @@
                  "width":80,
                  "x":1520,
                  "y":1760
+                }, 
+                {
+                 "height":80,
+                 "id":846,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":160,
+                 "x":1280,
+                 "y":800
+                }, 
+                {
+                 "gid":285,
+                 "height":80,
+                 "id":847,
+                 "name":"",
+                 "rotation":0,
+                 "type":"sandBlock",
+                 "visible":true,
+                 "width":518,
+                 "x":1600,
+                 "y":560
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -777,7 +776,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":845,
+ "nextobjectid":848,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,
@@ -1515,8 +1514,8 @@
          "margin":0,
          "name":"objs",
          "spacing":0,
-         "tilecount":35,
-         "tileheight":256,
+         "tilecount":36,
+         "tileheight":484,
          "tiles":
             {
              "1":
@@ -1704,16 +1703,20 @@
                 {
                  "image":"img\/poison.jpg"
                 },
+             "78":
+                {
+                 "image":"img\/sand.jpg"
+                },
              "9":
                 {
                  "image":"img\/doorBlueStroked.png"
                 }
             },
-         "tilewidth":256
+         "tilewidth":518
         }, 
         {
          "columns":0,
-         "firstgid":285,
+         "firstgid":286,
          "margin":0,
          "name":"tiles",
          "spacing":0,
