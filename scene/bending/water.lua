@@ -23,11 +23,11 @@ function M.new( display, physics )
     instance.particleSystem:addEventListener( "particleCollision" )
 
     function instance:makeParticle( x, y, velocityX, velocityY )
-        config.createParticle.x = x
-        config.createParticle.y = y
-        config.createParticle.velocityX = velocityX
-        config.createParticle.velocityY = velocityY
-        instance.particleSystem:createParticle( config.createParticle )
+        config.waterBlock.createParticle.x = x
+        config.waterBlock.createParticle.y = y
+        config.waterBlock.createParticle.velocityX = velocityX
+        config.waterBlock.createParticle.velocityY = velocityY
+        instance.particleSystem:createParticle( config.waterBlock.createParticle )
     end
 
     local fullScreen = {

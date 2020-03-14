@@ -49,16 +49,91 @@ local startConfig = {
             gravityScale=1,
             pressureStrength=0.1
         },
-        createParticle = {
-            color = { 0.3, 0.43, 1, 1 },
-            lifetime = 48,
-            flags = { "water", "fixtureContactListener" }
+        waterBlock = {
+            createParticle = {
+                color = { 0.3, 0.43, 1, 1 },
+                lifetime = 48,
+                flags = { "water", "colorMixing", "fixtureContactListener" }
+            },
+            createGroup = {
+                color = { 0.3, 0.43, 1, 1 },
+                lifetime = 48,
+                flags = { "water", "colorMixing", "fixtureContactListener" }
+            }
         },
-        createGroup = {
-            color = { 0.3, 0.43, 1, 1 },
-            lifetime = 48,
-            flags = { "water", "fixtureContactListener" }
-        }
+        iceBlock = {
+            createParticle = {
+                color = { 1, 1, 1, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "fixtureContactListener" },
+                groupFlags = { "solid", "rigid" }
+            },
+            createGroup = {
+                color = { 1, 1, 1, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "fixtureContactListener" },
+                groupFlags = { "solid", "rigid" }
+            }
+        },
+        steamBlock = {
+            createParticle = {
+                color = { 1, 1, 1, 0.1 },
+                lifetime = 48,
+                strength = 0.0,
+                flags = { "powder", "repulsive", "fixtureContactListener" }
+            },
+            createGroup = {
+                color = { 1, 1, 1, 0.9 },
+                lifetime = 48,
+                strength = 0.0,
+                flags = { "powder", "repulsive", "staticPressure", "fixtureContactListener" },
+                linearVelocityY = -1000
+            }
+        },
+        mudBlock = {
+            createParticle = {
+                color = { 86/255, 48/255, 51/255, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "viscous", "tensile", "fixtureContactListener" }
+            },
+            createGroup = {
+                color = { 86/255, 48/255, 51/255, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "viscous", "tensile", "fixtureContactListener" }
+            }
+        },
+        jellyBlock = {
+            createParticle = {
+                color = { 106/255, 253/255, 76/255, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "viscous", "tensile", "spring", "elastic", "fixtureContactListener" }
+            },
+            createGroup = {
+                color = { 106/255, 253/255, 76/255, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "viscous", "tensile", "spring", "elastic", "fixtureContactListener" }
+            }
+        },
+        poisonBlock = {
+            createParticle = {
+                color = { 106/255, 253/255, 76/255, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "water", "colorMixing", "fixtureContactListener" }
+            },
+            createGroup = {
+                color = { 106/255, 253/255, 76/255, 1 },
+                lifetime = 48,
+                strength = 1.0,
+                flags = { "water", "colorMixing", "fixtureContactListener" }
+            }
+        },
     },
     hero = {
         body = 'hollow',
@@ -110,7 +185,7 @@ local startConfig = {
         waterHitDamage = 1
     },
     game = {
-        debugPhysics = true
+        debugPhysics = false
     }
 }
 

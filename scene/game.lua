@@ -68,7 +68,8 @@ function scene:create( event )
 	-- Find our enemies and other items
 	map:extend(
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
-		"waterBlock", "filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock"
+		"waterBlock", "iceBlock", "steamBlock", "mudBlock", "jellyBlock", "poisonBlock",
+		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock"
 	)
 
 	-- Find the parallax layer
@@ -112,6 +113,31 @@ function scene:create( event )
 		fountain.addWater()
 	end
 	allWaterBlocks = map:listTypes( "waterBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	allWaterBlocks = map:listTypes( "iceBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	allWaterBlocks = map:listTypes( "steamBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	allWaterBlocks = map:listTypes( "mudBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	allWaterBlocks = map:listTypes( "jellyBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	allWaterBlocks = map:listTypes( "poisonBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
