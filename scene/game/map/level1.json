@@ -732,18 +732,6 @@
                  "width":160,
                  "x":1280,
                  "y":800
-                }, 
-                {
-                 "gid":285,
-                 "height":80,
-                 "id":847,
-                 "name":"",
-                 "rotation":0,
-                 "type":"sandBlock",
-                 "visible":true,
-                 "width":518,
-                 "x":1600,
-                 "y":560
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -776,7 +764,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":848,
+ "nextobjectid":852,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,
