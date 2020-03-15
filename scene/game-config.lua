@@ -172,6 +172,11 @@ local startConfig = {
         startHealth = 100,
         waterHitDamage = 1
     },
+    enemyCanon = {
+        maxPositionOffset = 100,
+        maxRotationStep = 2,
+        fireCooldown = 10
+    },
     game = {
         debugPhysics = false
     }

@@ -236,6 +236,18 @@
                  "width":160,
                  "x":640,
                  "y":2080
+                }, 
+                {
+                 "gid":286,
+                 "height":200,
+                 "id":862,
+                 "name":"",
+                 "rotation":0,
+                 "type":"enemyCanon",
+                 "visible":true,
+                 "width":170,
+                 "x":2160,
+                 "y":720
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -268,7 +280,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":862,
+ "nextobjectid":863,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,
@@ -1006,7 +1018,7 @@
          "margin":0,
          "name":"objs",
          "spacing":0,
-         "tilecount":36,
+         "tilecount":37,
          "tileheight":484,
          "tiles":
             {
@@ -1199,6 +1211,10 @@
                 {
                  "image":"img\/sand.jpg"
                 },
+             "79":
+                {
+                 "image":"img\/canon.png"
+                },
              "9":
                 {
                  "image":"img\/doorBlueStroked.png"
@@ -1208,7 +1224,7 @@
         }, 
         {
          "columns":0,
-         "firstgid":286,
+         "firstgid":287,
          "margin":0,
          "name":"tiles",
          "spacing":0,

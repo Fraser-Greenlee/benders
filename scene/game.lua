@@ -69,7 +69,8 @@ function scene:create( event )
 	map:extend(
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
 		"waterBlock", "iceBlock", "sandBlock", "mudBlock", "jellyBlock", "poisonBlock",
-		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock"
+		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock",
+		"enemyCanon"
 	)
 
 	-- Find the parallax layer
@@ -146,6 +147,12 @@ function scene:create( event )
 	for i, block in pairs(allkillWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.start()
+	end
+
+	-- Give enamies reference to hero
+	allEnamies = map:listTypes( "enemyCanon" )
+	for i, enemy in pairs(allEnamies) do
+		enemy.hero = hero
 	end
 
 	-- Use seperate particle system to filter water
