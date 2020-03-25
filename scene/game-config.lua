@@ -22,10 +22,10 @@ local startConfig = {
         playerVmultiplier = 0,
     
         charge = {
-            max = 300,
+            max = 600,
             min = 100,
             lossPerParticle = 0.02,
-            rechargePerRender = 3,
+            rechargePerRender = 6,
             indicator = {
                 width = 200,
                 height = 50
@@ -175,7 +175,11 @@ local startConfig = {
     enemyCanon = {
         maxPositionOffset = 100,
         maxRotationStep = 2,
-        fireCooldown = 10
+        fireCooldown = 10,
+        fireDelay = 1000 * 5,
+        canonCount = 3,
+        canonForce = 1000,
+        canonBallPhysics = { density=10.0, friction=0.2, bounce=0.0, radius=85 }
     },
     game = {
         debugPhysics = false
