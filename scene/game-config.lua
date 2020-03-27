@@ -12,7 +12,7 @@ local startConfig = {
         radius = {
             px = 2.5
         },
-        farRadius = 2,
+        farRadius = 1,
         boxes = {},
         renderDelay = 1,
         staticDelay = 1,
@@ -22,9 +22,9 @@ local startConfig = {
         playerVmultiplier = 0,
     
         charge = {
-            max = 600,
+            max = 1000,
             min = 100,
-            lossPerParticle = 0.02,
+            lossPerParticle = 0.015,
             rechargePerRender = 6,
             indicator = {
                 width = 200,
@@ -32,7 +32,7 @@ local startConfig = {
             }
         },
         distancePower = {
-            max = 850,
+            max = 1250,
         },
         heroPull = 5,
         heroPullDist = 300,

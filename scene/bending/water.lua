@@ -13,7 +13,9 @@ function M.new( display, physics )
 
     local function particleSystemCollision( self, event )
         if ( event.phase == "began" and event.object.type ~= nil ) then
-            if event.object.type == "target" then
+            if event.object.type == "enemyCanon" and event.r == 1 and event.g == 1 and event.b == 1 then
+                event.object:dead()
+            elseif event.object.type == "target" then
                 event.object.waterHit()
             end
         end

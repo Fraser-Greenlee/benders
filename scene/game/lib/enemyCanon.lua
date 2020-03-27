@@ -85,7 +85,7 @@ function M.new( instance )
 			end
 			if (instance.rotation + config.maxRotationStep < targetAngle) then
 				instance:rotate(config.maxRotationStep)
-			elseif (targetAngle < -180 and instance.rotation > targetAngle + 270) then
+			elseif targetAngle < -180 and instance.rotation > targetAngle + 270 then
 				instance:rotate(config.maxRotationStep)
 			elseif (targetAngle < -180) and instance.rotation < targetAngle + 270 then
                 instance:rotate(-config.maxRotationStep)
@@ -97,6 +97,14 @@ function M.new( instance )
 
 	local function enterFrame()
         instance.targetPlayer()
+	end
+
+	function instance:dead()
+		instance.isSensor = true
+		instance.isVisible = false
+		instance.canonBall.isSensor = true
+		instance.canonBall.isVisible = false
+		Runtime:removeEventListener( "enterFrame", enterFrame )
 	end
 
 	function instance:finalize()

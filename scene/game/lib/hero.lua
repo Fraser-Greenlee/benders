@@ -155,21 +155,14 @@ function M.new( instance, options )
 
 	function instance:collision( event )
 		local phase = event.phase
-		local other = event.other
-		local y1, y2 = self.y + 50, other.y - ( other.type == "enemy" and 25 or other.height/2 )
-		local vx, vy = self:getLinearVelocity()
 		if phase == "began" then
-			if not self.isDead and ( other.type == "cannon-ball" ) then
-				self:hurt()
-			elseif self.jumping and vy > 0 and not self.isDead then
-				-- Landed after jumping
-				instance:jumpFloatEnd()
-				self.jumping = false
-				if not ( left == 0 and right == 0 ) and not instance.jumping then
-					instance:setSequence( "walk" )
-					instance:play()
-				else
-					self:setSequence( "idle" )
+			if not self.isDead and ( event.other.type == "cannon-ball" ) then
+				local heroVx, heroVy = self:getLinearVelocity()
+				local otherVx, otherVy = event.other:getLinearVelocity()
+				local collisionSpeed = math.sqrt(heroVx*heroVy + otherVx*otherVy)
+				-- cannon ball kills player on first hit
+				if collisionSpeed > 100 then
+					instance:die()
 				end
 			end
 		end
