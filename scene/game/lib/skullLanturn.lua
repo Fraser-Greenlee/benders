@@ -23,12 +23,15 @@ function M.new( instance )
     instance.gravityScale = config.gravityScale
 	instance.isFixedRotation = true
 
+    instance.isDead = false
+
 	function instance:die()
         -- swith to non-lanturn skull
-        instance.radius = 20
+        instance.isDead = true
         instance:removeEventListener( "collision" )
         Runtime:removeEventListener( "enterFrame", enterFrame )
         instance:setSequence( "dead" )
+        instance.gravityScale = 1.0
     end
 
 	function instance:collision( event )
@@ -36,7 +39,6 @@ function M.new( instance )
 		if phase == "began" then
 			if event.other.type == "hero" then
                 event.other:hurt()
-                instance.gravityScale = 1.0
 			end
 		end
     end
@@ -58,7 +60,10 @@ function M.new( instance )
         timer.performWithDelay(333, swapDirection, 1)
     end
 
-	local function enterFrame()
+    local function enterFrame()
+        if instance.isDead then
+            return nil
+        end
         -- Do this every frame
         local xDist = instance.x - instance.hero.x
         local yDist = instance.y - instance.hero.y

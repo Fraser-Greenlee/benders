@@ -202,7 +202,7 @@ local startConfig = {
         }
     },
     game = {
-        debugPhysics = false
+        debugPhysics = true
     }
 }
 
