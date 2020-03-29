@@ -153,6 +153,7 @@ function scene:create( event )
 	allEnamies = map:listTypes( "enemyCanon", "skullLanturn" )
 	for i, enemy in pairs(allEnamies) do
 		enemy.hero = hero
+		enemy.water = water
 	end
 
 	-- Use seperate particle system to filter water

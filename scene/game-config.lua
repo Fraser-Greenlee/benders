@@ -184,7 +184,7 @@ local startConfig = {
         skullLanturn = {
             physics = { density=2.0, friction=0.5, bounce=0.0, radius=60 },
             gravityScale = -0.1,
-            maxParticleHitCount = 40,
+            maxParticleHitCount = 60,
             sheetFileName = "skull-lanturn-Sheet.png",
             moveImpulse = 10,
             sheetData = {

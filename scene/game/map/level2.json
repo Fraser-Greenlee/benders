@@ -183,26 +183,6 @@
                  "y":880
                 }, 
                 {
-                 "gid":152,
-                 "height":240,
-                 "id":935,
-                 "name":"",
-                 "properties":
-                    {
-                     "spawnId":"1"
-                    },
-                 "propertytypes":
-                    {
-                     "spawnId":"string"
-                    },
-                 "rotation":0,
-                 "type":"enemyPortal",
-                 "visible":true,
-                 "width":400,
-                 "x":1360,
-                 "y":240
-                }, 
-                {
                  "gid":153,
                  "height":116,
                  "id":936,

@@ -43,6 +43,7 @@ function M.new( instance )
         Runtime:removeEventListener( "enterFrame", enterFrame )
         instance:setSequence( "dead" )
         instance.gravityScale = 1.0
+        instance.water:destroyRadius( instance.x, instance.y, 160 )
     end
 
 	function instance:collision( event )
@@ -70,7 +71,7 @@ function M.new( instance )
             end
             instance.startedTurn = false
         end
-        timer.performWithDelay(333, swapDirection, 1)
+        instance.turnMethod = timer.performWithDelay(333, swapDirection, 1)
     end
 
     local function enterFrame()
@@ -96,10 +97,15 @@ function M.new( instance )
             instance.x,
             instance.y
         )
+
+        if instance.health < config.maxParticleHitCount then
+            instance.health = instance.health + 1
+        end
 	end
 
 	function instance:finalize()
-		-- On remove, cleanup instance, or call directly for non-visual
+        -- On remove, cleanup instance, or call directly for non-visual
+        timer.cancel(instance.turnMethod)
 		instance:removeEventListener( "collision" )
 		Runtime:removeEventListener( "enterFrame", enterFrame )
 	end

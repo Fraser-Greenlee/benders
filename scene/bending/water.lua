@@ -47,6 +47,24 @@ function M.new( display, physics )
         })
     end
 
+    function instance:destroyRadius(x, y, radius)
+        local fullScreen = {
+            x = -500,
+            y = -200,
+            halfWidth = display.actualContentWidth + 500,
+            halfHeight = (display.actualContentHeight + 500)*2
+        }
+        print('destroyParticles')
+        print( instance.particleSystem:destroyParticles( fullScreen ) )
+        --[[
+        instance.particleSystem:destroyParticles({
+            x = x,
+            y = y,
+            radius = radius
+        })
+        ]]
+    end
+
     local fullScreen = {
 		x = -500,
 		y = -200,
