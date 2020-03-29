@@ -183,7 +183,7 @@ local startConfig = {
             canonBallPhysics = { density=10.0, friction=0.2, bounce=0.0, radius=85 }
         },
         skullLanturn = {
-            physics = { density=2.0, friction=0.0, bounce=0.0, radius=80 },
+            physics = { density=2.0, friction=0.0, bounce=0.0, radius=60 },
             gravityScale = 0.0,
             sheetFileName = "skull-lanturn-Sheet.png",
             moveImpulse = 10,
