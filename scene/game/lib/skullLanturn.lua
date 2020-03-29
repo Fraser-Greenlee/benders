@@ -24,6 +24,17 @@ function M.new( instance )
 	instance.isFixedRotation = true
 
     instance.isDead = false
+    instance.health = config.maxParticleHitCount
+
+    function instance:hurt()
+        if instance.isDead then
+            return nil
+        end
+        instance.health = instance.health - 1
+        if instance.health < 1 then
+            instance:die()
+        end
+    end
 
 	function instance:die()
         -- swith to non-lanturn skull
@@ -51,10 +62,12 @@ function M.new( instance )
         instance:setSequence( "turn" )
         instance:play()
         local swapDirection = function()
-            instance.direction = instance.direction * -1
-            instance.xScale = instance.direction
-            instance:setSequence( "hover" )
-            instance:play()
+            if instance.isDead == false then
+                instance.direction = instance.direction * -1
+                instance.xScale = instance.direction
+                instance:setSequence( "hover" )
+                instance:play()
+            end
             instance.startedTurn = false
         end
         timer.performWithDelay(333, swapDirection, 1)
@@ -66,7 +79,7 @@ function M.new( instance )
         end
         -- Do this every frame
         local xDist = instance.x - instance.hero.x
-        local yDist = instance.y - instance.hero.y
+        local yDist = (instance.y - instance.hero.y) * 0.1
         local heroDistance = math.sqrt(xDist^2 + yDist^2)
 
         if instance.startedTurn == false then

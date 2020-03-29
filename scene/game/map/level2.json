@@ -167,44 +167,8 @@
                  "type":"waterBlock",
                  "visible":true,
                  "width":3200,
-                 "x":0,
+                 "x":-28,
                  "y":2160
-                }, 
-                {
-                 "gid":151,
-                 "height":200,
-                 "id":862,
-                 "name":"",
-                 "rotation":0,
-                 "type":"enemyCanon",
-                 "visible":true,
-                 "width":170,
-                 "x":2320,
-                 "y":880
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":926,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2320,
-                 "y":-240
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":927,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2400,
-                 "y":-240
                 }, 
                 {
                  "gid":151,
@@ -217,78 +181,6 @@
                  "width":170,
                  "x":560,
                  "y":880
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":929,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2240,
-                 "y":-240
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":930,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2480,
-                 "y":-240
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":931,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2160,
-                 "y":-240
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":932,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2080,
-                 "y":-240
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":933,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2640,
-                 "y":-240
-                }, 
-                {
-                 "gid":144,
-                 "height":80,
-                 "id":934,
-                 "name":"",
-                 "rotation":0,
-                 "type":"iceBlock",
-                 "visible":true,
-                 "width":80,
-                 "x":2560,
-                 "y":-240
                 }, 
                 {
                  "gid":152,
@@ -331,6 +223,138 @@
                  "width":126,
                  "x":1864,
                  "y":160
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":937,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"skullLanturn",
+                 "visible":true,
+                 "width":126,
+                 "x":2160,
+                 "y":240
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":938,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"skullLanturn",
+                 "visible":true,
+                 "width":126,
+                 "x":1680,
+                 "y":480
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":939,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"skullLanturn",
+                 "visible":true,
+                 "width":126,
+                 "x":2720,
+                 "y":400
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":940,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"skullLanturn",
+                 "visible":true,
+                 "width":126,
+                 "x":2449,
+                 "y":18
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":941,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"skullLanturn",
+                 "visible":true,
+                 "width":126,
+                 "x":2560,
+                 "y":640
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":942,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"skullLanturn",
+                 "visible":true,
+                 "width":126,
+                 "x":2080,
+                 "y":640
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -363,7 +387,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":937,
+ "nextobjectid":943,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,

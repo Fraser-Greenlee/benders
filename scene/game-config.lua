@@ -20,7 +20,6 @@ local startConfig = {
         maxAge = 1,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
-    
         charge = {
             max = 1000,
             min = 100,
@@ -183,8 +182,9 @@ local startConfig = {
             canonBallPhysics = { density=10.0, friction=0.2, bounce=0.0, radius=85 }
         },
         skullLanturn = {
-            physics = { density=2.0, friction=0.0, bounce=0.0, radius=60 },
-            gravityScale = 0.0,
+            physics = { density=2.0, friction=0.5, bounce=0.0, radius=60 },
+            gravityScale = -0.1,
+            maxParticleHitCount = 40,
             sheetFileName = "skull-lanturn-Sheet.png",
             moveImpulse = 10,
             sheetData = {
@@ -202,7 +202,7 @@ local startConfig = {
         }
     },
     game = {
-        debugPhysics = true
+        debugPhysics = false
     }
 }
 
