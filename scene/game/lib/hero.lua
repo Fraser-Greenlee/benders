@@ -180,23 +180,15 @@ function M.new( instance, options )
 		end
 	end
 
-	local function enterFrame()
-		-- Do this every frame
-	end
-
 	function instance:finalize()
 		-- On remove, cleanup instance, or call directly for non-visual
 		instance:removeEventListener( "preCollision" )
 		instance:removeEventListener( "collision" )
-		Runtime:removeEventListener( "enterFrame", enterFrame )
 		Runtime:removeEventListener( "key", key )
 	end
 
 	-- Add a finalize listener (for display objects only, comment out for non-visual)
 	instance:addEventListener( "finalize" )
-
-	-- Add our enterFrame listener
-	Runtime:addEventListener( "enterFrame", enterFrame )
 
 	-- Add our key/joystick listeners
 	Runtime:addEventListener( "key", key )

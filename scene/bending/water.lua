@@ -15,6 +15,8 @@ function M.new( display, physics )
         if ( event.phase == "began" and event.object.type ~= nil ) then
             if event.object.type == "enemyCanon" and event.r == 1 and event.g == 1 and event.b == 1 then
                 event.object:dead()
+            elseif event.object.type == "skullLanturn" and event.r == 0.3 and event.g == 0.43 and event.b == 1 then
+                event.object:die()
             elseif event.object.type == "target" then
                 event.object.waterHit()
             end

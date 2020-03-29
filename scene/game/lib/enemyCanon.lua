@@ -1,7 +1,7 @@
 
 -- Module/class for platformer enemyCanon
 
-local config = require('scene.game-config').noDisplay.enemyCanon
+local config = require('scene.game-config').noDisplay.enemies.enemyCanon
 
 -- Define module
 local M = {}

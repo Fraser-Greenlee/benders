@@ -197,7 +197,7 @@ function M.new( display, particleSystem, hero )
             -- pull hero
             self.hero:applyLinearImpulse(
                 (heroDistX/heroDistance) * self.config.heroPull,
-                heroDistY/heroDistance * self.config.heroPull,
+                (heroDistY/heroDistance) * self.config.heroPull,
                 hero.x,
                 hero.y
             )

@@ -172,14 +172,34 @@ local startConfig = {
         startHealth = 100,
         waterHitDamage = 1
     },
-    enemyCanon = {
-        maxPositionOffset = 100,
-        maxRotationStep = 2,
-        fireCooldown = 10,
-        fireDelay = 1000 * 5,
-        canonCount = 3,
-        canonForce = 1000,
-        canonBallPhysics = { density=10.0, friction=0.2, bounce=0.0, radius=85 }
+    enemies = {
+        enemyCanon = {
+            maxPositionOffset = 100,
+            maxRotationStep = 2,
+            fireCooldown = 10,
+            fireDelay = 1000 * 5,
+            canonCount = 3,
+            canonForce = 1000,
+            canonBallPhysics = { density=10.0, friction=0.2, bounce=0.0, radius=85 }
+        },
+        skullLanturn = {
+            physics = { density=2.0, friction=0.0, bounce=0.0, radius=80 },
+            gravityScale = 0.0,
+            sheetFileName = "skull-lanturn-Sheet.png",
+            moveImpulse = 10,
+            sheetData = {
+                width = 150,
+                height = 140,
+                numFrames = 8,
+                sheetContentWidth = 1200,
+                sheetContentHeight = 140
+            },
+            sequenceData = {
+                { name = "hover", frames = { 1, 2, 3, 4 }, time = 1200 },
+                { name = "turn", frames = { 5, 6, 7 }, time = 333, loopCount = 0 },
+                { name = "dead", frames = { 8 }, time = 333, loopCount = 0 },
+            }
+        }
     },
     game = {
         debugPhysics = false

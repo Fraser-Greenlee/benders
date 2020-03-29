@@ -70,7 +70,7 @@ function scene:create( event )
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
 		"waterBlock", "iceBlock", "sandBlock", "mudBlock", "jellyBlock", "poisonBlock",
 		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock",
-		"enemyCanon"
+		"enemyCanon", "skullLanturn"
 	)
 
 	-- Find the parallax layer
@@ -150,7 +150,7 @@ function scene:create( event )
 	end
 
 	-- Give enamies reference to hero
-	allEnamies = map:listTypes( "enemyCanon" )
+	allEnamies = map:listTypes( "enemyCanon", "skullLanturn" )
 	for i, enemy in pairs(allEnamies) do
 		enemy.hero = hero
 	end
