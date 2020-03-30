@@ -40,6 +40,24 @@ local startConfig = {
         debugGrid = false,
         debugPrint = false
     },
+    fire = {
+        particleSystem = {
+            filename = "scene/bending/img/water_droplet.png",
+            radius = 23,
+            imageRadius=25,
+            density=2,
+            gravityScale=0,
+            pressureStrength=0.1
+        },
+        fireBlock = {
+            createParticle = {
+                flags = { "water", "colorMixing", "fixtureContactListener" }
+            },
+            createGroup = {
+                flags = { "water", "colorMixing", "fixtureContactListener" }
+            }
+        },
+    }
     water = {
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
@@ -202,7 +220,8 @@ local startConfig = {
         }
     },
     game = {
-        debugPhysics = false
+        debugPhysics = false,
+        bendingMode = 'fire'
     }
 }
 
