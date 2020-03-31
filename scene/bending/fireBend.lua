@@ -191,7 +191,10 @@ function M.new( display, fire, hero )
         if heroDistance <= self.config.distancePower.max then
             self.bendingRadius = self.config.radius.px
             -- hotter temp when closer to hero
-            local tempRatio = 1 - ( heroDistance / self.config.distancePower.max )
+            local touchVelocity = math.sqrt((self.velocityX * self.velocityX) + (self.velocityY * self.velocityY))
+            local touchVelocityRatio = math.min(touchVelocity, self.config.maxPlayerVelocity) / self.config.maxPlayerVelocity
+            local invHeroDist = 1 - ( heroDistance / self.config.distancePower.max )
+            local tempRatio = 0.3 * invHeroDist + 0.7 * touchVelocityRatio
             self.fire:makeParticle( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio )
         else
             self.bendingRadius = self.config.farRadius

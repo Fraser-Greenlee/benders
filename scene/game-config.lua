@@ -36,6 +36,8 @@ local startConfig = {
         heroPull = 5,
         heroPullDist = 300,
 
+        maxPlayerVelocity = 1000,
+
         debugLine = false,
         debugGrid = false,
         debugPrint = false
@@ -47,7 +49,7 @@ local startConfig = {
             radius = 23,
             imageRadius=25,
             density=4,
-            gravityScale=0,
+            gravityScale=-0.5,
             pressureStrength=0.05
         },
         fireBlock = {
