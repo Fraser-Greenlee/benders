@@ -37,6 +37,7 @@ local startConfig = {
         heroPullDist = 300,
 
         maxPlayerVelocity = 1000,
+        minStepsPerParticleMax = 10,
 
         debugLine = false,
         debugGrid = false,
@@ -44,6 +45,7 @@ local startConfig = {
     },
     fire = {
         maxLifetime = 5,
+        maxRadius = 100,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
             radius = 23,

@@ -55,6 +55,18 @@ function M.new( display, physics )
         instance.particleSystem:createParticle( config.fireBlock.createParticle )
     end
 
+    function instance:makeParticleGroup( x, y, velocityX, velocityY, tempRatio )
+        config.fireBlock.createGroup.x = x
+        config.fireBlock.createGroup.y = y
+        config.fireBlock.createGroup.linearVelocityX = velocityX
+        config.fireBlock.createGroup.linearVelocityY = velocityY
+        config.fireBlock.createGroup.color = instance:fireColor( tempRatio )
+        -- print(config.fireBlock.color[1], config.fireBlock.color[2], config.fireBlock.color[3], config.fireBlock.color[4])
+        config.fireBlock.createGroup.lifetime = config.maxLifetime * tempRatio
+        config.fireBlock.createGroup.radius = config.maxRadius * tempRatio
+        instance.particleSystem:createGroup( config.fireBlock.createGroup )
+    end
+
     function instance:deleteParticles( startX, startY, endX, endY )
         local distX = endX - startX
         local distY = endY - startY

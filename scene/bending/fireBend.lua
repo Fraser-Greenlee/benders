@@ -170,6 +170,8 @@ function M.new( display, fire, hero )
     self.lastTouchEvent = 0
     self.bendTimer = 0
     self.ranRestart = false -- if player holds touch while level is restarted the event times will be off, use this to reset it
+    self.stepsSinceLastParticleMade = 0
+    self.minStepsPerParticle = self.config.minStepsPerParticleMax
 
     function self:timer(event)
         self.touchX = self.lastTouchEvent.x
@@ -190,12 +192,19 @@ function M.new( display, fire, hero )
         local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
         if heroDistance <= self.config.distancePower.max then
             self.bendingRadius = self.config.radius.px
-            -- hotter temp when closer to hero
+
             local touchVelocity = math.sqrt((self.velocityX * self.velocityX) + (self.velocityY * self.velocityY))
             local touchVelocityRatio = math.min(touchVelocity, self.config.maxPlayerVelocity) / self.config.maxPlayerVelocity
             local invHeroDist = 1 - ( heroDistance / self.config.distancePower.max )
             local tempRatio = 0.3 * invHeroDist + 0.7 * touchVelocityRatio
-            self.fire:makeParticle( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio )
+            self.minStepsPerParticle = (1 - tempRatio) * self.config.minStepsPerParticleMax
+
+            if self.stepsSinceLastParticleMade >= self.minStepsPerParticle then
+                self.fire:makeParticleGroup( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio )
+                self.stepsSinceLastParticleMade = 0
+            else
+                self.stepsSinceLastParticleMade = self.stepsSinceLastParticleMade + 1
+            end
         else
             self.bendingRadius = self.config.farRadius
         end
