@@ -8,7 +8,9 @@ local json = require( "json" )
 local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
 local Water = require( "scene.bending.water" )
-local Bending = require( "scene.bending.bend" )
+local WaterBending = require( "scene.bending.waterBend" )
+local Fire = require( "scene.bending.fire" )
+local FireBending = require( "scene.bending.fireBend" )
 local FilterParticleSystem = require( "scene.game.lib.filterParticleSystem" )
 local config = require('scene.game-config').noDisplay.game
 
@@ -165,10 +167,17 @@ function scene:create( event )
 		block.makeBlock()
 	end
 
-	-- Allow bending
-	bending = Bending.new( display, water.particleSystem, hero )
-	bending.drawGrid(bending)
-
+	if config.bendingMode == 'water' then
+		-- Allow waterBending
+		waterBending = WaterBending.new( display, water, hero )
+		waterBending.drawGrid(waterBending)
+	elseif config.bendingMode == 'fire' then
+		-- Allow fireBending
+		fireBending = fireBending.new( display, fire, hero )
+		fireBending.drawGrid(fireBending)
+	else
+		error("no valid bending mode")
+	end
 end
 
 -- Function to scroll the map
@@ -225,7 +234,7 @@ function scene:destroy( event )
 		halfHeight = (display.actualContentHeight + 500)*2
 	}
 
-	bending:destroy()
+	waterBending:destroy()
 	water:destroy()
 	filterParticleSystem.particleSystem:destroyParticles(fullScreen)
 

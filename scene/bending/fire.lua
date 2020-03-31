@@ -26,11 +26,28 @@ function M.new( display, physics )
     instance.particleSystem.particleCollision = particleSystemCollision
     instance.particleSystem:addEventListener( "particleCollision" )
 
-    function instance:makeParticle( x, y, velocityX, velocityY )
+    function instance:fireColor( tempRatio )
+        --[[
+        # makes a color table relative to [0.0, 1.0] temperature ratio (1.0 is max)
+        Range of values from max to min:
+            { 254, 247, 93 }
+            { 248, 205, 81 }
+            { 229, 166, 56 }
+            { 223, 104, 42 }
+        ]]
+        return {
+            223 + (254 - 223) * tempRatio,
+            104 + (247 - 104) * tempRatio,
+            42 + (93 - 42) * tempRatio
+        }
+    end
+
+    function instance:makeParticle( x, y, velocityX, velocityY, tempRatio )
         config.fireBlock.createParticle.x = x
         config.fireBlock.createParticle.y = y
         config.fireBlock.createParticle.velocityX = velocityX
         config.fireBlock.createParticle.velocityY = velocityY
+        config.fireBlock.color = instance:fireColor( tempRatio )
         instance.particleSystem:createParticle( config.fireBlock.createParticle )
     end
 

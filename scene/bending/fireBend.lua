@@ -6,14 +6,15 @@ local configMaker = require('scene.game-config').new
 -- Define module
 local M = {}
 
-function M.new( display, particleSystem, hero )
+function M.new( display, fire, hero )
     local self = {}
 
     self.display = display
     -- Create display group to hold visuals
 	self.displayGroup = display.newGroup()
     self.config = configMaker(self.display).bending
-    self.particleSystem = particleSystem
+    self.fire = fire
+    self.particleSystem = fire.particleSystem
     self.hero = hero
 
     local function bendingPixelXY(x, y)
@@ -189,18 +190,11 @@ function M.new( display, particleSystem, hero )
         local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
         if heroDistance <= self.config.distancePower.max then
             self.bendingRadius = self.config.radius.px
+            -- hotter temp when closer to hero
+            local tempRatio = 1 - ( heroDistance / self.config.distancePower.max )
+            self.fire:makeParticle( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio )
         else
             self.bendingRadius = self.config.farRadius
-        end
-
-        if heroDistance <= self.config.heroPullDist then
-            -- pull hero
-            self.hero:applyLinearImpulse(
-                (heroDistX/heroDistance) * self.config.heroPull,
-                (heroDistY/heroDistance) * self.config.heroPull,
-                hero.x,
-                hero.y
-            )
         end
 
         self.bendingCircle.path.radius = self.bendingRadius * self.config.pixel.size

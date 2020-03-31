@@ -6,14 +6,15 @@ local configMaker = require('scene.game-config').new
 -- Define module
 local M = {}
 
-function M.new( display, particleSystem, hero )
+function M.new( display, water, hero )
     local self = {}
 
     self.display = display
     -- Create display group to hold visuals
 	self.displayGroup = display.newGroup()
     self.config = configMaker(self.display).bending
-    self.particleSystem = particleSystem
+    self.water = water
+    self.particleSystem = water.particleSystem
     self.hero = hero
 
     local function bendingPixelXY(x, y)
