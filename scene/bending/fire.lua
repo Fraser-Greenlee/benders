@@ -35,6 +35,7 @@ function M.new( display, physics )
             { 229, 166, 56 }
             { 223, 104, 42 }
         ]]
+        tempRatio = math.max(math.min(tempRatio + math.random(-5, 5)/10, 1), 0)
         return {
             (223 + (254 - 223) * tempRatio)/255,
             (104 + (247 - 104) * tempRatio)/255,
@@ -44,8 +45,8 @@ function M.new( display, physics )
     end
 
     function instance:makeParticle( x, y, velocityX, velocityY, tempRatio )
-        config.fireBlock.createParticle.x = x
-        config.fireBlock.createParticle.y = y
+        config.fireBlock.createParticle.x = x + math.random(-50, 50)
+        config.fireBlock.createParticle.y = y + math.random(-50, 50)
         config.fireBlock.createParticle.velocityX = velocityX
         config.fireBlock.createParticle.velocityY = velocityY
         config.fireBlock.createParticle.color = instance:fireColor( tempRatio )
