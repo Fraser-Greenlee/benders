@@ -172,8 +172,9 @@ function scene:create( event )
 		waterBending = WaterBending.new( display, water, hero )
 		waterBending.drawGrid(waterBending)
 	elseif config.bendingMode == 'fire' then
+		fire = Fire.new( display, physics )
 		-- Allow fireBending
-		fireBending = fireBending.new( display, fire, hero )
+		fireBending = FireBending.new( display, fire, hero )
 		fireBending.drawGrid(fireBending)
 	else
 		error("no valid bending mode")

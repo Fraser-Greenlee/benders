@@ -41,13 +41,14 @@ local startConfig = {
         debugPrint = false
     },
     fire = {
+        maxLifetime = 5,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
             radius = 23,
             imageRadius=25,
-            density=2,
+            density=4,
             gravityScale=0,
-            pressureStrength=0.1
+            pressureStrength=0.05
         },
         fireBlock = {
             createParticle = {
@@ -57,7 +58,7 @@ local startConfig = {
                 flags = { "water", "colorMixing", "fixtureContactListener" }
             }
         },
-    }
+    },
     water = {
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",

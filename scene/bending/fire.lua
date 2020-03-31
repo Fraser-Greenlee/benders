@@ -36,9 +36,10 @@ function M.new( display, physics )
             { 223, 104, 42 }
         ]]
         return {
-            223 + (254 - 223) * tempRatio,
-            104 + (247 - 104) * tempRatio,
-            42 + (93 - 42) * tempRatio
+            (223 + (254 - 223) * tempRatio)/255,
+            (104 + (247 - 104) * tempRatio)/255,
+            (42 + (93 - 42) * tempRatio)/255,
+            1
         }
     end
 
@@ -47,7 +48,9 @@ function M.new( display, physics )
         config.fireBlock.createParticle.y = y
         config.fireBlock.createParticle.velocityX = velocityX
         config.fireBlock.createParticle.velocityY = velocityY
-        config.fireBlock.color = instance:fireColor( tempRatio )
+        config.fireBlock.createParticle.color = instance:fireColor( tempRatio )
+        -- print(config.fireBlock.color[1], config.fireBlock.color[2], config.fireBlock.color[3], config.fireBlock.color[4])
+        config.fireBlock.createParticle.lifetime = config.maxLifetime * tempRatio
         instance.particleSystem:createParticle( config.fireBlock.createParticle )
     end
 
@@ -94,6 +97,7 @@ function M.new( display, physics )
         instance.particleSystem:removeEventListener( "particleCollision" )
     end
 
+    --[[
     local worldGroup = display.newGroup()
     -- Initialize snapshot for full screen
     local snapshot = display.newSnapshot( worldGroup, display.actualContentWidth*2, display.actualContentHeight*2 )
@@ -109,6 +113,7 @@ function M.new( display, physics )
         snapshot:invalidate()
     end
     Runtime:addEventListener( "enterFrame", onEnterFrame )
+    ]]
 
     return instance
 end
