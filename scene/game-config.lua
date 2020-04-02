@@ -96,7 +96,7 @@ local startConfig = {
             pressureStrength=0.05,
             surfaceTensionPressureStrength=0.2,
             surfaceTensionNormalStrength=0.2,
-            maxCount=200
+            maxCount=2000
         },
         fireBlock = {
             createParticle = {

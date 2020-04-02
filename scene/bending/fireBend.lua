@@ -173,7 +173,7 @@ function M.new( display, fire, hero )
     self.bendTimer = 0
     self.ranRestart = false -- if player holds touch while level is restarted the event times will be off, use this to reset it
     self.stepsSinceLastParticleMade = 0
-    self.minStepsPerParticle = self.config.minStepsPerParticleMax
+    self.minStepsPerParticle = 0 -- self.config.minStepsPerParticleMax
 
     function self:timer(event)
         self.touchX = self.lastTouchEvent.x
@@ -215,19 +215,25 @@ function M.new( display, fire, hero )
         local positionDeltaX = touchX - self.SpreviousX
         local positionDeltaY = touchY - self.SpreviousY
         local positionDistance = math.sqrt(positionDeltaX^2 + positionDeltaY^2)
+        if positionDistance < 40 then
+            return nil
+        end
         self.SpreviousX = touchX
         self.SpreviousY = touchY
         velocityX = ( positionDeltaX / self.timeDelta )
         velocityY = ( positionDeltaY / self.timeDelta )
 
         local touchVelocity = math.sqrt((velocityX * velocityX) + (velocityY * velocityY))
+        if touchVelocity < 20 then
+            return nil
+        end
         local touchVelocityRatio = math.min(touchVelocity, self.config.maxPlayerVelocity) / self.config.maxPlayerVelocity
         local invHeroDist = 1 - ( heroDistance / self.config.distancePower.max )
         local tempRatio = 0.3 * invHeroDist + 0.7 * touchVelocityRatio
-        self.minStepsPerParticle = (1 - tempRatio) * self.config.minStepsPerParticleMax
+        -- self.minStepsPerParticle = (1 - tempRatio) * self.config.minStepsPerParticleMax
 
         if self.stepsSinceLastParticleMade >= self.minStepsPerParticle then
-            self.fire:makeParticleGroup( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio, positionDistance )
+            self.fire:makeParticleGroup( touchX, touchY, velocityX, velocityY, tempRatio, positionDistance )
             self.bendingCharge = self.bendingCharge - 10 * tempRatio
             self.stepsSinceLastParticleMade = 0
         else
