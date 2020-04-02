@@ -12,7 +12,7 @@ function M.new( display, fire, hero )
     self.display = display
     -- Create display group to hold visuals
 	self.displayGroup = display.newGroup()
-    self.config = configMaker(self.display).bending
+    self.config = configMaker(self.display).fireBend
     self.fire = fire
     self.particleSystem = fire.particleSystem
     self.hero = hero
@@ -147,6 +147,8 @@ function M.new( display, fire, hero )
     self.previousTime = 0
     self.previousX = 0
     self.previousY = 0
+    self.SpreviousX = 0
+    self.SpreviousY = 0
     self.touchX = 0
     self.touchY = 0
     self.velocityX = 0
@@ -176,7 +178,6 @@ function M.new( display, fire, hero )
     function self:timer(event)
         self.touchX = self.lastTouchEvent.x
         self.touchY = self.lastTouchEvent.y
-        self.previousTime = ( self.lastTouchEvent.time / 1000 )
         local positionDeltaX = self.touchX - self.previousX
         local positionDeltaY = self.touchY - self.previousY
         self.previousX = self.touchX
@@ -186,28 +187,6 @@ function M.new( display, fire, hero )
 
         self.bendingCircle.x = self.touchX
         self.bendingCircle.y = self.touchY
-
-        local heroDistX = self.bendingCircle.x - self.hero.x
-        local heroDistY = self.bendingCircle.y - self.hero.y
-        local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
-        if heroDistance <= self.config.distancePower.max then
-            self.bendingRadius = self.config.radius.px
-
-            local touchVelocity = math.sqrt((self.velocityX * self.velocityX) + (self.velocityY * self.velocityY))
-            local touchVelocityRatio = math.min(touchVelocity, self.config.maxPlayerVelocity) / self.config.maxPlayerVelocity
-            local invHeroDist = 1 - ( heroDistance / self.config.distancePower.max )
-            local tempRatio = 0.3 * invHeroDist + 0.7 * touchVelocityRatio
-            self.minStepsPerParticle = (1 - tempRatio) * self.config.minStepsPerParticleMax
-
-            if self.stepsSinceLastParticleMade >= self.minStepsPerParticle then
-                self.fire:makeParticleGroup( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio )
-                self.stepsSinceLastParticleMade = 0
-            else
-                self.stepsSinceLastParticleMade = self.stepsSinceLastParticleMade + 1
-            end
-        else
-            self.bendingRadius = self.config.farRadius
-        end
 
         self.bendingCircle.path.radius = self.bendingRadius * self.config.pixel.size
 
@@ -220,6 +199,41 @@ function M.new( display, fire, hero )
         self.run( self, event.time, self.touchX, self.touchY, self.velocityX, self.velocityY )
     end
 
+    function self:makeParticle(event)
+        touchX = self.lastTouchEvent.x
+        touchY = self.lastTouchEvent.y
+
+        local heroDistX = touchX - self.hero.x
+        local heroDistY = touchY - self.hero.y
+        local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
+
+        if heroDistance >= self.config.distancePower.max then
+            return nil
+        end
+
+        self.previousTime = ( self.lastTouchEvent.time / 1000 )
+        local positionDeltaX = touchX - self.SpreviousX
+        local positionDeltaY = touchY - self.SpreviousY
+        local positionDistance = math.sqrt(positionDeltaX^2 + positionDeltaY^2)
+        self.SpreviousX = touchX
+        self.SpreviousY = touchY
+        velocityX = ( positionDeltaX / self.timeDelta )
+        velocityY = ( positionDeltaY / self.timeDelta )
+
+        local touchVelocity = math.sqrt((velocityX * velocityX) + (velocityY * velocityY))
+        local touchVelocityRatio = math.min(touchVelocity, self.config.maxPlayerVelocity) / self.config.maxPlayerVelocity
+        local invHeroDist = 1 - ( heroDistance / self.config.distancePower.max )
+        local tempRatio = 0.3 * invHeroDist + 0.7 * touchVelocityRatio
+        self.minStepsPerParticle = (1 - tempRatio) * self.config.minStepsPerParticleMax
+
+        if self.stepsSinceLastParticleMade >= self.minStepsPerParticle then
+            self.fire:makeParticleGroup( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio, positionDistance )
+            self.stepsSinceLastParticleMade = 0
+        else
+            self.stepsSinceLastParticleMade = self.stepsSinceLastParticleMade + 1
+        end
+    end
+
     function self:touch(event)
         self.timeDelta = ( event.time / 1000 ) - self.previousTime
         if self.timeDelta > 0 then
@@ -228,6 +242,7 @@ function M.new( display, fire, hero )
                 self.bendTimer = timer.performWithDelay( 10, self, -1 )
                 self.ranRestart = false
             end
+            self:makeParticle(event)
             if self.ranRestart == true then
                 self.previousTime = event.time
             end

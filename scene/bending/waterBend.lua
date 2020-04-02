@@ -12,7 +12,7 @@ function M.new( display, water, hero )
     self.display = display
     -- Create display group to hold visuals
 	self.displayGroup = display.newGroup()
-    self.config = configMaker(self.display).bending
+    self.config = configMaker(self.display).waterBend
     self.water = water
     self.particleSystem = water.particleSystem
     self.hero = hero

@@ -1,5 +1,5 @@
 local startConfig = {
-    bending = {
+    waterBending = {
         pixel = {
             start = {
                 x = 20,
@@ -36,7 +36,48 @@ local startConfig = {
         heroPull = 5,
         heroPullDist = 300,
 
-        maxPlayerVelocity = 1000,
+        debugLine = false,
+        debugGrid = false,
+        debugPrint = false
+    },
+    fireBend = {
+        pixel = {
+            start = {
+                x = 20,
+                y = -520
+            },
+            per = {
+                row = 50
+            }
+        },
+        radius = {
+            px = 2.5
+        },
+        farRadius = 1,
+        boxes = {},
+        renderDelay = 1,
+        staticDelay = 1,
+        power = 400,
+        maxAge = 1,
+        playerVstatic = 0.2,
+        playerVmultiplier = 0,
+        charge = {
+            max = 1000,
+            min = 100,
+            lossPerParticle = 0.015,
+            rechargePerRender = 6,
+            indicator = {
+                width = 200,
+                height = 50
+            }
+        },
+        distancePower = {
+            max = 1250,
+        },
+        heroPull = 5,
+        heroPullDist = 300,
+
+        maxPlayerVelocity = 2000,
         minStepsPerParticleMax = 10,
 
         debugLine = false,
@@ -50,9 +91,12 @@ local startConfig = {
             filename = "scene/bending/img/water_droplet.png",
             radius = 23,
             imageRadius=25,
-            density=4,
+            density=1,
             gravityScale=-0.5,
-            pressureStrength=0.05
+            pressureStrength=0.05,
+            surfaceTensionPressureStrength=0.2,
+            surfaceTensionNormalStrength=0.2,
+            maxCount=200
         },
         fireBlock = {
             createParticle = {
@@ -232,15 +276,27 @@ local startConfig = {
 
 return {
     new = function(display)
-        startConfig.bending.pixel.size = math.floor(
-            display.actualContentWidth / startConfig.bending.pixel.per.row
+
+        startConfig.waterBending.pixel.size = math.floor(
+            display.actualContentWidth / startConfig.waterBending.pixel.per.row
         )
-        startConfig.bending.pixel.per.column = math.floor(
-            display.actualContentHeight / startConfig.bending.pixel.size
+        startConfig.waterBending.pixel.per.column = math.floor(
+            display.actualContentHeight / startConfig.waterBending.pixel.size
         )
-        startConfig.bending.radius.bendingPX = math.floor(
-            startConfig.bending.radius.px / startConfig.bending.pixel.size
+        startConfig.waterBending.radius.bendingPX = math.floor(
+            startConfig.waterBending.radius.px / startConfig.waterBending.pixel.size
         )
+
+        startConfig.fireBend.pixel.size = math.floor(
+            display.actualContentWidth / startConfig.fireBend.pixel.per.row
+        )
+        startConfig.fireBend.pixel.per.column = math.floor(
+            display.actualContentHeight / startConfig.fireBend.pixel.size
+        )
+        startConfig.fireBend.radius.bendingPX = math.floor(
+            startConfig.fireBend.radius.px / startConfig.fireBend.pixel.size
+        )
+
         return startConfig
     end,
     noDisplay = startConfig
