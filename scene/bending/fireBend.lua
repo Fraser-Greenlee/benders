@@ -228,6 +228,7 @@ function M.new( display, fire, hero )
 
         if self.stepsSinceLastParticleMade >= self.minStepsPerParticle then
             self.fire:makeParticleGroup( self.touchX, self.touchY, self.velocityX, self.velocityY, tempRatio, positionDistance )
+            self.bendingCharge = self.bendingCharge - 10 * tempRatio
             self.stepsSinceLastParticleMade = 0
         else
             self.stepsSinceLastParticleMade = self.stepsSinceLastParticleMade + 1
@@ -241,8 +242,12 @@ function M.new( display, fire, hero )
             if ( "began" == event.phase ) then
                 self.bendTimer = timer.performWithDelay( 10, self, -1 )
                 self.ranRestart = false
+
+                self.SpreviousX = self.lastTouchEvent.x
+                self.SpreviousY = self.lastTouchEvent.y
+            else
+                self:makeParticle(event)
             end
-            self:makeParticle(event)
             if self.ranRestart == true then
                 self.previousTime = event.time
             end
