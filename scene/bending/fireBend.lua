@@ -42,9 +42,9 @@ function M.new( display, fire, hero )
     
     local function setDeltaV(XorY, playerXorY)
         -- print(XorY, playerXorY)
-        if ((XorY > 0 and playerXorY < 0) or (XorY < 0 and playerXorY > 0)) then
-            return 0
-        end
+        --if ((XorY > 0 and playerXorY < 0) or (XorY < 0 and playerXorY > 0)) then
+        --    return 0
+        --end
         return staticDeltaV(XorY) * (1 - self.config.playerVstatic)
     end
     
@@ -211,7 +211,7 @@ function M.new( display, fire, hero )
         local heroDistY = touchY - self.hero.y
         local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
 
-        if heroDistance >= self.config.distancePower.max then
+        if heroDistance >= self.config.makeParticleMaxDistance then
             print('too far from player')
             return nil
         end

@@ -51,13 +51,13 @@ local startConfig = {
             }
         },
         radius = {
-            px = 2.5
+            px = 8
         },
         farRadius = 1,
         boxes = {},
         renderDelay = 1,
         staticDelay = 1,
-        power = 140,
+        power = 180,
         maxAge = 1,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
@@ -74,6 +74,7 @@ local startConfig = {
         distancePower = {
             max = 1250,
         },
+        makeParticleMaxDistance = 600,
         heroPull = 5,
         heroPullDist = 300,
 
@@ -92,8 +93,8 @@ local startConfig = {
             radius = 23,
             imageRadius=25,
             density=1,
-            gravityScale=-0.0,
-            pressureStrength=0.05,
+            gravityScale=0.0,
+            pressureStrength=0.1,
             surfaceTensionPressureStrength=0.2,
             surfaceTensionNormalStrength=0.2,
             maxCount=2000
