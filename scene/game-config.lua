@@ -1,5 +1,5 @@
 local startConfig = {
-    waterBending = {
+    waterBend = {
         pixel = {
             start = {
                 x = 20,
@@ -272,21 +272,21 @@ local startConfig = {
     },
     game = {
         debugPhysics = false,
-        bendingMode = 'fire'
+        bendingMode = 'water'
     }
 }
 
 return {
     new = function(display)
 
-        startConfig.waterBending.pixel.size = math.floor(
-            display.actualContentWidth / startConfig.waterBending.pixel.per.row
+        startConfig.waterBend.pixel.size = math.floor(
+            display.actualContentWidth / startConfig.waterBend.pixel.per.row
         )
-        startConfig.waterBending.pixel.per.column = math.floor(
-            display.actualContentHeight / startConfig.waterBending.pixel.size
+        startConfig.waterBend.pixel.per.column = math.floor(
+            display.actualContentHeight / startConfig.waterBend.pixel.size
         )
-        startConfig.waterBending.radius.bendingPX = math.floor(
-            startConfig.waterBending.radius.px / startConfig.waterBending.pixel.size
+        startConfig.waterBend.radius.bendingPX = math.floor(
+            startConfig.waterBend.radius.px / startConfig.waterBend.pixel.size
         )
 
         startConfig.fireBend.pixel.size = math.floor(

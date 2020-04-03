@@ -8,7 +8,7 @@ local json = require( "json" )
 local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
 local Water = require( "scene.bending.water" )
-local WaterBending = require( "scene.bending.waterBend" )
+local waterBend = require( "scene.bending.waterBend" )
 local Fire = require( "scene.bending.fire" )
 local FireBending = require( "scene.bending.fireBend" )
 local FilterParticleSystem = require( "scene.game.lib.filterParticleSystem" )
@@ -168,9 +168,9 @@ function scene:create( event )
 	end
 
 	if config.bendingMode == 'water' then
-		-- Allow waterBending
-		waterBending = WaterBending.new( display, water, hero )
-		waterBending.drawGrid(waterBending)
+		-- Allow waterBend
+		waterBend = waterBend.new( display, water, hero )
+		waterBend.drawGrid(waterBend)
 	elseif config.bendingMode == 'fire' then
 		fire = Fire.new( display, physics )
 		-- Allow fireBending
@@ -235,7 +235,7 @@ function scene:destroy( event )
 		halfHeight = (display.actualContentHeight + 500)*2
 	}
 
-	waterBending:destroy()
+	waterBend:destroy()
 	water:destroy()
 	filterParticleSystem.particleSystem:destroyParticles(fullScreen)
 

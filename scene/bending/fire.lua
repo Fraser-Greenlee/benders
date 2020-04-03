@@ -37,9 +37,9 @@ function M.new( display, physics )
         ]]
         tempRatio = math.max(math.min(tempRatio + math.random(-5, 5)/10, 1), 0)
         return {
-            (223 + (254 - 223) * tempRatio)/255,
+            (223 + (255 - 223) * tempRatio)/255,
             (104 + (247 - 104) * tempRatio)/255,
-            (42 + (93 - 42) * tempRatio)/255,
+            (42 +  (93 - 42) * tempRatio)/255,
             1
         }
     end
