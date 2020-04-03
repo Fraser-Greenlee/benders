@@ -30,12 +30,6 @@ function M.new( display, water, hero )
     end
     
     local function staticDeltaV(XorY)
-        --[[
-            TODO
-            - gradually ramp up deltaV until at 80% bending radius
-            - then gradually decrease till last 10% radius
-            - put 0 force there
-        ]]
         local bendingCoeff = ( (XorY / self.bendingRadius) )
         return - self.config.power * bendingCoeff
     end
@@ -123,10 +117,10 @@ function M.new( display, water, hero )
                     local ageRatio = 1 - (age / self.config.maxAge)
 
                     local hits = self.particleSystem:queryRegion(
-                        pixel.x - self.config.pixel.size/2 + self.pixelOffsetX,
-                        pixel.y - self.config.pixel.size/2 + self.pixelOffsetY,
-                        pixel.x + self.config.pixel.size/2 + self.pixelOffsetX,
-                        pixel.y + self.config.pixel.size/2 + self.pixelOffsetY,
+                        -self.cameraOffset.x + pixel.x - self.config.pixel.size/2 + self.pixelOffsetX,
+                        -self.cameraOffset.y + pixel.y - self.config.pixel.size/2 + self.pixelOffsetY,
+                        -self.cameraOffset.x + pixel.x + self.config.pixel.size/2 + self.pixelOffsetX,
+                        -self.cameraOffset.y + pixel.y + self.config.pixel.size/2 + self.pixelOffsetY,
                         { deltaVelocityX=pixel.deltaVX * ageRatio * self.hasCharge, deltaVelocityY=pixel.deltaVY * ageRatio * self.hasCharge }
                     )
 
@@ -144,6 +138,7 @@ function M.new( display, water, hero )
     end
 
     -- attributes for tracking cursor movement
+    self.cameraOffset = {x=0, y=0}
     self.previousTime = 0
     self.previousX = 0
     self.previousY = 0
@@ -185,8 +180,8 @@ function M.new( display, water, hero )
         self.bendingCircle.x = self.touchX
         self.bendingCircle.y = self.touchY
 
-        local heroDistX = self.bendingCircle.x - self.hero.x
-        local heroDistY = self.bendingCircle.y - self.hero.y
+        local heroDistX = self.bendingCircle.x - self.hero.x - self.cameraOffset.x
+        local heroDistY = self.bendingCircle.y - self.hero.y - self.cameraOffset.y
         local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
         if heroDistance <= self.config.distancePower.max then
             self.bendingRadius = self.config.radius.px

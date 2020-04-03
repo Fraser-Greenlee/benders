@@ -183,21 +183,15 @@ end
 
 -- Function to scroll the map
 local function enterFrame( event )
-
-	local elapsed = event.time
-
 	-- Easy way to scroll a map based on a character
-	[[--
 	if hero and hero.x and hero.y and not hero.isDead then
-		local x, y = hero:localToContent( 0, 0 )
-		x, y = display.contentCenterX - x, display.contentCenterY - y
+		local x, y = hero:localToContent( -400, -400 )
+		x = display.contentCenterX - x
+		y = display.contentCenterY - y
 		map.x, map.y = map.x + x, map.y + y
-		-- Easy parallax
-		if parallax then
-			parallax.x, parallax.y = map.x / 6, map.y / 8  -- Affects x more than y
-		end
+		water.particleSystem.x, water.particleSystem.y = water.particleSystem.x + x, water.particleSystem.y + y
+		waterBend.cameraOffset.x, waterBend.cameraOffset.y = waterBend.cameraOffset.x + x, waterBend.cameraOffset.y + y
 	end
-	]]
 end
 
 -- This function is called when scene comes fully on screen
@@ -206,7 +200,9 @@ function scene:show( event )
 	local phase = event.phase
 	if ( phase == "will" ) then
 		fx.fadeIn()	-- Fade up from black
-		-- Runtime:addEventListener( "enterFrame", enterFrame )
+		if config.cameraTracking then
+			Runtime:addEventListener( "enterFrame", enterFrame )
+		end
 	elseif ( phase == "did" ) then
 		-- Start playing wind sound
 		-- For more details on options to play a pre-loaded sound, see the Audio Usage/Functions guide:
@@ -222,7 +218,7 @@ function scene:hide( event )
 	if ( phase == "will" ) then
 		audio.fadeOut( { time = 1000 } )
 	elseif ( phase == "did" ) then
-		-- Runtime:removeEventListener( "enterFrame", enterFrame )
+		Runtime:removeEventListener( "enterFrame", enterFrame )
 	end
 end
 

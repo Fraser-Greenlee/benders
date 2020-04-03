@@ -272,7 +272,8 @@ local startConfig = {
     },
     game = {
         debugPhysics = false,
-        bendingMode = 'water'
+        bendingMode = 'fire',
+        cameraTracking = false
     }
 }
 
