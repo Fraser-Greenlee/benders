@@ -82,7 +82,7 @@ function M.new( display, fire, hero )
     end
 
     function self:run(eventTime, globalX, globalY, playerVX, playerVY)
-        centreX, centreY = bendingPixelXY(globalX, globalY)
+        local centreX, centreY = bendingPixelXY(globalX, globalY)
         for y = centreY - self.bendingRadius, centreY + self.bendingRadius do
             for x = centreX - self.bendingRadius, centreX + self.bendingRadius do
     
@@ -153,6 +153,7 @@ function M.new( display, fire, hero )
     self.previousY = 0
     self.SpreviousX = 0
     self.SpreviousY = 0
+    self.SpreviousTime = 0
     self.touchX = 0
     self.touchY = 0
     self.velocityX = 0
@@ -177,7 +178,6 @@ function M.new( display, fire, hero )
     self.bendTimer = 0
     self.ranRestart = false -- if player holds touch while level is restarted the event times will be off, use this to reset it
     self.stepsSinceLastParticleMade = 0
-    self.minStepsPerParticle = 0 -- self.config.minStepsPerParticleMax
 
     function self:timer(event)
         self.touchX = self.lastTouchEvent.x
@@ -204,8 +204,8 @@ function M.new( display, fire, hero )
     end
 
     function self:makeParticle(event)
-        touchX = event.x
-        touchY = event.y
+        local touchX = event.x
+        local touchY = event.y
 
         local heroDistX = touchX - self.hero.x
         local heroDistY = touchY - self.hero.y
@@ -219,34 +219,32 @@ function M.new( display, fire, hero )
         local positionDeltaX = touchX - self.SpreviousX
         local positionDeltaY = touchY - self.SpreviousY
         local positionDistance = math.sqrt(positionDeltaX^2 + positionDeltaY^2)
-        if positionDistance < 40 then
+        if positionDistance < 80 then
+            print('too close')
             return nil
         end
-        velocityX = ( positionDeltaX / self.timeDelta )
-        velocityY = ( positionDeltaY / self.timeDelta )
+        local timeDelta = ( event.time / 1000 ) - self.SpreviousTime
+        local velocityX = ( positionDeltaX / timeDelta )
+        local velocityY = ( positionDeltaY / timeDelta )
 
         local touchVelocity = math.sqrt((velocityX * velocityX) + (velocityY * velocityY))
-        if touchVelocity < 1 then
-            print('too slow')
+        if touchVelocity < self.config.minPlayerVelocity then
+            print('too slow', touchVelocity, timeDelta)
             return nil
         end
 
         local touchVelocityRatio = math.min(touchVelocity, self.config.maxPlayerVelocity) / self.config.maxPlayerVelocity
         local invHeroDist = 1 - ( heroDistance / self.config.distancePower.max )
         local tempRatio = 0.3 * invHeroDist + 0.7 * touchVelocityRatio
-        -- self.minStepsPerParticle = (1 - tempRatio) * self.config.minStepsPerParticleMax
 
-        if self.stepsSinceLastParticleMade >= self.minStepsPerParticle then
-            self.fire:makeParticleGroup( touchX, touchY, velocityX, velocityY, tempRatio, positionDistance )
-            self.bendingCharge = self.bendingCharge - 10 * tempRatio
-            self.stepsSinceLastParticleMade = 0
+        self.fire:makeParticleGroup( touchX, touchY, velocityX, velocityY, tempRatio, positionDistance )
+        self.bendingCharge = self.bendingCharge - 10 * tempRatio
+        self.stepsSinceLastParticleMade = 0
 
-            -- passed nil
-            self.SpreviousX = touchX
-            self.SpreviousY = touchY
-        else
-            self.stepsSinceLastParticleMade = self.stepsSinceLastParticleMade + 1
-        end
+        -- passed nil
+        self.SpreviousX = touchX
+        self.SpreviousY = touchY
+        self.SpreviousTime = event.time / 1000
     end
 
     function self:touch(event)
@@ -259,6 +257,7 @@ function M.new( display, fire, hero )
 
                 self.SpreviousX = event.x
                 self.SpreviousY = event.y
+                self.SpreviousTime = event.time / 1000
             else
                 self:makeParticle(event)
             end
