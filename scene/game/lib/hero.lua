@@ -33,48 +33,15 @@ function M.new( instance, options )
 	instance.x,instance.y = x, y
 	instance:setSequence( "idle" )
 
-	-- Add physics
-	if (config.body == 'hollow') then
-		physics.addBody( instance, "dynamic",
-			{
-				density = 1.3,
-				bounce = 0.0,
-				friction = 0.2,
-				filter = playerFilter,
-				shape = { 
-					0-90,0+10, 0-90,37+10, 38-90,62+10, 38-90,-10+10
-				}
-			},
-			{
-				density = 1.3,
-				bounce = 0.0,
-				friction = 0.2,
-				filter = playerFilter,
-				shape = { 
-					160-90,62+10, 201-90,37+10, 201-90,1+10, 160-90,-10+10
-				}
-			},
-			{
-				density = 1.3,
-				bounce = 0.0,
-				friction = 0.2,
-				filter = playerFilter,
-				shape = { 
-					38-90,10+10,  160-90,10+10, 160-90,-10+10, 38-90,-10+10
-				}
-			}
-		)
-	elseif (config.body == 'circle') then
-		physics.addBody( instance, "dynamic",
-			{
-				density = 1.2,
-				bounce = 0.0,
-				friction = 0.2,
-				filter = playerFilter,
-				radius = 70
-			}
-		)
-	end
+	physics.addBody( instance, "dynamic",
+		{
+			density = 1.2,
+			bounce = 0.0,
+			friction = 0.2,
+			filter = playerFilter,
+			shape={ 0,-150, 120,-100, 80,130, -80,130, -120,-100 }
+		}
+	)
 	instance.isFixedRotation = true
 	instance.anchorY = config.anchorY
 	instance.anchorX = config.anchorX
@@ -165,6 +132,7 @@ function M.new( instance, options )
 					instance:die()
 				end
 			end
+			self.jumping = false
 		end
 	end
 
@@ -180,6 +148,22 @@ function M.new( instance, options )
 		end
 	end
 
+	local function enterFrame()
+		-- Do this every frame
+		local vx, vy = instance:getLinearVelocity()
+		local dx = left + right
+		-- if instance.jumping then dx = dx / 2 end
+		local dy = 0
+		-- if instance.jumping then dy = -5 end
+		if (dx == 0 and instance.jumping) then
+			instance:applyForce( -3*vx, dy, instance.x, instance.y )
+		elseif ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
+			instance:applyForce( dx or 0, dy, instance.x, instance.y )
+		end
+		-- Turn around
+		instance.xScale = math.min( 1, flip )
+	end
+
 	function instance:finalize()
 		-- On remove, cleanup instance, or call directly for non-visual
 		instance:removeEventListener( "preCollision" )
@@ -189,6 +173,8 @@ function M.new( instance, options )
 
 	-- Add a finalize listener (for display objects only, comment out for non-visual)
 	instance:addEventListener( "finalize" )
+
+	Runtime:addEventListener( "enterFrame", enterFrame )
 
 	-- Add our key/joystick listeners
 	Runtime:addEventListener( "key", key )

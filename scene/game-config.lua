@@ -93,7 +93,7 @@ local startConfig = {
             filename = "scene/bending/img/water_droplet.png",
             radius = 30,
             imageRadius=32,
-            density=1,
+            density=2,
             gravityScale=-0.5,
             pressureStrength=0.1,
             surfaceTensionPressureStrength=0.2,
@@ -192,9 +192,8 @@ local startConfig = {
         },
     },
     hero = {
-        body = 'hollow',
         floatGravity = 0.5,
-        jumpForce = -480,
+        jumpForce = -2000,
         anchorY = 0.56,
         anchorX = 0.45,
         walkAcceleration = 1000,
@@ -271,7 +270,7 @@ local startConfig = {
         }
     },
     game = {
-        debugPhysics = false,
+        debugPhysics = true,
         bendingMode = 'fire',
         cameraTracking = false
     }

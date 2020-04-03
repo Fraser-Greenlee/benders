@@ -21,66 +21,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":400,
-                 "x":1360,
+                 "width":3200,
+                 "x":0,
                  "y":1840
-                }, 
-                {
-                 "height":160,
-                 "id":946,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":80,
-                 "x":1280,
-                 "y":1680
-                }, 
-                {
-                 "height":160,
-                 "id":947,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":80,
-                 "x":1760,
-                 "y":1680
-                }, 
-                {
-                 "height":80,
-                 "id":948,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":400,
-                 "x":1360,
-                 "y":1600
                 }],
          "opacity":1,
          "type":"objectgroup",
