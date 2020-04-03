@@ -51,13 +51,13 @@ local startConfig = {
             }
         },
         radius = {
-            px = 8
+            px = 6
         },
         farRadius = 1,
         boxes = {},
         renderDelay = 1,
         staticDelay = 1,
-        power = 180,
+        power = 240,
         maxAge = 1,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
