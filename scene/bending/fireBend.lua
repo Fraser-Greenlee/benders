@@ -219,7 +219,7 @@ function M.new( display, fire, hero )
         local positionDeltaX = touchX - self.SpreviousX
         local positionDeltaY = touchY - self.SpreviousY
         local positionDistance = math.sqrt(positionDeltaX^2 + positionDeltaY^2)
-        if positionDistance < 80 then
+        if positionDistance < 90 then
             print('too close')
             return nil
         end

@@ -51,7 +51,7 @@ local startConfig = {
             }
         },
         radius = {
-            px = 6
+            px = 10
         },
         farRadius = 1,
         boxes = {},
@@ -87,12 +87,12 @@ local startConfig = {
         debugPrint = false
     },
     fire = {
-        maxLifetime = 10,
+        maxLifetime = 3,
         maxRadius = 100,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
-            radius = 17,
-            imageRadius=19,
+            radius = 30,
+            imageRadius=32,
             density=1,
             gravityScale=-0.5,
             pressureStrength=0.1,
