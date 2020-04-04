@@ -91,8 +91,8 @@ local startConfig = {
         maxRadius = 100,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
-            radius = 30,
-            imageRadius=32,
+            radius = 20,
+            imageRadius=25,
             density=2,
             gravityScale=-0.5,
             pressureStrength=0.1,
@@ -270,7 +270,7 @@ local startConfig = {
         }
     },
     game = {
-        debugPhysics = true,
+        debugPhysics = false,
         bendingMode = 'fire',
         cameraTracking = false
     }
