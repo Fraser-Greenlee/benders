@@ -87,7 +87,7 @@ local startConfig = {
         debugPrint = false
     },
     fire = {
-        maxLifetime = 3,
+        maxLifetime = 3*100,
         maxRadius = 100,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",

@@ -81,7 +81,8 @@ function M.new( display, fire, hero )
         end
     end
 
-    function self:run(eventTime, globalX, globalY, playerVX, playerVY)
+    function self:run(eventTime, globalX, globalY, playerVX, playerVY, isThrow)
+        print(isThrow)
         local centreX, centreY = bendingPixelXY(globalX, globalY)
         for y = centreY - self.bendingRadius, centreY + self.bendingRadius do
             for x = centreX - self.bendingRadius, centreX + self.bendingRadius do
@@ -91,19 +92,29 @@ function M.new( display, fire, hero )
                 local distance = math.sqrt(relX*relX + relY*relY)
     
                 if distance <= self.bendingRadius then
-                    local pixel = self.config.boxes[tostring(x) .. ',' .. tostring(y)]
-                    if pixel == nil then
-                        pixel = {}
+                    local dontSkip = true
+                    if isThrow then
+                        local dotProduct = relX*playerVX + relY*playerVY
+                        if dotProduct < 0 then
+                            dontSkip = false
+                        end
                     end
-                    pixel.deltaVX = setDeltaV(relX, playerVX)
-                    pixel.deltaVY = setDeltaV(relY, playerVY)
 
-                    pixel.x = x * self.config.pixel.size
-                    pixel.y = y * self.config.pixel.size + self.config.pixel.start.y
-                    pixel.madeAt = eventTime
-                    self.config.boxes[tostring(x) .. ',' .. tostring(y)] = pixel
+                    if dontSkip then
+                        local pixel = self.config.boxes[tostring(x) .. ',' .. tostring(y)]
+                        if pixel == nil then
+                            pixel = {}
+                        end
+                        pixel.deltaVX = setDeltaV(relX, playerVX)
+                        pixel.deltaVY = setDeltaV(relY, playerVY)
 
-                    showDebug(pixel)
+                        pixel.x = x * self.config.pixel.size
+                        pixel.y = y * self.config.pixel.size + self.config.pixel.start.y
+                        pixel.madeAt = eventTime
+                        self.config.boxes[tostring(x) .. ',' .. tostring(y)] = pixel
+
+                        showDebug(pixel)
+                    end
                 end
             end
         end
@@ -200,7 +211,8 @@ function M.new( display, fire, hero )
             self.bendingCircle.alpha = 0.05 + 0.3 * self.bendingCharge/self.config.charge.max
         end
 
-        self.run( self, event.time, self.touchX, self.touchY, self.velocityX, self.velocityY )
+        local touchVelocity = math.sqrt((self.velocityX * self.velocityX) + (self.velocityY * self.velocityY))
+        self.run( self, event.time, self.touchX, self.touchY, self.velocityX, self.velocityY, touchVelocity > 4 )
     end
 
     function self:makeParticle(event)
@@ -212,7 +224,7 @@ function M.new( display, fire, hero )
         local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
 
         if heroDistance >= self.config.makeParticleMaxDistance then
-            print('too far from player')
+            -- print('too far from player')
             return nil
         end
 
@@ -220,7 +232,7 @@ function M.new( display, fire, hero )
         local positionDeltaY = touchY - self.SpreviousY
         local positionDistance = math.sqrt(positionDeltaX^2 + positionDeltaY^2)
         if positionDistance < 90 then
-            print('too close')
+            -- print('too close')
             return nil
         end
         local timeDelta = ( event.time / 1000 ) - self.SpreviousTime
@@ -229,7 +241,7 @@ function M.new( display, fire, hero )
 
         local touchVelocity = math.sqrt((velocityX * velocityX) + (velocityY * velocityY))
         if touchVelocity < self.config.minPlayerVelocity then
-            print('too slow', touchVelocity, timeDelta)
+            -- print('too slow', touchVelocity, timeDelta)
             return nil
         end
 

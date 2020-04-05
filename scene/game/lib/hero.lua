@@ -55,11 +55,11 @@ function M.new( instance, options )
 		local name = event.keyName
 		if ( phase == lastEvent.phase ) and ( name == lastEvent.keyName ) then return false end  -- Filter repeating keys
 		if phase == "down" then
-			if "left" == name or "a" == name then
+			if instance.jumping == false and ("left" == name or "a" == name) then
 				left = -config.walkAcceleration
 				flip = -1
 			end
-			if "right" == name or "d" == name then
+			if instance.jumping == false and ("right" == name or "d" == name) then
 				right = config.walkAcceleration
 				flip = 1
 			elseif "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
