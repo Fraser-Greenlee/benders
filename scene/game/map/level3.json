@@ -12,11 +12,15 @@
                  "name":"",
                  "properties":
                     {
-                     "bodyType":"static"
+                     "bodyType":"static",
+                     "floating":"true",
+                     "friction":"0.2"
                     },
                  "propertytypes":
                     {
-                     "bodyType":"string"
+                     "bodyType":"string",
+                     "floating":"string",
+                     "friction":"string"
                     },
                  "rotation":0,
                  "type":"",

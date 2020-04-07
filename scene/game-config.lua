@@ -75,6 +75,7 @@ local startConfig = {
             max = 1250,
         },
         makeParticleMaxDistance = 600,
+        makeParticleMinDistance = 150,
         heroPull = 5,
         heroPullDist = 300,
 
@@ -87,7 +88,7 @@ local startConfig = {
         debugPrint = false
     },
     fire = {
-        maxLifetime = 3*100,
+        maxLifetime = 10,
         maxRadius = 100,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
@@ -270,7 +271,7 @@ local startConfig = {
         }
     },
     game = {
-        debugPhysics = false,
+        debugPhysics = true,
         bendingMode = 'fire',
         cameraTracking = false
     }

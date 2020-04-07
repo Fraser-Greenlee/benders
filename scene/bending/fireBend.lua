@@ -223,7 +223,7 @@ function M.new( display, fire, hero )
         local heroDistY = touchY - self.hero.y
         local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
 
-        if heroDistance >= self.config.makeParticleMaxDistance then
+        if heroDistance >= self.config.makeParticleMaxDistance or heroDistance <= self.config.makeParticleMinDistance then
             -- print('too far from player')
             return nil
         end

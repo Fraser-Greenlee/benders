@@ -35,9 +35,9 @@ function M.new( instance, options )
 
 	physics.addBody( instance, "dynamic",
 		{
-			density = 1.2,
+			density = 1.0,
 			bounce = 0.0,
-			friction = 0.2,
+			friction = 0.6,
 			filter = playerFilter,
 			shape={ 0,-150, 120,-100, 80,130, -80,130, -120,-100 }
 		}
@@ -153,12 +153,8 @@ function M.new( instance, options )
 		local vx, vy = instance:getLinearVelocity()
 		local dx = left + right
 		-- if instance.jumping then dx = dx / 2 end
-		local dy = 0
-		-- if instance.jumping then dy = -5 end
-		if (dx == 0 and instance.jumping) then
-			instance:applyForce( -3*vx, dy, instance.x, instance.y )
-		elseif ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
-			instance:applyForce( dx or 0, dy, instance.x, instance.y )
+		if ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
+			instance:applyForce( 2 * dx or 0, 0, instance.x, instance.y )
 		end
 		-- Turn around
 		instance.xScale = math.min( 1, flip )
