@@ -88,7 +88,7 @@ local startConfig = {
         debugPrint = false
     },
     fire = {
-        maxLifetime = 10,
+        maxLifetime = 7.5,
         maxRadius = 100,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
@@ -194,7 +194,7 @@ local startConfig = {
     },
     hero = {
         floatGravity = 0.5,
-        jumpForce = -2000,
+        jumpForce = -1500,
         anchorY = 0.56,
         anchorX = 0.45,
         walkAcceleration = 1000,

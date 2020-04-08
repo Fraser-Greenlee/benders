@@ -122,14 +122,27 @@ function M.new( instance, options )
 
 	function instance:collision( event )
 		local phase = event.phase
+		local other = event.other
+		local y1, y2 = self.y + 50, other.y - ( other.type == "enemy" and 25 or other.height/2 )
+		local vx, vy = self:getLinearVelocity()
 		if phase == "began" then
-			if not self.isDead and ( event.other.type == "cannon-ball" ) then
+			if not self.isDead and ( other.type == "cannon-ball" ) then
 				local heroVx, heroVy = self:getLinearVelocity()
-				local otherVx, otherVy = event.other:getLinearVelocity()
+				local otherVx, otherVy = other:getLinearVelocity()
 				local collisionSpeed = math.sqrt(heroVx*heroVy + otherVx*otherVy)
 				-- cannon ball kills player on first hit
 				if collisionSpeed > 100 then
 					instance:die()
+				end
+			elseif self.jumping and vy > 0 and not self.isDead then
+				-- Landed after jumping
+				instance:jumpFloatEnd()
+				self.jumping = false
+				if not ( left == 0 and right == 0 ) and not instance.jumping then
+					instance:setSequence( "walk" )
+					instance:play()
+				else
+					self:setSequence( "idle" )
 				end
 			end
 			self.jumping = false
@@ -153,8 +166,10 @@ function M.new( instance, options )
 		local vx, vy = instance:getLinearVelocity()
 		local dx = left + right
 		-- if instance.jumping then dx = dx / 2 end
-		if ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
-			instance:applyForce( 2 * dx or 0, 0, instance.x, instance.y )
+		if (dx == 0 and instance.jumping) then
+			instance:applyForce( -3*vx, dy, instance.x, instance.y )
+		elseif ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
+			instance:applyForce( 3 * dx or 0, dy, instance.x, instance.y )
 		end
 		-- Turn around
 		instance.xScale = math.min( 1, flip )
