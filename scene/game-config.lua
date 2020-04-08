@@ -51,7 +51,7 @@ local startConfig = {
             }
         },
         radius = {
-            px = 10
+            px = 5 -- 2.5
         },
         farRadius = 1,
         boxes = {},
