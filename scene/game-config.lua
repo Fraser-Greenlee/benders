@@ -51,7 +51,7 @@ local startConfig = {
             }
         },
         radius = {
-            px = 5 -- 2.5
+            px = 5
         },
         farRadius = 1,
         boxes = {},
@@ -64,7 +64,7 @@ local startConfig = {
         charge = {
             max = 100,
             min = 0,
-            lossPerParticle = 0.015,
+            lossPerParticle = 0.0,
             rechargePerRender = 6,
             indicator = {
                 width = 200,
@@ -74,7 +74,7 @@ local startConfig = {
         distancePower = {
             max = 1250,
         },
-        makeParticleMaxDistance = 600,
+        makeParticleMaxDistance = 1200,
         makeParticleMinDistance = 150,
         heroPull = 5,
         heroPullDist = 300,

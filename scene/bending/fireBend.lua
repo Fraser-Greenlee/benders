@@ -218,6 +218,9 @@ function M.new( display, fire, hero )
     end
 
     function self:makeParticle(event)
+        if self.bendingCharge < 10 then
+            return nil
+        end
         local touchX = event.x
         local touchY = event.y
 
@@ -225,7 +228,7 @@ function M.new( display, fire, hero )
         local heroDistY = touchY - self.hero.y
         local heroDistance = math.sqrt(heroDistX^2 + heroDistY^2)
 
-        if heroDistance >= self.config.makeParticleMaxDistance or heroDistance <= self.config.makeParticleMinDistance then
+        if  heroDistance >= self.config.makeParticleMaxDistance or heroDistance <= self.config.makeParticleMinDistance then
             -- print('too far from player')
             return nil
         end
@@ -253,7 +256,7 @@ function M.new( display, fire, hero )
         local tempRatio = 0.2 * invHeroDist + 0.8 * touchVelocityRatio
 
         self.fire:makeParticleGroup( touchX, touchY, velocityX, velocityY, tempRatio, positionDistance )
-        self.bendingCharge = self.bendingCharge - 10 * tempRatio
+        self.bendingCharge = self.bendingCharge - 15 * tempRatio
         self.stepsSinceLastParticleMade = 0
 
         self.makeParticlePreviousX = touchX
