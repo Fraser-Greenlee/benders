@@ -18,8 +18,8 @@ function M.new( display, fire, hero )
     self.hero = hero
 
     local function bendingPixelXY(x, y)
-        x = x
-        y = y - self.config.pixel.start.y
+        local x = x
+        local y = y - self.config.pixel.start.y
         local pixelX = math.round(x / self.config.pixel.size)
         local pixelY = math.round(y / self.config.pixel.size)
 
@@ -68,8 +68,8 @@ function M.new( display, fire, hero )
             for x=0, self.config.pixel.per.row do
                 local bendingPixel = self.display.newRect(
                     self.displayGroup,
-                    x*self.config.pixel.size + self.config.pixel.start.x,
-                    y*self.config.pixel.size + self.config.pixel.start.y,
+                    x * self.config.pixel.size + self.config.pixel.start.x,
+                    y * self.config.pixel.size + self.config.pixel.start.y,
                     self.config.pixel.size,
                     self.config.pixel.size
                 )
@@ -82,7 +82,6 @@ function M.new( display, fire, hero )
     end
 
     function self:run(eventTime, globalX, globalY, playerVX, playerVY, isThrow)
-        print(isThrow)
         local centreX, centreY = bendingPixelXY(globalX, globalY)
         for y = centreY - self.bendingRadius, centreY + self.bendingRadius do
             for x = centreX - self.bendingRadius, centreX + self.bendingRadius do
@@ -92,15 +91,15 @@ function M.new( display, fire, hero )
                 local distance = math.sqrt(relX*relX + relY*relY)
     
                 if distance <= self.bendingRadius then
-                    local dontSkip = true
+                    local skip = false
                     if isThrow then
                         local dotProduct = relX*playerVX + relY*playerVY
-                        if dotProduct < 0 then
-                            dontSkip = false
+                        if dotProduct > 0 then
+                            skip = true
                         end
                     end
 
-                    if dontSkip then
+                    if skip == false then
                         local pixel = self.config.boxes[tostring(x) .. ',' .. tostring(y)]
                         if pixel == nil then
                             pixel = {}
@@ -152,8 +151,11 @@ function M.new( display, fire, hero )
             end
         end
         self.bendingCharge = self.bendingCharge - particlesTouched * self.config.charge.lossPerParticle
-        if particlesTouched == 0 and self.bendingCharge < self.config.charge.max then
+        if particlesTouched == 0 and self.bendingCharge < self.config.charge.max and self.hero.jumping == false then
             self.bendingCharge = self.bendingCharge + self.config.charge.rechargePerRender
+        end
+        if self.bendingCharge < 0 then
+            self.bendingCharge = 0
         end
         self.bendingChargeIndicator.path.width = self.config.charge.indicator.width * self.bendingCharge/self.config.charge.max
     end
@@ -162,9 +164,9 @@ function M.new( display, fire, hero )
     self.previousTime = 0
     self.previousX = 0
     self.previousY = 0
-    self.SpreviousX = 0
-    self.SpreviousY = 0
-    self.SpreviousTime = 0
+    self.makeParticlePreviousX = 0
+    self.makeParticlePreviousY = 0
+    self.makeParticlePreviousTime = 0
     self.touchX = 0
     self.touchY = 0
     self.velocityX = 0
@@ -228,14 +230,14 @@ function M.new( display, fire, hero )
             return nil
         end
 
-        local positionDeltaX = touchX - self.SpreviousX
-        local positionDeltaY = touchY - self.SpreviousY
+        local positionDeltaX = touchX - self.makeParticlePreviousX
+        local positionDeltaY = touchY - self.makeParticlePreviousY
         local positionDistance = math.sqrt(positionDeltaX^2 + positionDeltaY^2)
         if positionDistance < 90 then
             -- print('too close')
             return nil
         end
-        local timeDelta = ( event.time / 1000 ) - self.SpreviousTime
+        local timeDelta = ( event.time / 1000 ) - self.makeParticlePreviousTime
         local velocityX = ( positionDeltaX / timeDelta )
         local velocityY = ( positionDeltaY / timeDelta )
 
@@ -246,17 +248,17 @@ function M.new( display, fire, hero )
         end
 
         local touchVelocityRatio = math.min(touchVelocity, self.config.maxPlayerVelocity) / self.config.maxPlayerVelocity
-        local invHeroDist = 1 - ( heroDistance / self.config.distancePower.max )
-        local tempRatio = 0.3 * invHeroDist + 0.7 * touchVelocityRatio
+        local maxPlayerRadius = 150
+        local invHeroDist = 1 - ( (heroDistance - maxPlayerRadius) / (self.config.distancePower.max - maxPlayerRadius) )
+        local tempRatio = 0.2 * invHeroDist + 0.8 * touchVelocityRatio
 
         self.fire:makeParticleGroup( touchX, touchY, velocityX, velocityY, tempRatio, positionDistance )
         self.bendingCharge = self.bendingCharge - 10 * tempRatio
         self.stepsSinceLastParticleMade = 0
 
-        -- passed nil
-        self.SpreviousX = touchX
-        self.SpreviousY = touchY
-        self.SpreviousTime = event.time / 1000
+        self.makeParticlePreviousX = touchX
+        self.makeParticlePreviousY = touchY
+        self.makeParticlePreviousTime = event.time / 1000
     end
 
     function self:touch(event)
@@ -264,23 +266,27 @@ function M.new( display, fire, hero )
         if self.timeDelta > 0 then
             self.lastTouchEvent = event
             if ( "began" == event.phase ) then
-                self.bendTimer = timer.performWithDelay( 10, self, -1 )
+                self.bendTimer = timer.performWithDelay( 1, self, -1 )
                 self.ranRestart = false
 
-                self.SpreviousX = event.x
-                self.SpreviousY = event.y
-                self.SpreviousTime = event.time / 1000
+                self.makeParticlePreviousX = event.x
+                self.makeParticlePreviousY = event.y
+                self.makeParticlePreviousTime = event.time / 1000
             else
                 self:makeParticle(event)
             end
             if self.ranRestart == true then
                 self.previousTime = event.time
+                self.makeParticlePreviousX = event.x
+                self.makeParticlePreviousY = event.y
+                self.makeParticlePreviousTime = event.time / 1000
             end
         end
         if ( "ended" == event.phase or "cancelled" == event.phase ) and type(self.bendTimer) ~= 'number' then
             timer.cancel(self.bendTimer)
             self.bendingCircle.alpha = 0.0
             self.previousTime = 0
+            self.pixelOffsetX, self.pixelOffsetY = 0, 0
         end
         return true
     end

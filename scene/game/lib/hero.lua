@@ -55,11 +55,11 @@ function M.new( instance, options )
 		local name = event.keyName
 		if ( phase == lastEvent.phase ) and ( name == lastEvent.keyName ) then return false end  -- Filter repeating keys
 		if phase == "down" then
-			if instance.jumping == false and ("left" == name or "a" == name) then
+			if ("left" == name or "a" == name) then
 				left = -config.walkAcceleration
 				flip = -1
 			end
-			if instance.jumping == false and ("right" == name or "d" == name) then
+			if ("right" == name or "d" == name) then
 				right = config.walkAcceleration
 				flip = 1
 			elseif "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
@@ -167,9 +167,9 @@ function M.new( instance, options )
 		local dx = left + right
 		-- if instance.jumping then dx = dx / 2 end
 		if (dx == 0 and instance.jumping) then
-			instance:applyForce( -3*vx, dy, instance.x, instance.y )
+			instance:applyForce( 0, 0, instance.x, instance.y )
 		elseif ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
-			instance:applyForce( 3 * dx or 0, dy, instance.x, instance.y )
+			instance:applyForce( 3 * dx or 0, 0, instance.x, instance.y )
 		end
 		-- Turn around
 		instance.xScale = math.min( 1, flip )

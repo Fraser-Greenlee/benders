@@ -57,8 +57,8 @@ local startConfig = {
         boxes = {},
         renderDelay = 10,
         staticDelay = 1,
-        power = 240,
-        maxAge = 1,
+        power = 140,
+        maxAge = 3,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
         charge = {
@@ -79,7 +79,7 @@ local startConfig = {
         heroPull = 5,
         heroPullDist = 300,
 
-        maxPlayerVelocity = 1000,
+        maxPlayerVelocity = 5000,
         minPlayerVelocity = 40,
         minStepsPerParticleMax = 10,
 
@@ -88,7 +88,7 @@ local startConfig = {
         debugPrint = false
     },
     fire = {
-        maxLifetime = 7.5,
+        maxLifetime = 5,
         maxRadius = 100,
         particleSystem = {
             filename = "scene/bending/img/water_droplet.png",
@@ -271,7 +271,7 @@ local startConfig = {
         }
     },
     game = {
-        debugPhysics = true,
+        debugPhysics = false,
         bendingMode = 'fire',
         cameraTracking = false
     }
