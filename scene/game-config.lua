@@ -62,9 +62,9 @@ local startConfig = {
         playerVstatic = 0.2,
         playerVmultiplier = 0,
         charge = {
-            max = 100,
-            min = 0,
-            lossPerParticle = 0.0,
+            max = 1000,
+            min = 100,
+            lossPerParticle = 0.01,
             rechargePerRender = 6,
             indicator = {
                 width = 200,
@@ -74,9 +74,9 @@ local startConfig = {
         distancePower = {
             max = 1250,
         },
-        makeParticleMaxDistance = 1200,
+        makeParticleMaxDistance = 600,
         makeParticleMinDistance = 150,
-        heroPull = 5,
+        heroPull = 0,
         heroPullDist = 300,
 
         maxPlayerVelocity = 5000,

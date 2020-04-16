@@ -123,9 +123,9 @@ function M.new( display, fire, hero )
 
     function self:render()
         local particlesTouched = 0
-        if self.bendingCharge <= 0 then
+        if self.bendingCharge <= self.config.charge.min then
             self.hasCharge = 0
-        elseif self.hasCharge == 0 and self.bendingCharge >= self.config.charge.min then
+        elseif self.bendingCharge > self.config.charge.min then
             self.hasCharge = 1
         end
         for coords, pixel in pairs(self.config.boxes) do
@@ -218,7 +218,7 @@ function M.new( display, fire, hero )
     end
 
     function self:makeParticle(event)
-        if self.bendingCharge < 10 then
+        if self.bendingCharge < self.config.charge.min then
             return nil
         end
         local touchX = event.x

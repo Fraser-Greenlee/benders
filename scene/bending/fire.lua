@@ -110,24 +110,6 @@ function M.new( display, physics )
         instance.particleSystem:removeEventListener( "particleCollision" )
     end
 
-    --[[
-    local worldGroup = display.newGroup()
-    -- Initialize snapshot for full screen
-    local snapshot = display.newSnapshot( worldGroup, display.actualContentWidth*2, display.actualContentHeight*2 )
-    local snapshotGroup = snapshot.group
-    snapshot.x = 0
-    snapshot.y = 0
-    snapshot.canvasMode = "discard"
-    snapshot.alpha = 0.8
-    -- Insert the particle system into the snapshot
-    snapshotGroup:insert( instance.particleSystem )
-    -- Update (invalidate) the snapshot each frame
-    local function onEnterFrame( event )
-        snapshot:invalidate()
-    end
-    Runtime:addEventListener( "enterFrame", onEnterFrame )
-    ]]
-
     return instance
 end
 
