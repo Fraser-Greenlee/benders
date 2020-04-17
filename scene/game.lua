@@ -11,6 +11,7 @@ local Water = require( "scene.bending.water" )
 local waterBend = require( "scene.bending.waterBend" )
 local Fire = require( "scene.bending.fire" )
 local FireBending = require( "scene.bending.fireBend" )
+local FireMap = require( "scene.bending.fireMap" )
 local FilterParticleSystem = require( "scene.game.lib.filterParticleSystem" )
 local config = require('scene.game-config').noDisplay.game
 
@@ -176,6 +177,8 @@ function scene:create( event )
 		-- Allow fireBending
 		fireBending = FireBending.new( display, fire, hero )
 		fireBending.drawGrid(fireBending)
+    -- Allow AI fireMap
+    local fireMap = FireMap.new( display, fire )
 	else
 		error("no valid bending mode")
 	end

@@ -64,7 +64,6 @@ function M.new( display, physics )
         -- print(config.fireBlock.color[1], config.fireBlock.color[2], config.fireBlock.color[3], config.fireBlock.color[4])
         config.fireBlock.createGroup.lifetime = config.maxLifetime * tempRatio
         config.fireBlock.createGroup.radius = math.min(60 * tempRatio, 60)
-        print('debug!')
         instance.particleSystem:createGroup( config.fireBlock.createGroup )
     end
 

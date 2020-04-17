@@ -11,7 +11,7 @@ function M.new( display, fire, hero )
 
     self.display = display
     -- Create display group to hold visuals
-	self.displayGroup = display.newGroup()
+    self.displayGroup = display.newGroup()
     self.config = configMaker(self.display).fireBend
     self.fire = fire
     self.particleSystem = fire.particleSystem

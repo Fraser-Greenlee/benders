@@ -87,6 +87,11 @@ local startConfig = {
         debugGrid = false,
         debugPrint = false
     },
+    fireMap = {
+      refreshRate = 2,
+      pixelsPerRow = 15,
+      debug = true
+    },
     fire = {
         maxLifetime = 5,
         maxRadius = 100,
@@ -108,7 +113,7 @@ local startConfig = {
             createGroup = {
                 flags = { "water", "colorMixing", "fixtureContactListener" }
             }
-        },
+        }
     },
     water = {
         particleSystem = {
@@ -298,6 +303,13 @@ return {
         )
         startConfig.fireBend.radius.bendingPX = math.floor(
             startConfig.fireBend.radius.px / startConfig.fireBend.pixel.size
+        )
+
+        startConfig.fireMap.pixelSize = math.floor(
+            display.actualContentWidth / startConfig.fireMap.pixelsPerRow
+        )
+        startConfig.fireMap.pixelsPerCol = math.floor(
+            display.actualContentHeight / startConfig.fireMap.pixelSize
         )
 
         return startConfig
