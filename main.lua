@@ -13,6 +13,9 @@ https://docs.coronalabs.com/guide/system/composer/index.html
 
 --]]
 
+-- use ZeroBrane debugging
+require("mobdebug").start()
+
 -- Include the Composer library
 local composer = require( "composer" )
 
