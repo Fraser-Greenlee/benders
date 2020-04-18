@@ -16,8 +16,8 @@ function M.new( display, fire )
   self.config = configMaker(self.display).fireMap
   self.particleSystem = fire.particleSystem
 
-  self.grid = {}
-  self.predictionGrid = {}
+  self.gridPositions = {}
+  self.gridPositionsPredictions = {}
 
   local function drawQueryLines()
     for y=0, self.config.pixelsPerCol do
@@ -29,21 +29,21 @@ function M.new( display, fire )
 
   local function drawGrid()
     -- graw grid of squares to represent dict grid
-    self.gridCells = {}
+    self.gridPositionsCells = {}
     local cell
   
     for y=0, self.config.pixelsPerCol do
       for x=0, self.config.pixelsPerRow do
         cell = self.display.newRect(self.displayGroup, x * self.config.pixelSize, y * self.config.pixelSize, self.config.pixelSize, self.config.pixelSize)
-        cell:setFillColor( 0, 1, 0, 0 )
-        self.gridCells[tostring(x) .. tostring(y)] = cell
+        cell:setFillColor( 0, 0, 0, 0 )
+        self.gridPositionsCells[tostring(x) .. tostring(y)] = cell
       end
     end
   end
   
   local function updateFillColor(key)
     if self.config.debug then
-      self.gridCells[key]:setFillColor( 0, 1, 0, 0.5 - 0.5*(self.grid[key]/10) )
+      self.gridPositionsCells[key]:setFillColor( 1, 0, 0, 0.5 - 0.5 * (self.gridPositionsPredictions[key]/3)  )
     end
   end
 
@@ -51,15 +51,19 @@ function M.new( display, fire )
     for y=0, self.config.pixelsPerCol do
       for x=0, self.config.pixelsPerRow do
         local key = tostring(x) .. tostring(y)
-        if self.grid[key] ~= 10 then
-          if self.grid[key] then
-            self.grid[key] = self.grid[key] + 1
+        if self.gridPositions[key] ~= 10 then
+          if self.gridPositions[key] then
+            self.gridPositions[key] = self.gridPositions[key] + 1
           else
-            self.grid[key] = 10
+            self.gridPositions[key] = 10
           end
-          updateFillColor(key)
         end
-        self.predictionGrid[key] = 10
+        if self.gridPositionsPredictions[key] then
+          updateFillColor(key)
+          self.gridPositionsPredictions[key] = math.min(3, 1 + self.gridPositionsPredictions[key])
+        else
+          self.gridPositionsPredictions[key] = 3
+        end
       end
     end
   end
@@ -68,7 +72,7 @@ function M.new( display, fire )
     if x < 0 or x > self.config.pixelsPerRow or y < 0 or y > self.config.pixelsPerCol then
       return false
     end
-    return self.grid[tostring(x) .. tostring(y)] < 10
+    return self.gridPositions[tostring(x) .. tostring(y)] < 10
   end
   
   local function subtractCellVal(x, y, subVal)
@@ -76,7 +80,16 @@ function M.new( display, fire )
       return false
     end
     local key = tostring(x) .. tostring(y)
-    self.grid[key] = math.max(self.grid[key] - subVal, 1)
+    self.gridPositions[key] = math.max(self.gridPositions[key] - subVal, 1)
+    updateFillColor(key)
+  end
+
+  local function predictedCellVal(x, y)
+    if x < 0 or x > self.config.pixelsPerRow or y < 0 or y > self.config.pixelsPerCol then
+      return false
+    end
+    local key = tostring(x) .. tostring(y)
+    self.gridPositionsPredictions[key] = 0
     updateFillColor(key)
   end
 
@@ -94,59 +107,41 @@ function M.new( display, fire )
       
           local key = tostring(x) .. tostring(y)
           -- can only be zero if grid cell has already been ran this step
-          if self.grid[key] ~= 0 then
+          if self.gridPositions[key] ~= 0 then
             
-            self.grid[key] = 0
+            self.gridPositions[key] = 0
+            -- self.gridPositionsPredictions[key] = 0
             updateFillColor(key)
             
             -- TODO run adjacency values next frame?
-            
-            local adjVal = 10
-            
+
             if isActiveCell(x-1, y) then
-              print('+ve x')
-              subtractCellVal(x+1, y, adjVal)
+              predictedCellVal(x+1, y)
             end
             if isActiveCell(x-1, y-1) then
-              subtractCellVal(x+1, y+1, adjVal)
+              predictedCellVal(x+1, y+1)
             end
             if isActiveCell(x-1, y+1) then
-              subtractCellVal(x+1, y-1, adjVal)
+              predictedCellVal(x+1, y-1)
             end
 
             if isActiveCell(x+1, y) then
-              subtractCellVal(x-1, y, adjVal)
+              predictedCellVal(x-1, y)
             end
             if isActiveCell(x+1, y-1) then
-              subtractCellVal(x-1, y+1, adjVal)
+              predictedCellVal(x-1, y+1)
             end
             if isActiveCell(x+1, y+1) then
-              subtractCellVal(x-1, y-1, adjVal)
+              predictedCellVal(x-1, y-1)
             end
             
             if isActiveCell(x, y+1) then
-              subtractCellVal(x, y-1, adjVal)
+              predictedCellVal(x, y-1)
             end
             if isActiveCell(x, y-1) then
-              subtractCellVal(x, y+1, adjVal)
+              predictedCellVal(x, y+1)
             end
-            --[[
-            
-            
-            local adjVal = 1.5
 
-            subtractCellVal(x-1, y, adjVal)
-            subtractCellVal(x-1, y-1, adjVal)
-            subtractCellVal(x-1, y+1, adjVal)
-            
-            subtractCellVal(x+1, y, adjVal)
-            subtractCellVal(x+1, y-1, adjVal)
-            subtractCellVal(x+1, y+1, adjVal)
-            
-            subtractCellVal(x, y-1, adjVal)
-            subtractCellVal(x, y+1, adjVal)
-            ]]
-            
           end
         end
       end
