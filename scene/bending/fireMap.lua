@@ -17,6 +17,7 @@ function M.new( display, fire )
   self.particleSystem = fire.particleSystem
 
   self.grid = {}
+  self.predictionGrid = {}
 
   local function drawQueryLines()
     for y=0, self.config.pixelsPerCol do
@@ -46,7 +47,7 @@ function M.new( display, fire )
     end
   end
 
-  local function zeroGrid()    
+  local function zeroGrid()
     for y=0, self.config.pixelsPerCol do
       for x=0, self.config.pixelsPerRow do
         local key = tostring(x) .. tostring(y)
@@ -58,8 +59,16 @@ function M.new( display, fire )
           end
           updateFillColor(key)
         end
+        self.predictionGrid[key] = 10
       end
     end
+  end
+  
+  local function isActiveCell(x, y)
+    if x < 0 or x > self.config.pixelsPerRow or y < 0 or y > self.config.pixelsPerCol then
+      return false
+    end
+    return self.grid[tostring(x) .. tostring(y)] < 10
   end
   
   local function subtractCellVal(x, y, subVal)
@@ -67,7 +76,7 @@ function M.new( display, fire )
       return false
     end
     local key = tostring(x) .. tostring(y)
-    self.grid[key] = math.max(self.grid[key] - subVal, 0)
+    self.grid[key] = math.max(self.grid[key] - subVal, 1)
     updateFillColor(key)
   end
 
@@ -90,6 +99,40 @@ function M.new( display, fire )
             self.grid[key] = 0
             updateFillColor(key)
             
+            -- TODO run adjacency values next frame?
+            
+            local adjVal = 10
+            
+            if isActiveCell(x-1, y) then
+              print('+ve x')
+              subtractCellVal(x+1, y, adjVal)
+            end
+            if isActiveCell(x-1, y-1) then
+              subtractCellVal(x+1, y+1, adjVal)
+            end
+            if isActiveCell(x-1, y+1) then
+              subtractCellVal(x+1, y-1, adjVal)
+            end
+
+            if isActiveCell(x+1, y) then
+              subtractCellVal(x-1, y, adjVal)
+            end
+            if isActiveCell(x+1, y-1) then
+              subtractCellVal(x-1, y+1, adjVal)
+            end
+            if isActiveCell(x+1, y+1) then
+              subtractCellVal(x-1, y-1, adjVal)
+            end
+            
+            if isActiveCell(x, y+1) then
+              subtractCellVal(x, y-1, adjVal)
+            end
+            if isActiveCell(x, y-1) then
+              subtractCellVal(x, y+1, adjVal)
+            end
+            --[[
+            
+            
             local adjVal = 1.5
 
             subtractCellVal(x-1, y, adjVal)
@@ -102,6 +145,7 @@ function M.new( display, fire )
             
             subtractCellVal(x, y-1, adjVal)
             subtractCellVal(x, y+1, adjVal)
+            ]]
             
           end
         end
