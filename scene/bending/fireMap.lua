@@ -36,7 +36,7 @@ function M.new( display, fire )
       for x=0, self.config.pixelsPerRow do
         cell = self.display.newRect(self.displayGroup, x * self.config.pixelSize, y * self.config.pixelSize, self.config.pixelSize, self.config.pixelSize)
         cell:setFillColor( 0, 0, 0, 0 )
-        self.gridPositionsCells[tostring(x) .. tostring(y)] = cell
+        self.gridPositionsCells[tostring(x) .. "," .. tostring(y)] = cell
       end
     end
   end
@@ -50,7 +50,7 @@ function M.new( display, fire )
   local function zeroGrid()
     for y=0, self.config.pixelsPerCol do
       for x=0, self.config.pixelsPerRow do
-        local key = tostring(x) .. tostring(y)
+        local key = tostring(x) .. "," .. tostring(y)
         if self.gridPositions[key] ~= 10 then
           if self.gridPositions[key] then
             self.gridPositions[key] = self.gridPositions[key] + 1
@@ -72,14 +72,14 @@ function M.new( display, fire )
     if x < 0 or x > self.config.pixelsPerRow or y < 0 or y > self.config.pixelsPerCol then
       return false
     end
-    return self.gridPositions[tostring(x) .. tostring(y)] < 10
+    return self.gridPositions[tostring(x) .. "," .. tostring(y)] < 10
   end
   
   local function subtractCellVal(x, y, subVal)
     if x < 0 or x > self.config.pixelsPerRow or y < 0 or y > self.config.pixelsPerCol then
       return false
     end
-    local key = tostring(x) .. tostring(y)
+    local key = tostring(x) .. "," .. tostring(y)
     self.gridPositions[key] = math.max(self.gridPositions[key] - subVal, 1)
     updateFillColor(key)
   end
@@ -88,7 +88,7 @@ function M.new( display, fire )
     if x < 0 or x > self.config.pixelsPerRow or y < 0 or y > self.config.pixelsPerCol then
       return false
     end
-    local key = tostring(x) .. tostring(y)
+    local key = tostring(x) .. "," .. tostring(y)
     self.gridPositionsPredictions[key] = 0
     updateFillColor(key)
   end
@@ -105,7 +105,7 @@ function M.new( display, fire )
         for i,v in ipairs( hits ) do
           x = math.floor( (v.x / self.config.pixelSize) + 0.5 )
       
-          local key = tostring(x) .. tostring(y)
+          local key = tostring(x) .. "," .. tostring(y)
           -- can only be zero if grid cell has already been ran this step
           if self.gridPositions[key] ~= 0 then
             

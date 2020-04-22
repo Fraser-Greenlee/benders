@@ -73,7 +73,7 @@ function scene:create( event )
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
 		"waterBlock", "iceBlock", "sandBlock", "mudBlock", "jellyBlock", "poisonBlock",
 		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock",
-		"enemyCanon", "skullLanturn"
+		"enemyCanon", "skullLanturn", "debugGridEnemy"
 	)
 
 	-- Find the parallax layer
@@ -111,49 +111,49 @@ function scene:create( event )
 
 	-- Give fountains & waterBlocks water
 	water = Water.new( display, physics )
-	allFountains = map:listTypes( "fountain" )
+	local allFountains = map:listTypes( "fountain" )
 	for i, fountain in pairs(allFountains) do
 		fountain.water = water
 		fountain.addWater()
 	end
-	allWaterBlocks = map:listTypes( "waterBlock" )
+	local allWaterBlocks = map:listTypes( "waterBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allWaterBlocks = map:listTypes( "iceBlock" )
+	local allWaterBlocks = map:listTypes( "iceBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allWaterBlocks = map:listTypes( "sandBlock" )
+	local allWaterBlocks = map:listTypes( "sandBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allWaterBlocks = map:listTypes( "mudBlock" )
+	local allWaterBlocks = map:listTypes( "mudBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allWaterBlocks = map:listTypes( "jellyBlock" )
+	local allWaterBlocks = map:listTypes( "jellyBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allWaterBlocks = map:listTypes( "poisonBlock" )
+	local allWaterBlocks = map:listTypes( "poisonBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allkillWaterBlocks = map:listTypes( "killWaterBlock" )
+	local allkillWaterBlocks = map:listTypes( "killWaterBlock" )
 	for i, block in pairs(allkillWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.start()
 	end
 
 	-- Give enamies reference to hero
-	allEnamies = map:listTypes( "enemyCanon", "skullLanturn" )
+	local allEnamies = map:listTypes( "enemyCanon", "skullLanturn" )
 	for i, enemy in pairs(allEnamies) do
 		enemy.hero = hero
 		enemy.water = water
@@ -161,7 +161,7 @@ function scene:create( event )
 
 	-- Use seperate particle system to filter water
 	filterParticleSystem = FilterParticleSystem.new( physics )
-	filterBlocks = map:listTypes( "filterParticlesBlock" )
+	local filterBlocks = map:listTypes( "filterParticlesBlock" )
 	for i, block in pairs(filterBlocks) do
 		print("filterParticlesBlock")
 		block.particleSystem = filterParticleSystem.particleSystem
@@ -173,12 +173,21 @@ function scene:create( event )
 		waterBend = waterBend.new( display, water, hero )
 		waterBend.drawGrid(waterBend)
 	elseif config.bendingMode == 'fire' then
-		fire = Fire.new( display, physics )
+		local fire = Fire.new( display, physics )
 		-- Allow fireBending
-		fireBending = FireBending.new( display, fire, hero )
+		local fireBending = FireBending.new( display, fire, hero )
 		fireBending.drawGrid(fireBending)
     -- Allow AI fireMap
     local fireMap = FireMap.new( display, fire )
+    
+    local allEnamies = map:listTypes( "debugGridEnemy" )
+    for i, enemy in pairs(allEnamies) do
+      enemy.hero = hero
+      enemy.fire = fire
+      enemy.fireMap = fireMap
+      enemy:start()
+      break
+    end
 	else
 		error("no valid bending mode")
 	end

@@ -273,6 +273,12 @@ local startConfig = {
                 { name = "turn", frames = { 5, 6, 7 }, time = 333, loopCount = 0 },
                 { name = "dead", frames = { 8 }, time = 333, loopCount = 0 },
             }
+        },
+        debugGridEnemy = {
+          stepDelay = 500,
+          radius = 25,
+          physics = { density=1.0, friction=0.3, bounce=0.2, radius=25 },
+          maxParticleHitCount = 60
         }
     },
     game = {
