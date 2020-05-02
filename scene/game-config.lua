@@ -279,6 +279,17 @@ local startConfig = {
           radius = 25,
           physics = { density=1.0, friction=0.3, bounce=0.2, radius=25 },
           maxParticleHitCount = 60
+        },
+        debugRaycastEnemy = {
+          stepDelay = 100,
+          stepForce = 30,
+          rayLength = 600,
+          radius = 75,
+          physics = { density=1.0, friction=0.3, bounce=0.2, radius=75 },
+          maxVelocity = 100,
+          heroCoef = 0.2,
+          fireCoef = 0.8,
+          debug = false
         }
     },
     game = {

@@ -73,7 +73,7 @@ function scene:create( event )
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
 		"waterBlock", "iceBlock", "sandBlock", "mudBlock", "jellyBlock", "poisonBlock",
 		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock",
-		"enemyCanon", "skullLanturn", "debugGridEnemy"
+		"enemyCanon", "skullLanturn", "debugGridEnemy", "debugRaycastEnemy"
 	)
 
 	-- Find the parallax layer
@@ -178,13 +178,21 @@ function scene:create( event )
 		local fireBending = FireBending.new( display, fire, hero )
 		fireBending.drawGrid(fireBending)
     -- Allow AI fireMap
-    local fireMap = FireMap.new( display, fire )
+    -- local fireMap = FireMap.new( display, fire )
     
     local allEnamies = map:listTypes( "debugGridEnemy" )
     for i, enemy in pairs(allEnamies) do
       enemy.hero = hero
       enemy.fire = fire
       enemy.fireMap = fireMap
+      enemy:start()
+      break
+    end
+    
+    allEnamies = map:listTypes( "debugRaycastEnemy" )
+    for i, enemy in pairs(allEnamies) do
+      enemy.hero = hero
+      enemy.particleSystem = fire.particleSystem
       enemy:start()
       break
     end
