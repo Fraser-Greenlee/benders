@@ -46,7 +46,7 @@ application = {
 
 		-- The default frame rate is 30 frames per second, but you can set it to 60 frames per second
 		-- by adding the "fps" key. Values other than 30 or 60 will be ignored.
-		fps = 30,
+		fps = 60,
 
 		--local deviceScale = display.pixelWidth / display.actualContentWidth
 		-- This is the scale factor for the device. If the value on a particular device is greater than or

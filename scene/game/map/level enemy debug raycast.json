@@ -184,7 +184,7 @@
                 {
                  "gid":153,
                  "height":116,
-                 "id":950,
+                 "id":952,
                  "name":"",
                  "properties":
                     {
@@ -200,8 +200,184 @@
                  "type":"debugRaycastEnemy",
                  "visible":true,
                  "width":126,
-                 "x":2640,
-                 "y":160
+                 "x":1280,
+                 "y":-80
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":953,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":1840,
+                 "y":80
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":954,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":240,
+                 "y":800
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":955,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":2897,
+                 "y":662
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":956,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":2225,
+                 "y":390
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":957,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":777,
+                 "y":382
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":962,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":2240,
+                 "y":-80
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":963,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":1665,
+                 "y":-42
+                }, 
+                {
+                 "gid":153,
+                 "height":116,
+                 "id":965,
+                 "name":"",
+                 "properties":
+                    {
+                     "numberToSpawn":"10",
+                     "spawnsAtId":"1"
+                    },
+                 "propertytypes":
+                    {
+                     "numberToSpawn":"string",
+                     "spawnsAtId":"string"
+                    },
+                 "rotation":0,
+                 "type":"debugRaycastEnemy",
+                 "visible":true,
+                 "width":126,
+                 "x":865,
+                 "y":38
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -234,7 +410,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":951,
+ "nextobjectid":969,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,

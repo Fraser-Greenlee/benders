@@ -73,7 +73,7 @@ function scene:create( event )
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
 		"waterBlock", "iceBlock", "sandBlock", "mudBlock", "jellyBlock", "poisonBlock",
 		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock",
-		"enemyCanon", "skullLanturn", "debugGridEnemy", "debugRaycastEnemy"
+		"enemyCanon", "skullLanturn", "debugGridEnemy", "debugRaycastEnemy", "gunDrone"
 	)
 
 	-- Find the parallax layer
@@ -193,8 +193,20 @@ function scene:create( event )
     for i, enemy in pairs(allEnamies) do
       enemy.hero = hero
       enemy.particleSystem = fire.particleSystem
+      enemy.allRaycastEnamies = allEnamies
+    end
+    for i, enemy in pairs(allEnamies) do
       enemy:start()
-      break
+    end
+    
+    allEnamies = map:listTypes( "gunDrone" )
+    for i, enemy in pairs(allEnamies) do
+      enemy.hero = hero
+      enemy.particleSystem = fire.particleSystem
+      enemy.allRaycastEnamies = allEnamies
+    end
+    for i, enemy in pairs(allEnamies) do
+      enemy:start()
     end
 	else
 		error("no valid bending mode")

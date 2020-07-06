@@ -43,7 +43,7 @@ function M.new( instance )
   -- Add physics
   physics.addBody( instance.body, "dynamic", config.physics )
   instance.body.gravityScale = 0.0
-  instance.body.linearDamping = 1
+  instance.body.linearDamping = config.linearDamping
 
   instance.isDead = false
   instance.health = config.maxParticleHitCount
@@ -121,17 +121,32 @@ function M.new( instance )
         SE=rayParticleLen(  diagonalUnitLen,  diagonalUnitLen )
       }
     
-    directionScores.N  = directionScores.N  + config.fireCoef * (directionMeasures.N + 0.5 * directionMeasures.NW + 0.5 * directionMeasures.NE) - directionMeasures.S
-    directionScores.W  = directionScores.W  + config.fireCoef * (directionMeasures.W + 0.5 * directionMeasures.NW + 0.5 * directionMeasures.SW) - directionMeasures.E
-    directionScores.E  = directionScores.E  + config.fireCoef * (directionMeasures.E + 0.5 * directionMeasures.NE + 0.5 * directionMeasures.SE) - directionMeasures.W
-    directionScores.S  = directionScores.S  + config.fireCoef * (directionMeasures.S + 0.5 * directionMeasures.SW + 0.5 * directionMeasures.SE) - directionMeasures.N
+    directionScores.N  = directionScores.N  + config.fireCoef * (directionMeasures.N + 0.5 * directionMeasures.NW + 0.5 * directionMeasures.NE)
+    directionScores.W  = directionScores.W  + config.fireCoef * (directionMeasures.W + 0.5 * directionMeasures.NW + 0.5 * directionMeasures.SW)
+    directionScores.E  = directionScores.E  + config.fireCoef * (directionMeasures.E + 0.5 * directionMeasures.NE + 0.5 * directionMeasures.SE)
+    directionScores.S  = directionScores.S  + config.fireCoef * (directionMeasures.S + 0.5 * directionMeasures.SW + 0.5 * directionMeasures.SE)
 
-    directionScores.NW = directionScores.NW + config.fireCoef * (directionMeasures.NW + 0.5 * directionMeasures.N + 0.5 * directionMeasures.W) - directionMeasures.SE
-    directionScores.NE = directionScores.NE + config.fireCoef * (directionMeasures.NE + 0.5 * directionMeasures.N + 0.5 * directionMeasures.E) - directionMeasures.SW
-    directionScores.SW = directionScores.SW + config.fireCoef * (directionMeasures.SW + 0.5 * directionMeasures.S + 0.5 * directionMeasures.W) - directionMeasures.NE
-    directionScores.SE = directionScores.SE + config.fireCoef * (directionMeasures.SE + 0.5 * directionMeasures.S + 0.5 * directionMeasures.E) - directionMeasures.NW
-    
+    directionScores.NW = directionScores.NW + config.fireCoef * (directionMeasures.NW + 0.5 * directionMeasures.N + 0.5 * directionMeasures.W)
+    directionScores.NE = directionScores.NE + config.fireCoef * (directionMeasures.NE + 0.5 * directionMeasures.N + 0.5 * directionMeasures.E)
+    directionScores.SW = directionScores.SW + config.fireCoef * (directionMeasures.SW + 0.5 * directionMeasures.S + 0.5 * directionMeasures.W)
+    directionScores.SE = directionScores.SE + config.fireCoef * (directionMeasures.SE + 0.5 * directionMeasures.S + 0.5 * directionMeasures.E)
+
+    -- improve the scores of directions pointing at right angles from fire
+    directionScores.N  = directionScores.N - directionScores.S
+    directionScores.W  = directionScores.W - directionScores.E
+    directionScores.E  = directionScores.E - directionScores.W
+    directionScores.S  = directionScores.S - directionScores.N
+
+    directionScores.NW = directionScores.NW - directionScores.SE
+    directionScores.NE = directionScores.NE - directionScores.SW
+    directionScores.SW = directionScores.SW - directionScores.NE
+    directionScores.SE = directionScores.SE - directionScores.NW
+
     return directionScores
+  end
+  
+  local function avoidFellowEnemies(directionScores)
+    -- find enemies within min rage
   end
   
   instance.currentDirection = {
@@ -194,10 +209,11 @@ function M.new( instance )
     
     directionScores = assignHeroProximityScores(directionScores)
     directionScores = assignParticleProximityScores(directionScores)
+    -- directionScores = avoidFellowEnemies(directionScores)
     
     local xForce, yForce = getBestDirectionForces(directionScores)
-    instance.currentDirection.x = xForce
-    instance.currentDirection.y = yForce
+    instance.currentDirection.x = ( xForce * 2 + instance.currentDirection.x ) / 3
+    instance.currentDirection.y = ( yForce * 2 + instance.currentDirection.y ) / 3
   end
   
   local function matchBodyPos(obj)

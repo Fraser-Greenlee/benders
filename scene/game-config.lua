@@ -14,9 +14,9 @@ local startConfig = {
         },
         farRadius = 1,
         boxes = {},
-        renderDelay = 1,
+        renderDelay = 10,
         staticDelay = 1,
-        power = 140,
+        power = 70,
         maxAge = 1,
         playerVstatic = 0.2,
         playerVmultiplier = 0,
@@ -65,7 +65,7 @@ local startConfig = {
             max = 1000,
             min = 100,
             lossPerParticle = 0.01,
-            rechargePerRender = 6,
+            rechargePerRender = 12,
             indicator = {
                 width = 200,
                 height = 50
@@ -282,14 +282,28 @@ local startConfig = {
         },
         debugRaycastEnemy = {
           stepDelay = 100,
-          stepForce = 30,
-          rayLength = 600,
-          radius = 75,
-          physics = { density=1.0, friction=0.3, bounce=0.2, radius=75 },
-          maxVelocity = 100,
+          stepForce = 15,
+          rayLength = 750,
+          radius = 40,
+          physics = { density=2.0, friction=0.3, bounce=0.8, radius=40 },
+          linearDamping = 1,
           heroCoef = 0.2,
           fireCoef = 0.8,
           debug = false
+        },
+        gunDrone = {
+          stepDelay = 100,
+          stepForce = 120,
+          rayLength = 850,
+          radius = 80,
+          physics = { density=2.0, friction=0.3, bounce=0.4, radius=80 },
+          linearDamping = 2,
+          heroCoef = 0.2,
+          fireCoef = 0.8,
+          debug = true,
+          targetHeroDist = 750,
+          reloadTime = 10,
+          maxParticleHitCount = 20
         }
     },
     game = {
