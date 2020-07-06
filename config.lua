@@ -22,8 +22,8 @@ application = {
 
 		-- Set content area width/height settings for 1080p resolution here
 		-- Note that even for landscape-oriented apps, width should be the "short" side for Corona's purposes
-		width = 800,
-		height = 2560,
+		width = 1800,
+		height = 3200,
 
 		-- Sample aspect-driven width/height:
 		--width = aspectRatio > 1.5 and 720 or math.ceil( 1200 / aspectRatio ),
@@ -46,7 +46,7 @@ application = {
 
 		-- The default frame rate is 30 frames per second, but you can set it to 60 frames per second
 		-- by adding the "fps" key. Values other than 30 or 60 will be ignored.
-		fps = 30,
+		fps = 60,
 
 		--local deviceScale = display.pixelWidth / display.actualContentWidth
 		-- This is the scale factor for the device. If the value on a particular device is greater than or

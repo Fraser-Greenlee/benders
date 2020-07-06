@@ -33,9 +33,35 @@ function M.new( instance, options )
 	instance.x,instance.y = x, y
 	instance:setSequence( "idle" )
 
-	-- Add physics
-	config.physics.filter = playerFilter
-	physics.addBody( instance, "dynamic", config.physics )
+	physics.addBody( instance, "dynamic",
+			{
+				density = 1.3,
+				bounce = 0.0,
+				friction = 0.2,
+				filter = playerFilter,
+				shape = { 
+					0-90,0+10, 0-90,37+10, 38-90,62+10, 38-90,-10+10
+				}
+			},
+			{
+				density = 1.3,
+				bounce = 0.0,
+				friction = 0.2,
+				filter = playerFilter,
+				shape = { 
+					160-90,62+10, 201-90,37+10, 201-90,1+10, 160-90,-10+10
+				}
+			},
+			{
+				density = 1.3,
+				bounce = 0.0,
+				friction = 0.2,
+				filter = playerFilter,
+				shape = { 
+					38-90,10+10,  160-90,10+10, 160-90,-10+10, 38-90,-10+10
+				}
+			}
+	)
 	instance.isFixedRotation = true
 	instance.anchorY = config.anchorY
 	instance.anchorX = config.anchorX
@@ -49,11 +75,11 @@ function M.new( instance, options )
 		local name = event.keyName
 		if ( phase == lastEvent.phase ) and ( name == lastEvent.keyName ) then return false end  -- Filter repeating keys
 		if phase == "down" then
-			if "left" == name or "a" == name then
+			if ("left" == name or "a" == name) then
 				left = -config.walkAcceleration
 				flip = -1
 			end
-			if "right" == name or "d" == name then
+			if ("right" == name or "d" == name) then
 				right = config.walkAcceleration
 				flip = 1
 			elseif "space" == name or "up" == name or "w" == name or "buttonA" == name or "button1" == name then
@@ -95,14 +121,6 @@ function M.new( instance, options )
 
 	function instance:die()
 		composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
-		--[[
-		fx.fadeOut(
-			function()
-				composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
-			end,
-			5, 0
-		)
-		]]
 		instance.isDead = true
 		instance.isSensor = true
 		self:applyLinearImpulse( 0, -500 )
@@ -128,13 +146,13 @@ function M.new( instance, options )
 		local y1, y2 = self.y + 50, other.y - ( other.type == "enemy" and 25 or other.height/2 )
 		local vx, vy = self:getLinearVelocity()
 		if phase == "began" then
-			if not self.isDead and ( other.type == "blob" or other.type == "enemy" ) then
-				if y1 < y2 then
-					-- Hopped on top of an enemy
-					other:die()
-				elseif not other.isDead then
-					-- They attacked us
-					self:hurt()
+			if not self.isDead and ( other.type == "cannon-ball" ) then
+				local heroVx, heroVy = self:getLinearVelocity()
+				local otherVx, otherVy = other:getLinearVelocity()
+				local collisionSpeed = math.sqrt(heroVx*heroVy + otherVx*otherVy)
+				-- cannon ball kills player on first hit
+				if collisionSpeed > 100 then
+					instance:die()
 				end
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
@@ -147,6 +165,7 @@ function M.new( instance, options )
 					self:setSequence( "idle" )
 				end
 			end
+			self.jumping = false
 		end
 	end
 
@@ -154,12 +173,6 @@ function M.new( instance, options )
 		local other = event.other
 		local y1, y2 = self.y + 50, other.y - other.height/2
 		if event.contact and ( y1 > y2 ) then
-			--[[ 
-				TODO use this to allow jumping through a one way platform
-				if other.can_pass_thorugh then
-					event.contact.isEnabled = false
-				end
-			]]
 			if other.floating then
 				event.contact.friction = 0.0
 			else
@@ -173,12 +186,10 @@ function M.new( instance, options )
 		local vx, vy = instance:getLinearVelocity()
 		local dx = left + right
 		-- if instance.jumping then dx = dx / 2 end
-		local dy = 0
-		-- if instance.jumping then dy = -5 end
 		if (dx == 0 and instance.jumping) then
-			instance:applyForce( -3*vx, dy, instance.x, instance.y )
+			instance:applyForce( 0, 0, instance.x, instance.y )
 		elseif ( dx < 0 and vx > -config.maxWalkSpeed ) or ( dx > 0 and vx < config.maxWalkSpeed ) then
-			instance:applyForce( dx or 0, dy, instance.x, instance.y )
+			instance:applyForce( 3 * dx or 0, 0, instance.x, instance.y )
 		end
 		-- Turn around
 		instance.xScale = math.min( 1, flip )
@@ -188,14 +199,12 @@ function M.new( instance, options )
 		-- On remove, cleanup instance, or call directly for non-visual
 		instance:removeEventListener( "preCollision" )
 		instance:removeEventListener( "collision" )
-		Runtime:removeEventListener( "enterFrame", enterFrame )
 		Runtime:removeEventListener( "key", key )
 	end
 
 	-- Add a finalize listener (for display objects only, comment out for non-visual)
 	instance:addEventListener( "finalize" )
 
-	-- Add our enterFrame listener
 	Runtime:addEventListener( "enterFrame", enterFrame )
 
 	-- Add our key/joystick listeners

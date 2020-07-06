@@ -2,7 +2,7 @@
 -- Module/class for the waterBlock
 
 local composer = require( "composer" )
-local config = require('scene.game-config').noDisplay.water.createGroup
+local config = require('scene.game-config').noDisplay.water.waterBlock.createGroup
 
 -- Define module
 local M = {}

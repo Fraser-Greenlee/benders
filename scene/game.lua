@@ -8,7 +8,10 @@ local json = require( "json" )
 local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
 local Water = require( "scene.bending.water" )
-local Bending = require( "scene.bending.bend" )
+local waterBend = require( "scene.bending.waterBend" )
+local Fire = require( "scene.bending.fire" )
+local FireBending = require( "scene.bending.fireBend" )
+local FireMap = require( "scene.bending.fireMap" )
 local FilterParticleSystem = require( "scene.game.lib.filterParticleSystem" )
 local config = require('scene.game-config').noDisplay.game
 
@@ -21,8 +24,6 @@ local scene = composer.newScene()
 
 -- This function is called when scene is created
 function scene:create( event )
-
-	print('game scene')
 
 	local sceneGroup = self.view  -- Add scene display objects to this group
 
@@ -56,6 +57,11 @@ function scene:create( event )
 	map = tiled.new( mapData, "scene/game/map" )
 	--map.xScale, map.yScale = 0.85, 0.85
 
+	local background = display.newImage(sceneGroup, "inspiration/dark-towerfall-background.png")
+	background:scale(3.15, 3.15)
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
+
 	-- Find our hero!
 	map.extensions = "scene.game.lib."
 	map:extend( "hero" )
@@ -65,7 +71,9 @@ function scene:create( event )
 	-- Find our enemies and other items
 	map:extend(
 		"blob", "enemy", "exit", "coin", "spikes", "fountain", "target",
-		"waterBlock", "filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock"
+		"waterBlock", "iceBlock", "sandBlock", "mudBlock", "jellyBlock", "poisonBlock",
+		"filterParticlesBlock", "filterPlayerBlock", "deathBlock", "killWaterBlock",
+		"enemyCanon", "skullLanturn", "debugGridEnemy", "debugRaycastEnemy", "gunDrone"
 	)
 
 	-- Find the parallax layer
@@ -103,53 +111,119 @@ function scene:create( event )
 
 	-- Give fountains & waterBlocks water
 	water = Water.new( display, physics )
-	allFountains = map:listTypes( "fountain" )
+	local allFountains = map:listTypes( "fountain" )
 	for i, fountain in pairs(allFountains) do
 		fountain.water = water
 		fountain.addWater()
 	end
-	allWaterBlocks = map:listTypes( "waterBlock" )
+	local allWaterBlocks = map:listTypes( "waterBlock" )
 	for i, block in pairs(allWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.makeBlock()
 	end
-	allkillWaterBlocks = map:listTypes( "killWaterBlock" )
+	local allWaterBlocks = map:listTypes( "iceBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	local allWaterBlocks = map:listTypes( "sandBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	local allWaterBlocks = map:listTypes( "mudBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	local allWaterBlocks = map:listTypes( "jellyBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	local allWaterBlocks = map:listTypes( "poisonBlock" )
+	for i, block in pairs(allWaterBlocks) do
+		block.particleSystem = water.particleSystem
+		block.makeBlock()
+	end
+	local allkillWaterBlocks = map:listTypes( "killWaterBlock" )
 	for i, block in pairs(allkillWaterBlocks) do
 		block.particleSystem = water.particleSystem
 		block.start()
 	end
 
+	-- Give enamies reference to hero
+	local allEnamies = map:listTypes( "enemyCanon", "skullLanturn" )
+	for i, enemy in pairs(allEnamies) do
+		enemy.hero = hero
+		enemy.water = water
+	end
+
 	-- Use seperate particle system to filter water
 	filterParticleSystem = FilterParticleSystem.new( physics )
-	filterBlocks = map:listTypes( "filterParticlesBlock" )
+	local filterBlocks = map:listTypes( "filterParticlesBlock" )
 	for i, block in pairs(filterBlocks) do
+		print("filterParticlesBlock")
 		block.particleSystem = filterParticleSystem.particleSystem
 		block.makeBlock()
 	end
 
-	-- Allow bending
-	bending = Bending.new( display, water.particleSystem, hero )
-	bending.drawGrid(bending)
-
+	if config.bendingMode == 'water' then
+		-- Allow waterBend
+		waterBend = waterBend.new( display, water, hero )
+		waterBend.drawGrid(waterBend)
+	elseif config.bendingMode == 'fire' then
+		local fire = Fire.new( display, physics )
+		-- Allow fireBending
+		local fireBending = FireBending.new( display, fire, hero )
+		fireBending.drawGrid(fireBending)
+    -- Allow AI fireMap
+    -- local fireMap = FireMap.new( display, fire )
+    
+    local allEnamies = map:listTypes( "debugGridEnemy" )
+    for i, enemy in pairs(allEnamies) do
+      enemy.hero = hero
+      enemy.fire = fire
+      enemy.fireMap = fireMap
+      enemy:start()
+      break
+    end
+    
+    allEnamies = map:listTypes( "debugRaycastEnemy" )
+    for i, enemy in pairs(allEnamies) do
+      enemy.hero = hero
+      enemy.particleSystem = fire.particleSystem
+      enemy.allRaycastEnamies = allEnamies
+    end
+    for i, enemy in pairs(allEnamies) do
+      enemy:start()
+    end
+    
+    allEnamies = map:listTypes( "gunDrone" )
+    for i, enemy in pairs(allEnamies) do
+      enemy.hero = hero
+      enemy.particleSystem = fire.particleSystem
+      enemy.allRaycastEnamies = allEnamies
+    end
+    for i, enemy in pairs(allEnamies) do
+      enemy:start()
+    end
+	else
+		error("no valid bending mode")
+	end
 end
 
 -- Function to scroll the map
 local function enterFrame( event )
-
-	local elapsed = event.time
-
 	-- Easy way to scroll a map based on a character
-	[[--
 	if hero and hero.x and hero.y and not hero.isDead then
-		local x, y = hero:localToContent( 0, 0 )
-		x, y = display.contentCenterX - x, display.contentCenterY - y
+		local x, y = hero:localToContent( -400, -400 )
+		x = display.contentCenterX - x
+		y = display.contentCenterY - y
 		map.x, map.y = map.x + x, map.y + y
-		-- Easy parallax
-		if parallax then
-			parallax.x, parallax.y = map.x / 6, map.y / 8  -- Affects x more than y
-		end
+		water.particleSystem.x, water.particleSystem.y = water.particleSystem.x + x, water.particleSystem.y + y
+		waterBend.cameraOffset.x, waterBend.cameraOffset.y = waterBend.cameraOffset.x + x, waterBend.cameraOffset.y + y
 	end
-	]]
 end
 
 -- This function is called when scene comes fully on screen
@@ -158,12 +232,14 @@ function scene:show( event )
 	local phase = event.phase
 	if ( phase == "will" ) then
 		fx.fadeIn()	-- Fade up from black
-		-- Runtime:addEventListener( "enterFrame", enterFrame )
+		if config.cameraTracking then
+			Runtime:addEventListener( "enterFrame", enterFrame )
+		end
 	elseif ( phase == "did" ) then
 		-- Start playing wind sound
 		-- For more details on options to play a pre-loaded sound, see the Audio Usage/Functions guide:
 		-- https://docs.coronalabs.com/guide/media/audioSystem/index.html
-		audio.play( self.sounds.wind, { loops = -1, fadein = 750, channel = 15 } )
+		-- audio.play( self.sounds.wind, { loops = -1, fadein = 750, channel = 15 } )
 	end
 end
 
@@ -174,7 +250,7 @@ function scene:hide( event )
 	if ( phase == "will" ) then
 		audio.fadeOut( { time = 1000 } )
 	elseif ( phase == "did" ) then
-		-- Runtime:removeEventListener( "enterFrame", enterFrame )
+		Runtime:removeEventListener( "enterFrame", enterFrame )
 	end
 end
 
@@ -187,7 +263,7 @@ function scene:destroy( event )
 		halfHeight = (display.actualContentHeight + 500)*2
 	}
 
-	bending:destroy()
+	waterBend:destroy()
 	water:destroy()
 	filterParticleSystem.particleSystem:destroyParticles(fullScreen)
 

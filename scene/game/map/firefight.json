@@ -794,18 +794,6 @@
          "name":"game",
          "objects":[
                 {
-                 "gid":22,
-                 "height":160,
-                 "id":58,
-                 "name":"hero",
-                 "rotation":0,
-                 "type":"hero",
-                 "visible":true,
-                 "width":128,
-                 "x":1680,
-                 "y":960
-                }, 
-                {
                  "height":48,
                  "id":403,
                  "name":"",
@@ -896,29 +884,6 @@
                  "y":1280
                 }, 
                 {
-                 "height":80,
-                 "id":673,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":240,
-                 "x":880,
-                 "y":480
-                }, 
-                {
                  "height":240,
                  "id":674,
                  "name":"",
@@ -937,8 +902,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":560,
-                 "x":560,
+                 "width":320,
+                 "x":800,
                  "y":1120
                 }, 
                 {
@@ -983,12 +948,12 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":240,
+                 "width":480,
                  "x":320,
                  "y":1280
                 }, 
                 {
-                 "height":320,
+                 "height":160,
                  "id":679,
                  "name":"",
                  "properties":
@@ -1008,10 +973,10 @@
                  "visible":true,
                  "width":160,
                  "x":0,
-                 "y":1040
+                 "y":1200
                 }, 
                 {
-                 "height":320,
+                 "height":80,
                  "id":686,
                  "name":"",
                  "properties":
@@ -1031,7 +996,7 @@
                  "visible":true,
                  "width":160,
                  "x":2400,
-                 "y":1040
+                 "y":1280
                 }, 
                 {
                  "height":240,
@@ -1064,8 +1029,8 @@
                  "rotation":0,
                  "type":"filterParticlesBlock",
                  "visible":true,
-                 "width":320,
-                 "x":1120,
+                 "width":1040,
+                 "x":400,
                  "y":562.424242424242
                 }, 
                 {
@@ -1218,7 +1183,7 @@
                  "visible":true,
                  "width":80,
                  "x":80,
-                 "y":1040
+                 "y":1200
                 }, 
                 {
                  "gid":204,
@@ -1228,12 +1193,12 @@
                  "rotation":0,
                  "type":"waterBlock",
                  "visible":true,
-                 "width":400,
+                 "width":640,
                  "x":160,
                  "y":1280
                 }, 
                 {
-                 "height":320,
+                 "height":480,
                  "id":716,
                  "name":"",
                  "properties":
@@ -1350,7 +1315,7 @@
                  "y":560
                 }, 
                 {
-                 "height":320,
+                 "height":560,
                  "id":736,
                  "name":"",
                  "properties":
@@ -1382,7 +1347,7 @@
                  "visible":true,
                  "width":80,
                  "x":2400,
-                 "y":1040
+                 "y":1280
                 }, 
                 {
                  "gid":204,
@@ -1407,29 +1372,6 @@
                  "width":160,
                  "x":1200,
                  "y":-80
-                }, 
-                {
-                 "height":160,
-                 "id":744,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":80,
-                 "x":2160,
-                 "y":400
                 }, 
                 {
                  "gid":212,
@@ -1560,52 +1502,6 @@
                  "y":-160
                 }, 
                 {
-                 "height":26.1817848484848,
-                 "id":754,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":320,
-                 "x":1520,
-                 "y":960
-                }, 
-                {
-                 "height":26.1818,
-                 "id":756,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":"true",
-                     "friction":"0.2"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":320,
-                 "x":720,
-                 "y":960
-                }, 
-                {
                  "gid":210,
                  "height":80,
                  "id":757,
@@ -1619,7 +1515,7 @@
                 }, 
                 {
                  "gid":210,
-                 "height":80,
+                 "height":240,
                  "id":758,
                  "name":"",
                  "rotation":0,
@@ -1627,7 +1523,7 @@
                  "visible":true,
                  "width":80,
                  "x":2160,
-                 "y":400
+                 "y":560
                 }, 
                 {
                  "gid":212,
@@ -1663,6 +1559,18 @@
                  "width":35.8723,
                  "x":2480,
                  "y":560
+                }, 
+                {
+                 "gid":278,
+                 "height":180,
+                 "id":764,
+                 "name":"hero",
+                 "rotation":0,
+                 "type":"hero",
+                 "visible":true,
+                 "width":230,
+                 "x":240,
+                 "y":880
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1733,7 +1641,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":763,
+ "nextobjectid":768,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":80,
@@ -2471,7 +2379,7 @@
          "margin":0,
          "name":"objs",
          "spacing":0,
-         "tilecount":29,
+         "tilecount":30,
          "tileheight":256,
          "tiles":
             {
@@ -2586,6 +2494,59 @@
              "69":
                 {
                  "image":"img\/target.png"
+                },
+             "71":
+                {
+                 "image":"..\/img\/katara-boat-single_frame.png",
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "height":0,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":0,
+                             "id":1,
+                             "name":"",
+                             "polygon":[
+                                    {
+                                     "x":0,
+                                     "y":0
+                                    }, 
+                                    {
+                                     "x":0,
+                                     "y":37
+                                    }, 
+                                    {
+                                     "x":38,
+                                     "y":62
+                                    }, 
+                                    {
+                                     "x":160,
+                                     "y":63
+                                    }, 
+                                    {
+                                     "x":199,
+                                     "y":34
+                                    }, 
+                                    {
+                                     "x":201,
+                                     "y":1
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":0,
+                             "x":16,
+                             "y":111
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "width":0,
+                     "x":0,
+                     "y":0
+                    }
                 },
              "9":
                 {

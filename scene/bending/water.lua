@@ -13,7 +13,11 @@ function M.new( display, physics )
 
     local function particleSystemCollision( self, event )
         if ( event.phase == "began" and event.object.type ~= nil ) then
-            if event.object.type == "target" then
+            if event.object.type == "enemyCanon" and event.r == 1 and event.g == 1 and event.b == 1 then
+                event.object:dead()
+            elseif event.object.type == "skullLanturn" and event.object.isDead == false then
+                event.object:hurt()
+            elseif event.object.type == "target" then
                 event.object.waterHit()
             end
         end
@@ -23,11 +27,42 @@ function M.new( display, physics )
     instance.particleSystem:addEventListener( "particleCollision" )
 
     function instance:makeParticle( x, y, velocityX, velocityY )
-        config.createParticle.x = x
-        config.createParticle.y = y
-        config.createParticle.velocityX = velocityX
-        config.createParticle.velocityY = velocityY
-        instance.particleSystem:createParticle( config.createParticle )
+        config.waterBlock.createParticle.x = x
+        config.waterBlock.createParticle.y = y
+        config.waterBlock.createParticle.velocityX = velocityX
+        config.waterBlock.createParticle.velocityY = velocityY
+        instance.particleSystem:createParticle( config.waterBlock.createParticle )
+    end
+
+    function instance:deleteParticles( startX, startY, endX, endY )
+        local distX = endX - startX
+        local distY = endY - startY
+        local distance = math.sqrt(distX*distX + distY*distY)
+        instance.particleSystem:destroyParticles({
+            x = (startX + endX) / 2,
+            y = (startY + endY) / 2,
+            angle = math.atan2( distY, distX ),
+            halfWidth = distance/2,
+            halfHeight = 10
+        })
+    end
+
+    function instance:destroyRadius(x, y, radius)
+        local fullScreen = {
+            x = -500,
+            y = -200,
+            halfWidth = display.actualContentWidth + 500,
+            halfHeight = (display.actualContentHeight + 500)*2
+        }
+        print('destroyParticles')
+        print( instance.particleSystem:destroyParticles( fullScreen ) )
+        --[[
+        instance.particleSystem:destroyParticles({
+            x = x,
+            y = y,
+            radius = radius
+        })
+        ]]
     end
 
     local fullScreen = {
@@ -51,7 +86,7 @@ function M.new( display, physics )
     snapshot.x = 0
     snapshot.y = 0
     snapshot.canvasMode = "discard"
-    snapshot.alpha = 0.6
+    snapshot.alpha = 0.8
     -- Insert the particle system into the snapshot
     snapshotGroup:insert( instance.particleSystem )
     -- Update (invalidate) the snapshot each frame
